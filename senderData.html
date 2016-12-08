@@ -1,0 +1,51 @@
+<div>
+	<h1 class="text-center">Данные отправителя</h1>
+	<form action="#" class="form-horizontal">
+		<fieldset ng-repeat="sender in senders">
+			<div class="form-group">
+			    <label class="col-sm-4 col-md-4 control-label">Город</label>
+			    <div class="col-sm-8 col-md-8">
+			      <input type="text" class="form-control" name="" ng-model="sender.city" ng-disabled="!isChangeEvailable">
+			    </div>
+		  	</div>
+		  	<div class="form-group">
+			    <label class="col-sm-4 col-md-4 control-label">Адрес, с которого будут производится отправка</label>
+			    <div class="col-sm-8 col-md-8">
+			      <input type="text" class="form-control" name="" ng-model="sender.addressFrom" ng-disabled="!isChangeEvailable">
+			    </div>
+		  	</div>
+		  	<div class="form-group">
+			    <label class="col-sm-4 col-md-4 control-label">Контактный телефон отправителя</label>
+			    <div class="col-sm-8 col-md-8">
+			      <input type="text" class="form-control" name="" ng-model="sender.phone" ng-disabled="!isChangeEvailable">
+			    </div>
+		  	</div>
+		  	<div class="form-group">
+			    <label class="col-sm-4 col-md-4 control-label">Контактное лицо</label>
+			    <div class="col-sm-8 col-md-8">
+			      <input type="text" class="form-control" name="" ng-model="sender.contactName" ng-disabled="!isChangeEvailable">
+			    </div>
+		  	</div>
+		  	<div class="form-group">
+			    <label class="col-sm-4 col-md-4 control-label">Название магазина</label>
+			    <div class="col-sm-8 col-md-8">
+			      <input type="text" class="form-control" name="" ng-model="sender.shopName" ng-disabled="!isChangeEvailable">
+			    </div>
+		  	</div>
+		  	<hr>
+		</fieldset>
+	</form>
+	
+	<div class="form-group">
+	    <label class="col-sm-4 col-md-4 control-label">&nbsp;</label>
+	    <div class="col-sm-8 col-md-8">
+	      <button type="submit" class="btn btn-success" ng-click="addSender()">Добавить отправителя</button>
+	    </div>
+  	</div>
+  	<div class="row">
+  		<div class="col-sm-12 col-md-12 text-right">
+	  		<button type="submit" class="btn btn-warning" ng-click="toggleEdit()">Изменить</button>
+  			<button type="submit" class="btn btn-success">Сохранить</button>
+  		</div>
+  	</div>
+</div>

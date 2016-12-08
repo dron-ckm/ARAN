@@ -1,0 +1,88 @@
+h1 {
+  margin-bottom: 40px;
+}
+#content {
+  margin-left: 350px;
+}
+#content .menubar {
+  padding: 15px 40px;
+}
+#content .menubar .page-title {
+  padding-top: 5px;
+}
+#sidebar-black {
+  width: 350px;
+}
+.login-form {
+  max-width: 400px;
+  margin: 0 auto;
+}
+.login-form .form-control {
+  display: block;
+  margin: 0 0 20px;
+}
+.registryTable {
+  width: 100%;
+}
+.registryTable .registryTable__headings {
+  width: 100%;
+  overflow: hidden;
+  border-bottom: 1px solid #ccc;
+}
+.registryTable .registryTable__headings div {
+  float: left;
+  width: 25%;
+  padding: 5px 3px;
+}
+.registryTable .registryTable__row {
+  border-bottom: 1px solid #ccc;
+}
+.registryTable .registryTable__row:nth-child(even) {
+  background: #FAFAFC;
+}
+.registryTable .registryTable__row:hover {
+  background: #F2F5F8;
+}
+.registryTable .registryTable__row.active {
+  background: #F2F5F8;
+  -webkit-box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.5);
+  position: relative;
+  z-index: 5;
+}
+.registryTable .registryTable__row-holder {
+  cursor: pointer;
+  width: 100%;
+  overflow: hidden;
+}
+.registryTable .registryTable__cell {
+  float: left;
+  width: 25%;
+  padding: 5px 3px;
+}
+.registryTable table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.registryTable table th {
+  padding: 5px;
+}
+.registryTable table td {
+  padding: 5px;
+}
+.registryTable table tr:nth-child(even) td {
+  background: #f0f0f0;
+}
+.actsTable {
+  width: 100%;
+  border-collapse: collapse;
+}
+.actsTable th {
+  padding: 5px;
+}
+.actsTable td {
+  padding: 5px;
+}
+.actsTable tr:nth-child(even) td {
+  background: #f0f0f0;
+}

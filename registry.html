@@ -1,0 +1,41 @@
+<div class="row">
+	<h1 class="text-center">Реестры перечисления платежей</h1>
+	<div class="registryTable">
+		<div class="registryTable__headings">
+			<div>Номер реестра</div>
+			<div>Дата реестра</div>
+			<div>Сумма реестра</div>
+			<div>Дата оплаты</div>
+		</div>
+		<div class="registryTable__row" ng-repeat="item in items" ng-class="item.showed ? 'active' : ''">
+			<div class="registryTable__row-holder" ng-click="toggleItem(item)">
+				<div class="registryTable__cell">{{item.num}}</div>
+				<div class="registryTable__cell">{{item.registerDate}}</div>
+				<div class="registryTable__cell">{{item.sum}}</div>
+				<div class="registryTable__cell">{{item.paymentDate}}</div>
+			</div>
+			<table ng-show="item.showed">
+				<tr>
+					<th>Номер заказа магазина</th>
+					<th>Штрих-код</th>
+					<th>Город доставки</th>
+					<th>Стоимость доставки</th>
+					<th>Агентское вознаграждение</th>
+					<th>Сумма заказа</th>
+					<th>Сумма к перечислению</th>
+					<th>Статус</th>
+				</tr>
+				<tr ng-repeat="subitem in item.data">
+					<td>{{subitem.number}}</td>
+					<td>{{subitem.code}}</td>
+					<td>{{subitem.city}}</td>
+					<td>{{subitem.price}}</td>
+					<td>{{subitem.bounty}}</td>
+					<td>{{subitem.sum}}</td>
+					<td>{{subitem.sumPayment}}</td>
+					<td>{{subitem.status}}</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+</div>

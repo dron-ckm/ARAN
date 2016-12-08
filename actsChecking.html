@@ -1,0 +1,13 @@
+<div class="row">
+	<h1 class="text-center">Акты сверки</h1>
+	<table class="actsTable">
+		<tr>
+			<th>Номер акта</th>
+			<th>Интервал акта (с какое по какое число или за какой месяц)</th>
+		</tr>
+		<tr ng-repeat="item in items" ng-click="download(item)">
+			<td>{{item.num}}</td>
+			<td>{{item.interval}}</td>
+		</tr>
+	</table>
+</div>

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />	
+	<title>Wolf - Bootstrap Admin Theme</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+	<!-- stylesheets -->
+	<link rel="stylesheet" type="text/css" href="css/compiled/theme.css" />
+	<link rel="stylesheet" type="text/css" href="css/vendor/animate.css" />
+	<link rel="stylesheet" type="text/css" href="css/vendor/brankic.css" />
+	<link rel="stylesheet" type="text/css" href="css/vendor/ionicons.min.css" />
+	<link rel="stylesheet" type="text/css" href="css/vendor/font-awesome.min.css" />
+	<link rel="stylesheet" type="text/css" href="css/vendor/datepicker.css" />
+	<link rel="stylesheet" type="text/css" href="css/vendor/morris.css" />
+
+  	<link rel="stylesheet" type="text/css" href="css/custom.css" />
+
+	<!-- javascript -->
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+	<script src="js/bootstrap/bootstrap.min.js"></script>
+	<script src="js/vendor/jquery.cookie.js"></script>
+	<script src="js/vendor/moment.min.js"></script>
+	<script src="js/theme.js"></script>
+	<script src="js/vendor/bootstrap-datepicker.js"></script>
+	<script src="js/vendor/raphael-min.js"></script>
+	<script src="js/vendor/morris.min.js"></script>
+
+	<script src="js/vendor/jquery.flot/jquery.flot.js"></script>
+	<script src="js/vendor/jquery.flot/jquery.flot.time.js"></script>
+	<script src="js/vendor/jquery.flot/jquery.flot.tooltip.js"></script>
+
+	  <script src="js/angular.min.js"></script>
+	  <script src="http://angular-ui.github.io/ui-router/release/angular-ui-router.js"></script>
+	  <script src="js/angular-cookies.js"></script>
+	<!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+</head>
+<body id="dashboard">
+	<div id="wrapper" ng-app="app">
+		<div id="sidebar-default" class="main-sidebar">
+			<div class="current-user">
+				
+			</div>
+			<div class="menu-section">
+				<ul>
+					<li>
+						<a href="index.html" class="active">
+							<i class="ion-android-earth"></i> 
+							<span>Dashboard</span>
+						</a>
+					</li>
+					<li>
+						<a href="users.html" data-toggle="sidebar">
+							<i class="ion-person"></i>
+              				<span>Персональные данные</span>
+							<i class="fa fa-chevron-down"></i>
+						</a>
+						<ul class="submenu">
+							<li><a ui-sref="home">Контактные данные</a></li>
+							<li><a ui-sref="conditions">Условия работы / Документы</a></li>
+							<li><a ui-sref="senderData">Данные отправителя</a></li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+		</div>
+
+		<div id="content">
+			<div class="menubar">
+        		<div class="row">
+	  				<div class="sidebar-toggler visible-xs">
+	  					<i class="ion-navicon"></i>
+	  				</div>
+		          	<div class="page-title">
+		            	Dashboard
+		          	</div>
+		        </div>
+			</div>
+
+			<div class="content-wrapper">
+        <div ui-view></div>
+			</div>
+		</div>
+	</div>
+
+	<div class="skin-switcher">
+		<div class="toggler">
+			<span class="brankic-brush"></span>
+		</div>
+		<ul class="menu">
+			<li>
+				<a class="active" data-skin="sidebar-default" href="#">
+					<span class="color default"></span> Default
+					<i class="fa fa-check"></i>
+				</a>
+			</li>
+			<li>
+				<a data-skin="sidebar-clear" href="#">
+					<span class="color clear"></span> Clear
+					<i class="fa fa-check"></i>
+				</a>
+			</li>
+			<li>
+				<a data-skin="sidebar-black" href="#">
+					<span class="color black"></span> Black
+					<i class="fa fa-check"></i>
+				</a>
+			</li>
+			<li>
+				<a data-skin="sidebar-dark" href="#">
+					<span class="color dark"></span> Dark
+					<i class="fa fa-check"></i>
+				</a>
+			</li>
+			<li>
+				<a data-skin="sidebar-flat" href="#">
+					<span class="color flat"></span> Flat
+					<i class="fa fa-check"></i>
+				</a>
+			</li>
+			<li>
+				<a data-skin="sidebar-flat-dark" href="#">
+					<span class="color flat-dark"></span> Flat dark
+					<i class="fa fa-check"></i>
+				</a>
+			</li>
+		</ul>
+	</div>
+	
+	<script src="js/app.js"></script>
+  <script src="js/controllers/loginCtrl.js"></script>
+  <script src="js/controllers/homeCtrl.js"></script>
+  <script src="js/controllers/senderData.js"></script>
+  <script src="js/controllers/conditions.js"></script>
+  <script src="js/controllers/registryCtrl.js"></script>
+  <script src="js/controllers/actsCheckingCtrl.js"></script>
+  <script src="js/services/authorizationData.js"></script>
+  <script src="js/services/personalData.js"></script>
+
+</body>
+</html>
