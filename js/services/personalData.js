@@ -1,4 +1,4 @@
-app.service('personalData', function(){
+app.service('PersonalData', function(){
 	return {
 		organizationName: 'organizationName',
 		contactPerson: 'contactPerson',

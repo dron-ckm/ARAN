@@ -1,6 +1,8 @@
 var app = angular.module('app', [
     'ui.router',
-    'ngCookies'
+    'ngCookies',
+    'ngSanitize',
+    'mgcrea.ngStrap'
   ])
   .config(['$urlRouterProvider', '$stateProvider', function($urlRouterProvider, $stateProvider) {
     $urlRouterProvider.otherwise('/');
@@ -33,7 +35,27 @@ var app = angular.module('app', [
       .state('senderData', {
         url: '/senderData',
         templateUrl: 'senderData.html',
-        controller: 'senderData'
+        controller: 'senderDataCtrl'
+      })
+      .state('contacts', {
+        url: '/contacts',
+        templateUrl: 'contacts.html',
+        controller: 'contactsCtrl'
+      })
+      .state('ordersHistory', {
+        url: '/ordersHistory',
+        templateUrl: 'ordersHistory.html',
+        controller: 'ordersHistoryCtrl',
+        resolve: {
+          historyData: function (OrdersHistoryData) {
+            return OrdersHistoryData.getData();
+          }
+        }
+      })
+      .state('newOrder', {
+        url: '/newOrder',
+        templateUrl: 'newOrder.html',
+        controller: 'newOrderCtrl'
       })
       
   }])
@@ -43,50 +65,18 @@ var app = angular.module('app', [
 
       var shouldLogin = (toState.name !== 'login') && !AuthorizationData.getToken();
 
+      $rootScope.stateIsLoading = true;
+
       if (shouldLogin) {
           $state.go('login');
           event.preventDefault();
           return;
       }
-      /*
-      var shouldLogin = toState.data !== undefined
-                    && toState.data.requireLogin 
-                    && !authorizationData.isLoggedIn ;
-      
-      // NOT authenticated - wants any private stuff
-      if(shouldLogin)
-      {
-        $state.go('login');
-        event.preventDefault();
-        return;
-      }
-      
-      /*
-      // authenticated (previously) comming not to root main
-      if(Auth.isLoggedIn) 
-      {
-        var shouldGoToMain = fromState.name === ""
-                          && toState.name !== "main" ;
-          
-        if (shouldGoToMain)
-        {
-            $state.go('main');
-            event.preventDefault();
-        } 
-        return;
-      }
-      
-      // UNauthenticated (previously) comming not to root public 
-      var shouldGoToPublic = fromState.name === ""
-                        && toState.name !== "public"
-                        && toState.name !== "login" ;
-        
-      if(shouldGoToPublic)
-      {
-          $state.go('public');console.log('p')
-          event.preventDefault();
-      } 
-      */
-      // unmanaged
     });
+    $rootScope.$on('$stateChangeSuccess',function(){
+      $rootScope.stateIsLoading = false;
+    });
+
+
+  
   })

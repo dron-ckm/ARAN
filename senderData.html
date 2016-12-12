@@ -1,37 +1,48 @@
-<div>
+<div class="row">
 	<h1 class="text-center">Данные отправителя</h1>
 	<form action="#" class="form-horizontal">
 		<fieldset ng-repeat="sender in senders">
 			<div class="form-group">
-			    <label class="col-sm-4 col-md-4 control-label">Город</label>
-			    <div class="col-sm-8 col-md-8">
-			      <input type="text" class="form-control" name="" ng-model="sender.city" ng-disabled="!isChangeEvailable">
-			    </div>
-		  	</div>
-		  	<div class="form-group">
-			    <label class="col-sm-4 col-md-4 control-label">Адрес, с которого будут производится отправка</label>
-			    <div class="col-sm-8 col-md-8">
-			      <input type="text" class="form-control" name="" ng-model="sender.addressFrom" ng-disabled="!isChangeEvailable">
-			    </div>
-		  	</div>
-		  	<div class="form-group">
-			    <label class="col-sm-4 col-md-4 control-label">Контактный телефон отправителя</label>
-			    <div class="col-sm-8 col-md-8">
-			      <input type="text" class="form-control" name="" ng-model="sender.phone" ng-disabled="!isChangeEvailable">
-			    </div>
-		  	</div>
-		  	<div class="form-group">
-			    <label class="col-sm-4 col-md-4 control-label">Контактное лицо</label>
-			    <div class="col-sm-8 col-md-8">
-			      <input type="text" class="form-control" name="" ng-model="sender.contactName" ng-disabled="!isChangeEvailable">
-			    </div>
-		  	</div>
-		  	<div class="form-group">
 			    <label class="col-sm-4 col-md-4 control-label">Название магазина</label>
 			    <div class="col-sm-8 col-md-8">
 			      <input type="text" class="form-control" name="" ng-model="sender.shopName" ng-disabled="!isChangeEvailable">
 			    </div>
 		  	</div>
+		  	<div role="tablist" bs-collapse data-start-collapsed="true">
+				<h5 class="filters__title">
+			        <a bs-collapse-toggle class="pointer">
+			        	<i class="fa fa-info-circle" aria-hidden="true"></i>
+			        	Дополнительно
+			        </a>
+			     </h5>
+			    <div class="filters__collapse" role="tabpanel" bs-collapse-target>
+			    	<div class="form-group">
+					    <label class="col-sm-4 col-md-4 control-label">Город</label>
+					    <div class="col-sm-8 col-md-8">
+					      <input type="text" class="form-control" name="" ng-model="sender.city" ng-disabled="!isChangeEvailable">
+					    </div>
+				  	</div>
+				  	<div class="form-group">
+					    <label class="col-sm-4 col-md-4 control-label">Адрес, с которого будут производится отправка</label>
+					    <div class="col-sm-8 col-md-8">
+					      <input type="text" class="form-control" name="" ng-model="sender.addressFrom" ng-disabled="!isChangeEvailable">
+					    </div>
+				  	</div>
+				  	<div class="form-group">
+					    <label class="col-sm-4 col-md-4 control-label">Контактный телефон отправителя</label>
+					    <div class="col-sm-8 col-md-8">
+					      <input type="text" class="form-control" name="" ng-model="sender.phone" ng-disabled="!isChangeEvailable">
+					    </div>
+				  	</div>
+				  	<div class="form-group">
+					    <label class="col-sm-4 col-md-4 control-label">Контактное лицо</label>
+					    <div class="col-sm-8 col-md-8">
+					      <input type="text" class="form-control" name="" ng-model="sender.contactName" ng-disabled="!isChangeEvailable">
+					    </div>
+				  	</div>
+			    </div>
+		    </div>
+			
 		  	<hr>
 		</fieldset>
 	</form>

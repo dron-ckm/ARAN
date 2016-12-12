@@ -1,0 +1,130 @@
+<div class="row">
+	<h1 class="text-center">Новый заказ</h1>
+	<ul class="steps">
+		<li ng-class="(currentStep >=1 ) ? 'active' : ''"><span>Шаг 1</span></li>
+		<li ng-class="(currentStep >=2 ) ? 'active' : ''"><span>Шаг 2</span></li>
+		<li ng-class="(currentStep >=3 ) ? 'active' : ''"><span>Шаг 3</span></li>
+		<li ng-class="(currentStep >=4 ) ? 'active' : ''"><span>Шаг 4</span></li>
+	</ul>
+	<div ng-show="currentStep ===1">
+		<form action="#" class="form-horizontal">
+			<fieldset>
+				<div class="form-group">
+				    <label class="col-sm-4 col-md-4 control-label">Название магазина</label>
+				    <div class="col-sm-8 col-md-8">
+				      	<input type="text" class="form-control" name="" ng-model="sender.shopName">
+				      	<button type="button" class="btn btn-default" ng-model="selectedShop" data-html="1" data-toggle="true" bs-options="icon.value as icon.label for icon in icons" bs-select>
+						  Action <span class="caret"></span>
+						</button>
+				    </div>
+			  	</div>
+				<div class="form-group">
+				    <label class="col-sm-4 col-md-4 control-label">Город отправителя</label>
+				    <div class="col-sm-8 col-md-8">
+				        <input type="text" class="form-control" name="" ng-model="sender.city">
+				    </div>
+			  	</div>
+			  	<div class="form-group">
+				    <label class="col-sm-4 col-md-4 control-label">Адрес, с которого будут производится отправка</label>
+				    <div class="col-sm-8 col-md-8">
+				      <input type="text" class="form-control" name="" ng-model="sender.addressFrom">
+				    </div>
+			  	</div>
+			  	<div class="form-group">
+				    <label class="col-sm-4 col-md-4 control-label">Контактный телефон отправителя</label>
+				    <div class="col-sm-8 col-md-8">
+				      <input type="text" class="form-control" name="" ng-model="sender.phone">
+				    </div>
+			  	</div>
+			  	<div class="form-group">
+				    <label class="col-sm-4 col-md-4 control-label">Контактное лицо</label>
+				    <div class="col-sm-8 col-md-8">
+				      <input type="text" class="form-control" name="" ng-model="sender.contactName">
+				    </div>
+			  	</div>
+
+				<div class="form-group">
+				    <label class="col-sm-4 col-md-4 control-label">Город получателя</label>
+				    <div class="col-sm-8 col-md-8">
+				      <input type="text" class="form-control" name="" ng-model="sender.city">
+				    </div>
+			  	</div>
+			</fieldset>
+		</form>
+	</div>
+	<div ng-show="currentStep ===2">
+		<form action="#" class="form-horizontal">
+			<fieldset>
+				<div class="form-group">
+					<div class="col-sm-12 col-md-12">
+						<input type="radio" name="radio1" id="r01" checked="" ng-model="deliveryType" value="1">
+				    	<label class="control-label" for="r01">Забор груза</label>
+				    </div>
+			  	</div>
+				<div class="form-group">
+					<div class="col-sm-12 col-md-12">
+						<input type="radio" name="radio1" id="r02"  ng-model="deliveryType" value="2">
+				    	<label class="control-label" for="r02">Доставка Аран до двери</label>
+				    </div>
+			  	</div>
+			  	<div class="form-group">
+			  		<div class="col-sm-12 col-md-12">
+						<input type="radio" name="radio1" id="r03"  ng-model="deliveryType" value="3">
+				    	<label class="control-label" for="r03">Доставка Аран до терминала</label>
+				    </div>
+			  	</div>
+			  	<div class="form-group">
+			  		<div class="col-sm-12 col-md-12">
+						<input type="radio" name="radio1" id="r04"  ng-model="deliveryType" value="4">
+				    	<label class="control-label" for="r04">Доставка до терминала сторонней курьерской службой</label>
+				    </div>
+			  	</div>
+			  	<div class="form-group">
+			  		<div class="col-sm-12 col-md-12">
+						<input type="radio" name="radio1" id="r05"  ng-model="deliveryType" value="5">
+				    	<label class="control-label" for="r05">Доставка сторонней курьерской службой до двери</label>
+				    </div>
+			  	</div>
+			</fieldset>
+		</form>
+	</div>
+	<div ng-show="currentStep ===3">
+		<form action="#" class="form-horizontal">
+			<fieldset>
+				<div class="form-group">
+					<div class="col-sm-12 col-md-12">
+						<input type="radio" name="radio1" id="r01" checked="" ng-model="deliveryType" value="1">
+				    	<label class="control-label" for="r01">Забор груза</label>
+				    </div>
+			  	</div>
+				<div class="form-group">
+					<div class="col-sm-12 col-md-12">
+						<input type="radio" name="radio1" id="r02"  ng-model="deliveryType" value="2">
+				    	<label class="control-label" for="r02">Доставка Аран до двери</label>
+				    </div>
+			  	</div>
+			  	<div class="form-group">
+			  		<div class="col-sm-12 col-md-12">
+						<input type="radio" name="radio1" id="r03"  ng-model="deliveryType" value="3">
+				    	<label class="control-label" for="r03">Доставка Аран до терминала</label>
+				    </div>
+			  	</div>
+			  	<div class="form-group">
+			  		<div class="col-sm-12 col-md-12">
+						<input type="radio" name="radio1" id="r04"  ng-model="deliveryType" value="4">
+				    	<label class="control-label" for="r04">Доставка до терминала сторонней курьерской службой</label>
+				    </div>
+			  	</div>
+			  	<div class="form-group">
+			  		<div class="col-sm-12 col-md-12">
+						<input type="radio" name="radio1" id="r05"  ng-model="deliveryType" value="5">
+				    	<label class="control-label" for="r05">Доставка сторонней курьерской службой до двери</label>
+				    </div>
+			  	</div>
+			</fieldset>
+		</form>
+	</div>
+	<div class="text-right">
+		<button class="btn btn-primary" ng-click="goNext()">Далее</button>
+	</div>
+</div>
