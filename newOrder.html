@@ -1,130 +1,454 @@
-<div class="row">
+<div class="row js-kladr-form-address">
 	<h1 class="text-center">Новый заказ</h1>
-	<ul class="steps">
-		<li ng-class="(currentStep >=1 ) ? 'active' : ''"><span>Шаг 1</span></li>
-		<li ng-class="(currentStep >=2 ) ? 'active' : ''"><span>Шаг 2</span></li>
-		<li ng-class="(currentStep >=3 ) ? 'active' : ''"><span>Шаг 3</span></li>
-		<li ng-class="(currentStep >=4 ) ? 'active' : ''"><span>Шаг 4</span></li>
+	<ul class="steps" ng-show="currentStep <=4">
+		<li ng-class="(currentStep >=1 ) ? 'active' : ''" ng-click="goStep(1)"><span>Шаг 1</span></li>
+		<li ng-class="(currentStep >=2 ) ? 'active' : ''" ng-click="goStep(2)"><span>Шаг 2</span></li>
+		<li ng-class="(currentStep >=3 ) ? 'active' : ''" ng-click="goStep(3)"><span>Шаг 3</span></li>
+		<li ng-class="(currentStep >=4 ) ? 'active' : ''" ng-click="goStep(4)"><span>Шаг 4</span></li>
 	</ul>
 	<div ng-show="currentStep ===1">
-		<form action="#" class="form-horizontal">
+		<form action="#" class="form-horizontal" name="step1form">
 			<fieldset>
 				<div class="form-group">
 				    <label class="col-sm-4 col-md-4 control-label">Название магазина</label>
 				    <div class="col-sm-8 col-md-8">
-				      	<input type="text" class="form-control" name="" ng-model="sender.shopName">
-				      	<button type="button" class="btn btn-default" ng-model="selectedShop" data-html="1" data-toggle="true" bs-options="icon.value as icon.label for icon in icons" bs-select>
+				      	<input type="text" class="form-control" name="" disabled="" ng-model="newOrder.selectedShop.shopName" ng-show="newOrder.shops.length == 1" required>
+				      	<button type="button" class="btn btn-default dropdawn_default" placeholder="Выбирите магазин..." ng-model="newOrder.selectedShop" ng-show="newOrder.shops.length > 1" data-html="1" data-toggle="true" bs-options="shop.shopName for shop in newOrder.shops" bs-select>
 						  Action <span class="caret"></span>
 						</button>
 				    </div>
 			  	</div>
-				<div class="form-group">
+				<div class="form-group" ng-class="{'has-error': step1form.citySender.$invalid}">
 				    <label class="col-sm-4 col-md-4 control-label">Город отправителя</label>
 				    <div class="col-sm-8 col-md-8">
-				        <input type="text" class="form-control" name="" ng-model="sender.city">
+				        <input type="text" class="form-control" name="citySender" ng-model="newOrder.selectedShop.city" required>
 				    </div>
 			  	</div>
-			  	<div class="form-group">
-				    <label class="col-sm-4 col-md-4 control-label">Адрес, с которого будут производится отправка</label>
+			  	<div class="form-group" ng-class="{'has-error': step1form.address.$invalid}">
+				    <label class="col-sm-4 col-md-4 control-label">Адрес, с которого производится отправка</label>
 				    <div class="col-sm-8 col-md-8">
-				      <input type="text" class="form-control" name="" ng-model="sender.addressFrom">
+				      <input type="text" class="form-control" name="address" ng-model="newOrder.selectedShop.addressFrom" required>
 				    </div>
 			  	</div>
-			  	<div class="form-group">
+			  	<div class="form-group" ng-class="{'has-error': step1form.phone.$invalid}">
 				    <label class="col-sm-4 col-md-4 control-label">Контактный телефон отправителя</label>
 				    <div class="col-sm-8 col-md-8">
-				      <input type="text" class="form-control" name="" ng-model="sender.phone">
+				      <input type="text" class="form-control" name="phone" ng-model="newOrder.selectedShop.phone" required>
 				    </div>
 			  	</div>
-			  	<div class="form-group">
+			  	<div class="form-group" ng-class="{'has-error': step1form.person.$invalid}">
 				    <label class="col-sm-4 col-md-4 control-label">Контактное лицо</label>
 				    <div class="col-sm-8 col-md-8">
-				      <input type="text" class="form-control" name="" ng-model="sender.contactName">
+				      <input type="text" class="form-control" name="person" ng-model="newOrder.selectedShop.contactName" required>
 				    </div>
 			  	</div>
 
-				<div class="form-group">
+				<div class="form-group" ng-class="{'has-error': step1form.deliveryCity.$invalid}">
 				    <label class="col-sm-4 col-md-4 control-label">Город получателя</label>
 				    <div class="col-sm-8 col-md-8">
-				      <input type="text" class="form-control" name="" ng-model="sender.city">
+				      <input type="text" value="" placeholder="Город" autocomplete="off" data-kladr-type="city" class="form-control kladr_city"  ng-model="newOrder.selectedShop.getterCity" required name="deliveryCity">
 				    </div>
 			  	</div>
 			</fieldset>
 		</form>
+		<div class="text-right">
+			<button class="btn btn-primary" ng-click="goNext($event)" ng-disabled="step1form.$invalid">Далее</button>
+		</div>
 	</div>
 	<div ng-show="currentStep ===2">
 		<form action="#" class="form-horizontal">
 			<fieldset>
 				<div class="form-group">
 					<div class="col-sm-12 col-md-12">
-						<input type="radio" name="radio1" id="r01" checked="" ng-model="deliveryType" value="1">
+						<input type="radio" name="radio1" id="r01" ng-model="newOrder.deliveryType" ng-value="1">
 				    	<label class="control-label" for="r01">Забор груза</label>
 				    </div>
 			  	</div>
 				<div class="form-group">
 					<div class="col-sm-12 col-md-12">
-						<input type="radio" name="radio1" id="r02"  ng-model="deliveryType" value="2">
+						<input type="radio" name="radio1" id="r02"  ng-model="newOrder.deliveryType" ng-value="2">
 				    	<label class="control-label" for="r02">Доставка Аран до двери</label>
 				    </div>
 			  	</div>
 			  	<div class="form-group">
 			  		<div class="col-sm-12 col-md-12">
-						<input type="radio" name="radio1" id="r03"  ng-model="deliveryType" value="3">
+						<input type="radio" name="radio1" id="r03"  ng-model="newOrder.deliveryType" ng-value="3">
 				    	<label class="control-label" for="r03">Доставка Аран до терминала</label>
 				    </div>
 			  	</div>
 			  	<div class="form-group">
 			  		<div class="col-sm-12 col-md-12">
-						<input type="radio" name="radio1" id="r04"  ng-model="deliveryType" value="4">
+						<input type="radio" name="radio1" id="r04"  ng-model="newOrder.deliveryType" ng-value="4">
 				    	<label class="control-label" for="r04">Доставка до терминала сторонней курьерской службой</label>
 				    </div>
 			  	</div>
 			  	<div class="form-group">
 			  		<div class="col-sm-12 col-md-12">
-						<input type="radio" name="radio1" id="r05"  ng-model="deliveryType" value="5">
+						<input type="radio" name="radio1" id="r05"  ng-model="newOrder.deliveryType" ng-value="5">
 				    	<label class="control-label" for="r05">Доставка сторонней курьерской службой до двери</label>
 				    </div>
 			  	</div>
 			</fieldset>
 		</form>
+		<div class="text-right">
+			<button class="btn btn-primary" ng-click="goNext($event)">Далее</button>
+		</div>
 	</div>
 	<div ng-show="currentStep ===3">
-		<form action="#" class="form-horizontal">
-			<fieldset>
-				<div class="form-group">
-					<div class="col-sm-12 col-md-12">
-						<input type="radio" name="radio1" id="r01" checked="" ng-model="deliveryType" value="1">
-				    	<label class="control-label" for="r01">Забор груза</label>
-				    </div>
-			  	</div>
-				<div class="form-group">
-					<div class="col-sm-12 col-md-12">
-						<input type="radio" name="radio1" id="r02"  ng-model="deliveryType" value="2">
-				    	<label class="control-label" for="r02">Доставка Аран до двери</label>
-				    </div>
-			  	</div>
-			  	<div class="form-group">
-			  		<div class="col-sm-12 col-md-12">
-						<input type="radio" name="radio1" id="r03"  ng-model="deliveryType" value="3">
-				    	<label class="control-label" for="r03">Доставка Аран до терминала</label>
-				    </div>
-			  	</div>
-			  	<div class="form-group">
-			  		<div class="col-sm-12 col-md-12">
-						<input type="radio" name="radio1" id="r04"  ng-model="deliveryType" value="4">
-				    	<label class="control-label" for="r04">Доставка до терминала сторонней курьерской службой</label>
-				    </div>
-			  	</div>
-			  	<div class="form-group">
-			  		<div class="col-sm-12 col-md-12">
-						<input type="radio" name="radio1" id="r05"  ng-model="deliveryType" value="5">
-				    	<label class="control-label" for="r05">Доставка сторонней курьерской службой до двери</label>
-				    </div>
-			  	</div>
-			</fieldset>
-		</form>
+		<div class="col-sm-12 col-md-12">
+			<div ng-show="newOrder.deliveryType == 1">
+				<form action="#" class="form-horizontal" name="step3form">
+					<fieldset>
+						<div class="form-group">
+							<div class="row">
+						    	<label class="col-sm-2 col-md-2 control-label">Дата забора</label>
+					    		<div class="col-sm-10 col-md-10">
+							    	<div class="input-group">
+								        <input type="text" class="form-control" data-bs-show="isDateAwayShown" ng-model="newOrder.measurements.selectedDate" name="date" bs-datepicker placeholder="дд.мм.гггг" data-date-format="dd.MM.yyyy">
+								        <div class="input-group-addon pointer" ng-click="toggleDateAway()"><i class="fa fa-calendar"></i></div>
+								    </div>
+					    		</div>
+				    		</div>
+					  	</div>
+					  	<div class="form-group">
+						  	<div class="row">
+						  		<div class="col-sm-2 col-md-2 text-right">
+						  			<label class="control-label block">&nbsp;</label>
+						  			<label class="control-label">Габариты забора</label>
+						  		</div>
+						  		<div class="col-sm-1 col-md-1">
+						  			<label class="control-label">вес (кг)</label>
+						  			<input type="text" class="form-control" name="weight" ng-model="newOrder.measurements.weight" required>
+						  		</div>
+						  		<div class="col-sm-2 col-md-2">
+						  			<label class="control-label">длина (см)</label>
+						  			<input type="text" class="form-control" name="" ng-model="newOrder.measurements.length" ng-disabled="newOrder.measurements.volume">
+						  		</div>
+						  		<div class="col-sm-2 col-md-2">
+						  			<label class="control-label">ширина (см)</label>
+						  			<input type="text" class="form-control" name="" ng-model="newOrder.measurements.width" ng-disabled="newOrder.measurements.volume">
+						  		</div>
+						  		<div class="col-sm-2 col-md-2">
+						  			<label class="control-label">высота (см)</label>
+						  			<input type="text" class="form-control" name="" ng-model="newOrder.measurements.height" ng-disabled="newOrder.measurements.volume">
+						  		</div>
+						  		<div class="col-sm-1 col-md-1 text-center">
+						  			<label class="control-label block">&nbsp;</label>
+						  			<label class="control-label">или</label>
+						  		</div>
+						  		<div class="col-sm-2 col-md-2">
+						  			<label class="control-label">Объем (м<sup>3</sup>)</label>
+						  			<input type="text" class="form-control" name="" ng-model="newOrder.measurements.volume" ng-disabled="newOrder.measurements.height || newOrder.measurements.width || newOrder.measurements.length">
+						  		</div>
+					  		</div>
+						</div>
+						<div class="form-group">
+							<div class="row">
+						  		<label class="col-sm-2 col-md-2 control-label">Выбор склада АРАН:</label>
+						  		<div class="col-sm-10 col-md-10">
+					  				<button type="button" class="btn btn-default dropdawn_default" placeholder="Выбирите склад..." ng-model="newOrder.measurements.selectedStorage" data-html="1" data-toggle="true" bs-options="storage.name for storage in newOrder.aranStorages" bs-select>
+							  			Action <span class="caret"></span>
+									</button>
+					  			</div>
+				  			</div>
+						</div>
+					</fieldset>
+				</form>
+				<div class="text-right row">
+					<button class="btn btn-primary" ng-click="goNext($event)" ng-disabled="step3form.$invalid">Далее</button>
+				</div>
+			</div>
+			<div  ng-show="newOrder.deliveryType != 1">
+				<form action="#" class="form-horizontal" name="step3aform">
+					<fieldset>
+						<div class="row">
+							<h4>Адрес получателя:</h4>
+							<div ng-show="newOrder.deliveryType == 3 || newOrder.deliveryType == 4">
+								<div class="form-group">
+								    <label class="col-sm-4 col-md-4 control-label">Адрес терминала</label>
+								    <div class="col-sm-8 col-md-8">
+						  				<button type="button" class="btn btn-default dropdawn_default" placeholder="Выбирите склад..." ng-model="newOrder.recipient.terminal" data-html="1" data-toggle="true" bs-options="storage.name for storage in newOrder.aranStorages" bs-select>
+								  			Action <span class="caret"></span>
+										</button>
+						  			</div>
+							  	</div>
+							</div>
+							<div ng-show="newOrder.deliveryType == 2 || newOrder.deliveryType == 5">
+							  	<div class="form-group" ng-class="{'has-error': step3aform.street.$invalid}">
+								    <label class="col-sm-4 col-md-4 control-label">Улица:</label>
+								    <div class="col-sm-8 col-md-8">
+								      <input type="text" value="" placeholder="Улица" autocomplete="off" name="street" class="form-control kladr_street" ng-model="newOrder.recipient.street" required>
+								    </div>
+							  	</div>
+							  	<div class="form-group" ng-class="{'has-error': step3aform.building.$invalid}">
+								    <label class="col-sm-4 col-md-4 control-label">Номер дома(офиса):</label>
+								    <div class="col-sm-8 col-md-8">
+								      	<input type="text" class="form-control kladr_building" name="building" ng-model="newOrder.recipient.bilding" required>
+								    </div>
+							  	</div>
+							  	<div class="form-group">
+								    <label class="col-sm-4 col-md-4 control-label">Корпус (строение):</label>
+								    <div class="col-sm-8 col-md-8">
+								      	<input type="text" class="form-control" name="" ng-model="newOrder.recipient.housing">
+								    </div>
+							  	</div>
+							</div>
+							<div class="form-group" ng-class="{'has-error': step3aform.getterFIO.$invalid}">
+							    <label class="col-sm-4 col-md-4 control-label">ФИО получателя:</label>
+							    <div class="col-sm-8 col-md-8">
+							      	<input type="text" class="form-control" name="getterFIO" ng-model="newOrder.recipient.person" required>
+							    </div>
+						  	</div>
+						  	<div class="form-group" ng-class="{'has-error': step3aform.getterPhone.$invalid}">
+							    <label class="col-sm-4 col-md-4 control-label">Телефон получателя:</label>
+							    <div class="col-sm-8 col-md-8">
+							      	<input type="text" class="form-control" name="getterPhone" ng-model="newOrder.recipient.phone" required>
+							    </div>
+						  	</div>
+
+						  	<div class="form-group" ng-class="{'has-error': step3aform.date.$invalid}">
+						    	<label class="col-sm-4 col-md-4 control-label">Дата доставки</label>
+					    		<div class="col-sm-8 col-md-8">
+							    	<div class="input-group">
+								        <input type="text" class="form-control" ng-model="newOrder.recipient.date" name="date" bs-datepicker placeholder="дд.мм.гггг" data-date-format="dd.MM.yyyy" required data-bs-show="isDateDeliveryShown">
+								        <div class="input-group-addon pointer" ng-click="toggleDeliveryDate()"><i class="fa fa-calendar"></i></div>
+								    </div>
+					    		</div>
+						  	</div>
+
+						  	<div class="form-group">
+							    <label class="col-sm-4 col-md-4 control-label">Комментарий:</label>
+							    <div class="col-sm-8 col-md-8">
+							      <textarea class="form-control" ng-model="newOrder.recipient.comments"></textarea>
+							    </div>
+						  	</div>
+						</div>
+					</fieldset>
+				</form>
+				<div class="row text-right">
+					<button class="btn btn-primary" ng-click="goNext($event)" ng-disabled="step3aform.$invalid">Далее</button>
+				</div>
+			</div>
+			
+		</div>
+	
 	</div>
-	<div class="text-right">
-		<button class="btn btn-primary" ng-click="goNext()">Далее</button>
+	<div ng-show="currentStep === 4">
+		<div class="col-sm-12 col-md-12">
+			<form action="#" class="form-horizontal js-form-address" name="step4form">
+				<fieldset>
+					<div class="row">
+						<h4>Данные о товаре в заказе</h4>
+					  	<div class="form-group" ng-class="{'has-error': step4form.number.$invalid}">
+						    <label class="col-sm-4 col-md-4 control-label">Номер заказа магазина:</label>
+						    <div class="col-sm-8 col-md-8">
+						      	<input type="text" class="form-control" name="number" ng-model="newOrder.cargo.number" ng-pattern="/^[a-zа-я0-9]+$/i" required>
+						      	<div class="error-text"  ng-show="step4form.number.$error.pattern">Поле может содержать только арабские цифры или буквы кириллицы/латиницы</div>
+						    </div>
+					  	</div>
+					  	<div class="form-group" ng-class="{'has-error': step4form.price.$invalid || step4form.price.$error.pattern}">
+						    <label class="col-sm-4 col-md-4 control-label">Стоимость доставки для покупателя:</label>
+						    <div class="col-sm-8 col-md-8">
+						      	<input type="number" class="form-control" name="price" ng-model="newOrder.cargo.price" ng-pattern="/^-?\d+\.?\d*$/">
+						    </div>
+					  	</div>
+					  	<div class="form-group">
+						    <label class="col-sm-4 col-md-4 control-label">Способ оплаты</label>
+						    <div class="col-sm-8 col-md-8">
+						      	<button type="button" class="btn btn-default dropdawn_default" placeholder="Выбирите способ оплаты..." ng-model="newOrder.cargo.paymentType" data-html="1" data-toggle="true" bs-options="item.name for item in paymentType" bs-select>
+						  			Action <span class="caret"></span>
+								</button>
+						    </div>
+					  	</div>
+					  	<div class="form-group">
+						    <label class="col-sm-4 col-md-4 control-label">Количество мест</label>
+						    <div class="col-sm-4 col-md-4">
+						      	<input type="text" class="form-control" name="places" ng-model="newOrder.cargo.placesCount" disabled>
+						    </div>
+						    <div class="col-sm-1 col-md-1">
+						      	<button class="btn btn-block btn-primary" ng-click="addPlace($event)">+</button>
+						    </div>
+						    <div class="col-sm-1 col-md-1">
+						      	<button class="btn btn-block btn-danger" ng-click="removePlace($event)">-</button>
+						    </div>
+						    <div class="col-sm-2 col-md-2">
+						      	<button class="btn btn-block btn-success" ng-click="addCargo($event)">Добвить товар</button>
+						    </div>
+					  	</div>
+					  	<h4>Данные о заказе</h4>
+					  	<div ng-repeat="place in newOrder.cargo.cargos">
+					  		<div class="form-group">
+					  			<div class="col-sm-4 col-md-4 text-right">
+					  				<label class="control-label block">&nbsp;</label>
+						  			<label class="control-label">Габариты грузоместа</label>
+						  		</div>
+						  		<div class="col-sm-8 col-md-8">
+						  			<div class="row">
+						  				<div class="col-sm-2 col-md-2">
+								  			<label class="control-label">Вес <span class="small">(кг)</span></label>
+								  			<input type="text" class="form-control" name="weight" ng-model="place.weight" required>
+								  		</div>
+								  		<div class="col-sm-1 col-md-1 text-center">
+								  			<label class="control-label block">&nbsp;</label>
+								  		</div>
+								  		<div class="col-sm-2 col-md-2">
+								  			<label class="control-label">длина <span class="small">(см)</span></label>
+								  			<input type="text" class="form-control" name="" ng-model="place.length" ng-change="place.getVolume()">
+								  		</div>
+								  		<div class="col-sm-2 col-md-2">
+								  			<label class="control-label">ширина <span class="small">(см)</span></label>
+								  			<input type="text" class="form-control" name="" ng-model="place.width" ng-change="place.getVolume()">
+								  		</div>
+								  		<div class="col-sm-2 col-md-2">
+								  			<label class="control-label">высота <span class="small">(см)</span></label>
+								  			<input type="text" class="form-control" name="" ng-model="place.height" ng-change="place.getVolume()">
+								  		</div>
+								  		<div class="col-sm-1 col-md-1 text-center">
+								  			<label class="control-label block">&nbsp;</label>
+								  			<label class="control-label">или</label>
+								  		</div>
+								  		<div class="col-sm-2 col-md-2" ng-class="{'has-error': step4form.value.$invalid}">
+								  			<label class="control-label">Объем (м<sup>3</sup>)</label>
+								  			<input type="text" class="form-control" name="value" ng-model="place.volume" required>
+								  		</div>
+						  			</div>
+						  		</div>
+						  		
+							</div>
+							<div class="form-group">
+					  			<div class="col-sm-1 col-md-1 text-right">
+					  				<label class="control-label block">&nbsp;</label>
+						  			<label class="control-label">Товар</label>
+						  		</div>
+						  		<div class="col-sm-5 col-md-5">
+						  			<label class="control-label small">Наименование товара</label>
+						  			<input type="text" class="form-control" name="weight" ng-model="place.name" required>
+						  		</div>
+						  		<div class="col-sm-1 col-md-1" ng-class="{'has-error': step4form.code.$error.pattern}">
+						  			<label class="control-label small">Артикул</label>
+						  			<input type="text" class="form-control" name="code" ng-model="place.code" ng-pattern="/^[a-zа-я0-9]+$/i">
+									<div class="error-text"  ng-show="step4form.code.$error.pattern">Только арабские цифры или буквы кириллицы/латиницы</div>
+						  		</div>
+						  		<div class="col-sm-2 col-md-2">
+						  			<label class="control-label small">Оценочна стоимость</label>
+						  			<input type="text" class="form-control" name="" ng-model="place.price">
+						  		</div>
+						  		<div class="col-sm-2 col-md-2">
+						  			<label class="control-label small">Стоимость для покупателя</label>
+						  			<input type="text" class="form-control" name="" ng-model="place.customerPrice">
+						  		</div>
+						  		<div class="col-sm-1 col-md-1 small">
+						  			<label class="control-label">Количество</label>
+						  			<input type="text" class="form-control" name="" ng-model="place.count">
+						  		</div>
+							</div>
+					  		<hr>
+					  	</div>
+					</div>
+				</fieldset>
+			</form>
+			<div class="row text-right">
+	  			<button type="submit" class="btn btn-success" ng-click="goNext($event)">Оформить заказ</button>
+	  		</div>
+		</div>
 	</div>
+	<div ng-show="currentStep === 5">
+		<h4>Информация об отправителе:</h4>
+		<dl class="full-info">
+			<dt>Название магазина:</dt>
+			<dd>{{newOrder.selectedShop.shopName}}</dd>
+			<dt>Город отправителя:</dt>
+			<dd>{{newOrder.selectedShop.city}}</dd>
+			<dt>Адрес, с которого производится отправка:</dt>
+			<dd>{{newOrder.selectedShop.addressFrom}}</dd>
+			<dt>Контактный телефон отправителя:</dt>
+			<dd>{{newOrder.selectedShop.phone}}</dd>
+			<dt>Контактное лицо:</dt>
+			<dd>{{newOrder.selectedShop.contactName}}</dd>
+			<dt>Город получателя:</dt>
+			<dd>{{newOrder.selectedShop.getterCity}}</dd>
+		</dl>
+		<br>
+		<h4>Тип услуги:</h4>
+		<ul>
+			<li ng-show="newOrder.deliveryType == 1">Забор груза</li>
+			<li ng-show="newOrder.deliveryType == 2">Доставка Аран до двери</li>
+			<li ng-show="newOrder.deliveryType == 3">Доставка Аран до терминала</li>
+			<li ng-show="newOrder.deliveryType == 4">Доставка до терминала сторонней курьерской службой</li>
+			<li ng-show="newOrder.deliveryType == 5">Доставка сторонней курьерской службой до двери</li>
+		</ul>
+		<br>
+		<h4>Информация получателя</h4>
+		<div ng-show="newOrder.deliveryType == 1">
+			 <dl class="full-info">
+				<dt>Дата забора:</dt>
+				<dd>{{newOrder.measurements.selectedDate | date:'dd.MM.yyyy'}}</dd>
+				<dt>Вес <span class="small">(кг):</span></dt>
+				<dd>{{newOrder.measurements.weight}}</dd>
+				<dt>Объем (м<sup>3</sup>):</dt>
+				<dd>{{newOrder.measurements.volume || newOrder.measurements.length * newOrder.measurements.width * newOrder.measurements.height }}</dd>
+				<dt>Выбранный склад АРАН:</dt>
+				<dd>{{newOrder.measurements.selectedStorage.name}}</dd>
+			</dl>
+		</div>
+		<div ng-show="newOrder.deliveryType != 1">
+			<div ng-show="newOrder.deliveryType == 2 || newOrder.deliveryType == 5">
+				<dl class="full-info">
+					<dt>Адрес терминала:</dt>
+					<dd>{{newOrder.recipient.terminal}}</dd>
+				</dl>
+			</div>
+			<div ng-show="newOrder.deliveryType == 3 || newOrder.deliveryType == 4">
+				<dl class="full-info">
+					<dt>Улица:</dt>
+					<dd>{{newOrder.recipient.street}}</dd>
+					<dt>Номер дома(офиса):</dt>
+					<dd>{{newOrder.recipient.bilding}}</dd>
+					<dt>Корпус (строение):</dt>
+					<dd>{{newOrder.recipient.housing}}</dd>
+				</dl>
+			</div>
+			<dl class="full-info">
+				<dt>ФИО получателя:</dt>
+				<dd>{{newOrder.recipient.person}}</dd>
+				<dt>Телефон получателя:</dt>
+				<dd>{{newOrder.recipient.phone}}</dd>
+				<dt>Дата доставки:</dt>
+				<dd>{{newOrder.recipient.date | date:'dd.MM.yyyy'}}</dd>
+				<dt>Комментарий:</dt>
+				<dd>{{newOrder.recipient.comments}}</dd>
+			</dl>
+		</div>
+		<br>
+		<h4>Данные о товаре в заказе</h4>
+		<dl class="full-info">
+			<dt>Номер заказа магазина:</dt>
+			<dd>{{newOrder.cargo.number}}</dd>
+			<dt>Стоимость доставки для покупателя:</dt>
+			<dd>{{newOrder.cargo.price}}</dd>
+			<dt>Способ оплаты:</dt>
+			<dd>{{newOrder.cargo.paymentType.name}}</dd>
+			<dt>Количество мест:</dt>
+			<dd>{{newOrder.cargo.placesCount}}</dd>
+			<dt>Товары:</dt>
+			<dd>
+				{{newOrder.cargo.cargos}}
+			</dd>
+		</dl>
+		<!--
+		<p>1 {{newOrder.selectedShop}}</p>
+		<p>2 {{newOrder.deliveryType}}</p>
+		<p>3a {{newOrder.measurements}}</p>
+		<p>3b {{newOrder.recipient}}</p>
+		<p>4 {{newOrder.cargo}}</p>
+		-->
+
+		<div class="text-right">
+	  		<button type="submit" class="btn btn-warning" ng-click="goStep(4)">Править</button>
+  			<button type="submit" class="btn btn-success" ng-click="save()">Подтвердить</button>
+  		</div>
+	</div>
+
+	
+	
 </div>

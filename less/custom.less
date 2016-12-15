@@ -285,6 +285,7 @@ h1 {
 			background: #fff;
 			position: relative;
 			z-index: 5;
+			cursor: pointer;
 		}
 
 		&:before {
@@ -314,8 +315,90 @@ h1 {
 			margin-left: 10px;
 		}
 	}
+	.dropdawn_default {
+		width: 100%;
+		text-align: left;
+	}
+
+	.input-group {
+		.datepicker {
+			top: 100% !important;
+		}
+
+		input {
+			height: 35px;
+		}
+
+		.input-group-addon {
+			height: 35px !important;
+		}
+	}
+
+	.error-text {
+		display: block;
+		color: red;
+		font-size: 11px;
+	}
+}
+
+.select.dropdown-menu {
+	max-height: 200px;
+	overflow: auto;
+}
+
+.datepicker.dropdown-menu {
+	width: 250px;
+	height: 250px;
+
+	button {
+		outline: none;
+		border: 0px;
+	}
+	tbody {
+		height: 180px;
+	}
+	tbody button {
+		padding: 6px;
+	}
+	&.datepicker-mode-1, &.datepicker-mode-2 {
+		tbody button {
+			height: 65px;
+		}
+	}
+}
+
+.timepicker.dropdown-menu {
+	padding: 0 4px;
+
+	button {
+		outline: none;
+		border: 0px;
+	}
+	tbody button {
+		padding: 6px;
+	}
+}
+
+.full-info {
+	overflow: hidden;
+	line-height: 15px;
+	margin: 0;
+
+	dt {
+		float: left;
+		margin: 0 15px 15px 0;
+	}
+
+	dd {
+		margin: 0 0 15px;
+		padding: 0;
+		overflow: hidden;
+		min-height: 20px;
+	}
 }
 
 .pointer {
 	cursor: pointer;
 }
+
+.block {display: block;}

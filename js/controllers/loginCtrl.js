@@ -1,4 +1,4 @@
-app.controller('loginCtrl', ['$scope', '$http', 'AuthorizationData', function($scope, $http, AuthorizationData){
+app.controller('loginCtrl', ['$scope', '$http', 'AuthorizationData', '$state', '$rootScope', function($scope, $http, AuthorizationData, $state, $rootScope){
 	$scope.authorize = function($event){
 		var req = {
 			method: 'POST',
@@ -9,14 +9,14 @@ app.controller('loginCtrl', ['$scope', '$http', 'AuthorizationData', function($s
 			}
 		};
 		$event.preventDefault();
+		$rootScope.stateIsLoading = true;
 		$http(req).then(function successCallback(response) {
 			AuthorizationData.setData(response.data);
-			// this callback will be called asynchronously
-			// when the response is available
+			$rootScope.stateIsLoading = false;
+			$state.go('home');
 		}, function errorCallback(response) {
-			console.log('!!!!!!!ERROR', response);
-			// called asynchronously if an error occurs
-			// or server returns response with an error status.
+			$rootScope.stateIsLoading = false;
+			alert('LOGIN ERROR', response);
 		});
 	}
 }]);

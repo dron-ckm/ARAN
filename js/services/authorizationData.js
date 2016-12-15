@@ -12,7 +12,6 @@ app.service('AuthorizationData', ['$cookies', function($cookies){
 			for ( var key in newData) {
 				this[key] = newData [key];
 			}
-			console.log('new', newData);
 			$cookies.put('_token', newData.token);
 			this.token = newData.token;
 		}

@@ -236,6 +236,7 @@ h1 {
   background: #fff;
   position: relative;
   z-index: 5;
+  cursor: pointer;
 }
 .steps li:before {
   content: "";
@@ -255,6 +256,74 @@ h1 {
   text-align: left;
   margin-left: 10px;
 }
+.form-horizontal .dropdawn_default {
+  width: 100%;
+  text-align: left;
+}
+.form-horizontal .input-group .datepicker {
+  top: 100% !important;
+}
+.form-horizontal .input-group input {
+  height: 35px;
+}
+.form-horizontal .input-group .input-group-addon {
+  height: 35px !important;
+}
+.form-horizontal .error-text {
+  display: block;
+  color: red;
+  font-size: 11px;
+}
+.select.dropdown-menu {
+  max-height: 200px;
+  overflow: auto;
+}
+.datepicker.dropdown-menu {
+  width: 250px;
+  height: 250px;
+}
+.datepicker.dropdown-menu button {
+  outline: none;
+  border: 0px;
+}
+.datepicker.dropdown-menu tbody {
+  height: 180px;
+}
+.datepicker.dropdown-menu tbody button {
+  padding: 6px;
+}
+.datepicker.dropdown-menu.datepicker-mode-1 tbody button,
+.datepicker.dropdown-menu.datepicker-mode-2 tbody button {
+  height: 65px;
+}
+.timepicker.dropdown-menu {
+  padding: 0 4px;
+}
+.timepicker.dropdown-menu button {
+  outline: none;
+  border: 0px;
+}
+.timepicker.dropdown-menu tbody button {
+  padding: 6px;
+}
+.full-info {
+  overflow: hidden;
+  line-height: 15px;
+  margin: 0;
+}
+.full-info dt {
+  float: left;
+  margin: 0 15px 15px 0;
+}
+.full-info dd {
+  margin: 0 0 15px;
+  padding: 0;
+  overflow: hidden;
+  min-height: 20px;
+}
 .pointer {
   cursor: pointer;
+}
+.block {
+  display: block;
 }
