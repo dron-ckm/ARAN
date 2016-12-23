@@ -2,7 +2,8 @@ var app = angular.module('app', [
     'ui.router',
     'ngCookies',
     'ngSanitize',
-    'mgcrea.ngStrap'
+    'mgcrea.ngStrap',
+    'ngFileSaver'
   ])
   .config(['$urlRouterProvider', '$stateProvider', function($urlRouterProvider, $stateProvider) {
     $urlRouterProvider.otherwise('/');
