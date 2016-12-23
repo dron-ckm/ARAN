@@ -75,13 +75,13 @@
 		</tr>
 		<tr ng-repeat="item in filteredItems = ( items | filter:search )" ng-dblclick="showInfo(item)">
 			<td><input type="checkbox" ng-model="item.checked" ng-change="checkboxChanged(item.checked)"></td>
-			<td>{{item.num}}</td>
-			<td>{{item.shopNum}}</td>
-			<td>{{item.code}}</td>
-			<td>{{item.where}}</td>
+			<td>{{item.humanReadable.deliveryType}}</td>
+			<td>{{item.humanReadable.number}}</td>
+			<td>{{item.humanReadable.barcode}}</td>
+			<td>{{item.location.address}}</td>
 			<td>{{item.price}}</td>
-			<td>{{item.status}}</td>
-			<td><a href="#"><i class="fa fa-print"></i> Печать</a></td>
+			<td>{{item.humanReadable.status}}</td>
+			<td><a ng-click="getPrintPdf(item)"><i class="fa fa-print"></i> Печать</a></td>
 		</tr>
 	</table>
 	<button class="btn btn-success" ng-click="printActs()" ng-show="(getCheckedItems().length > 0 ) && (filteredItems.length != 0)">Распечатать акт приема-передачи </button>
