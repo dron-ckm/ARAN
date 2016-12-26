@@ -1,10 +1,15 @@
+<style>
+	.sizes {
+		padding:0 !important;
+	}
+</style>
 <div class="row js-kladr-form-address">
 	<h1 class="text-center">Новый заказ</h1>
-	<ul class="steps" ng-show="currentStep <=4">
+	<ul class="steps" ng-show="currentStep < 4 || (currentStep <= 4 && newOrder.deliveryType != 1) ">
 		<li ng-class="(currentStep >=1 ) ? 'active' : ''" ng-click="goStep(1)"><span>Шаг 1</span></li>
 		<li ng-class="(currentStep >=2 ) ? 'active' : ''" ng-click="goStep(2)"><span>Шаг 2</span></li>
 		<li ng-class="(currentStep >=3 ) ? 'active' : ''" ng-click="goStep(3)"><span>Шаг 3</span></li>
-		<li ng-class="(currentStep >=4 ) ? 'active' : ''" ng-click="goStep(4)"><span>Шаг 4</span></li>
+		<li ng-if="newOrder.deliveryType != 1" ng-class="(currentStep >=4 ) ? 'active' : ''" ng-click="goStep(4)"><span>Шаг 4</span></li>
 	</ul>
 	<div ng-show="currentStep ===1">
 		<form action="#" class="form-horizontal" name="step1form">
@@ -52,7 +57,7 @@
 			</fieldset>
 		</form>
 		<div class="text-right">
-			<button class="btn btn-primary" ng-click="goNext($event)" ng-disabled="step1form.$invalid">Далее</button>
+			<button class="btn btn-primary" ng-click="goNext($event)"  ng-disabled="step1form.$invalid">Далее</button>
 		</div>
 	</div>
 	<div ng-show="currentStep ===2">
@@ -117,20 +122,25 @@
 						  			<label class="control-label">Габариты забора</label>
 						  		</div>
 						  		<div class="col-sm-1 col-md-1">
-						  			<label class="control-label">вес (кг)</label>
+						  			<label class="control-label">вес(кг)</label>
 						  			<input type="text" class="form-control" name="weight" ng-model="newOrder.measurements.weight" required>
 						  		</div>
-						  		<div class="col-sm-2 col-md-2">
-						  			<label class="control-label">длина (см)</label>
-						  			<input type="text" class="form-control" name="" ng-model="newOrder.measurements.length" ng-disabled="newOrder.measurements.volume">
-						  		</div>
-						  		<div class="col-sm-2 col-md-2">
-						  			<label class="control-label">ширина (см)</label>
-						  			<input type="text" class="form-control" name="" ng-model="newOrder.measurements.width" ng-disabled="newOrder.measurements.volume">
-						  		</div>
-						  		<div class="col-sm-2 col-md-2">
-						  			<label class="control-label">высота (см)</label>
-						  			<input type="text" class="form-control" name="" ng-model="newOrder.measurements.height" ng-disabled="newOrder.measurements.volume">
+								<div class="col-sm-6 col-md-6">
+									<div class="col-sm-12 col-md-12 text-center sizes">
+										<label class="control-label" style="padding-left:36px;">Габариты (см)</label>
+									</div>
+									<span class="col-sm-1 col-md-1 sizes text-center"></span>
+									<div class="col-sm-3 col-md-3 sizes">
+						  				<input type="text" class="form-control" name="" ng-model="newOrder.measurements.length" ng-disabled="newOrder.measurements.volume">
+									</div>
+									<span class="col-sm-1 col-md-1 sizes text-center">--</span>
+									<div class="col-sm-3 col-md-3 sizes">
+										<input type="text" class="form-control" name="" ng-model="newOrder.measurements.width" ng-disabled="newOrder.measurements.volume">
+									</div>
+									<span class="col-sm-1 col-md-1 sizes text-center">--</span>
+									<div class="col-sm-3 col-md-3 sizes">
+										<input type="text" class="form-control" name="" ng-model="newOrder.measurements.height" ng-disabled="newOrder.measurements.volume">
+									</div>
 						  		</div>
 						  		<div class="col-sm-1 col-md-1 text-center">
 						  			<label class="control-label block">&nbsp;</label>
@@ -155,7 +165,8 @@
 					</fieldset>
 				</form>
 				<div class="text-right row">
-					<button class="btn btn-primary" ng-click="goNext($event)" ng-disabled="step3form.$invalid">Далее</button>
+					<button class="btn btn-primary" ng-click="goNext($event)" ng-if="newOrder.deliveryType != 1" ng-disabled="step3form.$invalid">Далее</button>
+					<button type="submit" class="btn btn-success" ng-if="newOrder.deliveryType == 1" ng-click="goNext($event)">Оформить заказ</button>
 				</div>
 			</div>
 			<div  ng-show="newOrder.deliveryType != 1">
@@ -233,7 +244,7 @@
 		</div>
 	
 	</div>
-	<div ng-show="currentStep === 4">
+	<div ng-show="currentStep === 4 && newOrder.deliveryType != 1">
 		<div class="col-sm-12 col-md-12">
 			<form action="#" class="form-horizontal js-form-address" name="step4form">
 				<fieldset>
@@ -276,7 +287,7 @@
 						    </div>
 					  	</div>
 					  	<h4>Данные о заказе</h4>
-					  	<div ng-repeat="place in newOrder.cargo.cargos">
+					  	<div ng-repeat="cargo in newOrder.cargo.cargos">
 					  		<div class="form-group">
 					  			<div class="col-sm-4 col-md-4 text-right">
 					  				<label class="control-label block">&nbsp;</label>
@@ -286,22 +297,22 @@
 						  			<div class="row">
 						  				<div class="col-sm-2 col-md-2">
 								  			<label class="control-label">Вес <span class="small">(кг)</span></label>
-								  			<input type="text" class="form-control" name="weight" ng-model="place.weight" required>
+								  			<input type="text" class="form-control" name="weight" ng-model="cargo.weight" required>
 								  		</div>
 								  		<div class="col-sm-1 col-md-1 text-center">
 								  			<label class="control-label block">&nbsp;</label>
 								  		</div>
 								  		<div class="col-sm-2 col-md-2">
 								  			<label class="control-label">длина <span class="small">(см)</span></label>
-								  			<input type="text" class="form-control" name="" ng-model="place.length" ng-change="place.getVolume()">
+								  			<input type="text" class="form-control" name="" ng-model="cargo.length" ng-change="place.getVolume()">
 								  		</div>
 								  		<div class="col-sm-2 col-md-2">
 								  			<label class="control-label">ширина <span class="small">(см)</span></label>
-								  			<input type="text" class="form-control" name="" ng-model="place.width" ng-change="place.getVolume()">
+								  			<input type="text" class="form-control" name="" ng-model="cargo.width" ng-change="place.getVolume()">
 								  		</div>
 								  		<div class="col-sm-2 col-md-2">
 								  			<label class="control-label">высота <span class="small">(см)</span></label>
-								  			<input type="text" class="form-control" name="" ng-model="place.height" ng-change="place.getVolume()">
+								  			<input type="text" class="form-control" name="" ng-model="cargo.height" ng-change="place.getVolume()">
 								  		</div>
 								  		<div class="col-sm-1 col-md-1 text-center">
 								  			<label class="control-label block">&nbsp;</label>
@@ -309,37 +320,37 @@
 								  		</div>
 								  		<div class="col-sm-2 col-md-2" ng-class="{'has-error': step4form.value.$invalid}">
 								  			<label class="control-label">Объем (м<sup>3</sup>)</label>
-								  			<input type="text" class="form-control" name="value" ng-model="place.volume" required>
+								  			<input type="text" class="form-control" name="value" ng-model="cargo.volume" required>
 								  		</div>
 						  			</div>
 						  		</div>
-						  		
+
 							</div>
-							<div class="form-group">
+							<div class="form-group" ng-repeat = "product in cargo.products">
 					  			<div class="col-sm-1 col-md-1 text-right">
 					  				<label class="control-label block">&nbsp;</label>
 						  			<label class="control-label">Товар</label>
 						  		</div>
 						  		<div class="col-sm-5 col-md-5">
 						  			<label class="control-label small">Наименование товара</label>
-						  			<input type="text" class="form-control" name="weight" ng-model="place.name" required>
+						  			<input type="text" class="form-control" name="weight" ng-model="product.name" required>
 						  		</div>
 						  		<div class="col-sm-1 col-md-1" ng-class="{'has-error': step4form.code.$error.pattern}">
 						  			<label class="control-label small">Артикул</label>
-						  			<input type="text" class="form-control" name="code" ng-model="place.code" ng-pattern="/^[a-zа-я0-9]+$/i">
+						  			<input type="text" class="form-control" name="code" ng-model="product.code" ng-pattern="/^[a-zа-я0-9]+$/i">
 									<div class="error-text"  ng-show="step4form.code.$error.pattern">Только арабские цифры или буквы кириллицы/латиницы</div>
 						  		</div>
 						  		<div class="col-sm-2 col-md-2">
 						  			<label class="control-label small">Оценочна стоимость</label>
-						  			<input type="text" class="form-control" name="" ng-model="place.price">
+						  			<input type="text" class="form-control" name="" ng-model="product.price">
 						  		</div>
 						  		<div class="col-sm-2 col-md-2">
 						  			<label class="control-label small">Стоимость для покупателя</label>
-						  			<input type="text" class="form-control" name="" ng-model="place.customerPrice">
+						  			<input type="text" class="form-control" name="" ng-model="product.customerPrice">
 						  		</div>
 						  		<div class="col-sm-1 col-md-1 small">
 						  			<label class="control-label">Количество</label>
-						  			<input type="text" class="form-control" name="" ng-model="place.count">
+						  			<input type="text" class="form-control" name="" ng-model="product.count">
 						  		</div>
 							</div>
 					  		<hr>
@@ -352,7 +363,7 @@
 	  		</div>
 		</div>
 	</div>
-	<div ng-show="currentStep === 5">
+	<div ng-show="currentStep === 5 || currentStep === 4 && newOrder.deliveryType === 1">
 		<h4>Информация об отправителе:</h4>
 		<dl class="full-info">
 			<dt>Название магазина:</dt>
@@ -444,7 +455,7 @@
 		-->
 
 		<div class="text-right">
-	  		<button type="submit" class="btn btn-warning" ng-click="goStep(4)">Править</button>
+	  		<button type="submit" class="btn btn-warning" ng-click="goStep(currentStep-1)">Править</button>
   			<button type="submit" class="btn btn-success" ng-click="save()">Подтвердить</button>
   		</div>
 	</div>

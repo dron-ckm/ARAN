@@ -1,3 +1,29 @@
+<style>
+	.table {
+		display:table;
+		font-size:13px;
+	}
+	.table-row {
+		display:table-row;
+		padding:10px;
+	}
+	.table-row:nth-child(2n) {
+		background:#e6e6e6;
+	}
+	.table-cell {
+		display:inline-block;
+	}
+	.info_parent {
+		margin:30px;
+	}
+	.info_children {
+		padding: 5px 0;
+	}
+	.filters__title {
+		text-align:right;
+	}
+
+</style>
 <div class="row">
 	<h1 class="text-center">История заказов</h1>
 
@@ -11,7 +37,7 @@
 				        	Фильтр
 				        </a>
 				     </h3>
-				    <div class="filters__collapse" role="tabpanel" bs-collapse-target>
+				    <div class="filters__collapse" role="tabpanel" bs-collapse-target startCollapsed="true">
 				    	<div class="row">
 							<div class="form-group col-sm-2 col-md-2">
 								<label>Дата заказа</label>
@@ -62,28 +88,83 @@
 			</fieldset>
 		</form>
 	</div>
-	<table class="acts-table">
-		<tr>
-			<th><input type="checkbox" ng-model="isMasterChecked" ng-change="toggleMasterCheckbox(isMasterChecked)"></th>
-			<th>Тип заказа</th>
-			<th>Номер заказа магазина</th>
-			<th>Штрих-код</th>
-			<th>Куда</th>
-			<th>Стоимость</th>
-			<th>Статус</th>
-			<th>&nbsp;</th>
-		</tr>
-		<tr ng-repeat="item in filteredItems = ( items | filter:search )" ng-dblclick="showInfo(item)">
-			<td><input type="checkbox" ng-model="item.checked" ng-change="checkboxChanged(item.checked)"></td>
-			<td>{{item.num}}</td>
-			<td>{{item.shopNum}}</td>
-			<td>{{item.code}}</td>
-			<td>{{item.where}}</td>
-			<td>{{item.price}}</td>
-			<td>{{item.status}}</td>
-			<td><a href="#"><i class="fa fa-print"></i> Печать</a></td>
-		</tr>
-	</table>
+	<div class="table">
+		<div class="table-row col-sm-12 col-md-12">
+			<div class="table-cell col-sm-1 col-md-1"><input type="checkbox" ng-model="isMasterChecked" ng-change="toggleMasterCheckbox(isMasterChecked)"></div>
+			<div class="table-cell col-sm-2 col-md-2">Тип заказа</div>
+			<div class="table-cell col-sm-2 col-md-2">Номер заказа магазина</div>
+			<div class="table-cell col-sm-1 col-md-1">Штрих-код</div>
+			<div class="table-cell col-sm-1 col-md-1">Куда</div>
+			<div class="table-cell col-sm-1 col-md-1">Стоимость</div>
+			<div class="table-cell col-sm-2 col-md-2">Статус</div>
+			<div class="table-cell col-sm-2 col-md-2">&nbsp;</div>
+		</div>
+		<div ng-repeat="item in filteredItems = ( items | filter:search )" ng-dblclick="showInfo(item)" class="table-row col-sm-12 col-md-12">
+			<div class="table-cell col-sm-1 col-md-1"><input type="checkbox" ng-model="item.checked" ng-change="checkboxChanged(item.checked)"></div>
+			<div class="table-cell col-sm-2 col-md-2">{{item.num}}</div>
+			<div class="table-cell col-sm-2 col-md-2">{{item.shopNum}}</div>
+			<div class="table-cell col-sm-1 col-md-1">{{item.code}}</div>
+			<div class="table-cell col-sm-1 col-md-1">{{item.where}}</div>
+			<div class="table-cell col-sm-1 col-md-1">{{item.price}}</div>
+			<div class="table-cell col-sm-2 col-md-2">{{item.status}}</div>
+			<div class="table-cell col-sm-2 col-md-2"><a href="#"><i class="fa fa-print"></i> Печать</a></div>
+			<div class="info_parent" ng-if="item.showInView">
+				<div class="info_children">Данные отправителя</div>
+				<div class="info_children">(ФИО, город, контактное лицо, контактный телефон, название магазина, от которого осуществляется доставка)</div>
+				<div class="info_children">Данные получателя</div>
+				<div class="info_children">(ФИО, город, контактное лицо, контактный телефон)</div>
+				<div class="info_children"> Номер заказа магазина</div>
+				<div class="info_children"> 7777 </div>
+				<div class="info_children"> Стоимость доставки для получателя</div>
+				<div class="info_children"> 777p</div>
+				<div class="info_children">Способ оплаты</div>
+				<div class="info_children">Visa</div>
+				<div class="info_children">Количество мест</div>
+				<div class="info_children">4</div>
+				<div class="info_children">Список товаров с артикулом, названием, оценочной стоимостью, стоимостью для получателя, количеством</div>
+				<div class="info_children">asasasasas</div>
+            </div>
+        </div>
+        <!--<table class="acts-table">-->
+		<!--<tr>-->
+			<!--<th><input type="checkbox" ng-model="isMasterChecked" ng-change="toggleMasterCheckbox(isMasterChecked)"></th>-->
+			<!--<th>Тип заказа</th>-->
+			<!--<th>Номер заказа магазина</th>-->
+			<!--<th>Штрих-код</th>-->
+			<!--<th>Куда</th>-->
+			<!--<th>Стоимость</th>-->
+			<!--<th>Статус</th>-->
+			<!--<th>&nbsp;</th>-->
+		<!--</tr>-->
+		<!--<tr ng-repeat="item in filteredItems = ( items | filter:search )" ng-dblclick="showInfo(item)">-->
+			<!--<td><input type="checkbox" ng-model="item.checked" ng-change="checkboxChanged(item.checked)"></td>-->
+			<!--<td>{{item.num}}</td>-->
+			<!--<td>{{item.shopNum}}</td>-->
+			<!--<td>{{item.code}}</td>-->
+			<!--<td>{{item.where}}</td>-->
+			<!--<td>{{item.price}}</td>-->
+			<!--<td>{{item.status}}</td>-->
+			<!--<td><a href="#"><i class="fa fa-print"></i> Печать</a></td>-->
+		<!--</tr>-->
+		<!--<tr ng-repeat="">-->
+			<!--<td>Данные отправителя</td>-->
+			<!--<td>Данные получателя</td>-->
+			<!--<td> Номер заказа магазина</td>-->
+			<!--<td> Стоимость доставки для получателя</td>-->
+			<!--<td>Способ оплаты</td>-->
+			<!--<td>Количество мест</td>-->
+			<!--<td>Список товаров с артикулом, названием, оценочной стоимостью, стоимостью для получателя, количеством</td>-->
+		<!--</tr>-->
+		<!--<tr>-->
+			<!--<td>(ФИО, город, контактное лицо, контактный телефон, название магазина, от которого осуществляется доставка)</td>-->
+			<!--<td>(ФИО, город, контактное лицо, контактный телефон)</td>-->
+			<!--<td> 7777 </td>-->
+			<!--<td> 777p</td>-->
+			<!--<td>Visa</td>-->
+			<!--<td>4</td>-->
+			<!--<td>asdasdas</td>-->
+		<!--</tr>-->
+	<!--</table>-->
 	<button class="btn btn-success" ng-click="printActs()" ng-show="(getCheckedItems().length > 0 ) && (filteredItems.length != 0)">Распечатать акт приема-передачи </button>
 	<div class="alert alert-danger" ng-show="filteredItems.length == 0">
 	  <p><strong>Внимание</strong> По заданным параметрам не найдено ни одного заказа, измените параметры поиска</p>

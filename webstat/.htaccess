@@ -1,0 +1,7 @@
+AuthType Basic
+AuthName "/www/aran.ipolh.com/webstat"
+AuthUserFile /var/www/demo/data/etc/10529087.passwd
+DirectoryIndex index.html
+<Limit GET POST>
+	require valid-user
+</Limit>
