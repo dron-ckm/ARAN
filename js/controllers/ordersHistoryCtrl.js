@@ -6,7 +6,8 @@ app.controller('ordersHistoryCtrl', [
     '$filter',
     'FileSaver',
     'OrderStatusService',
-    function ($scope, $modal, historyData, OrdersHistoryData, $filter, FileSaver, OrderStatusService) {
+    'RestOrdersService',
+    function ($scope, $modal, historyData, OrdersHistoryData, $filter, FileSaver, OrderStatusService,RestOrdersService) {
         var deliveryTypes = {
             '-1': ' ',
             1: 'Доставка',
@@ -14,22 +15,46 @@ app.controller('ordersHistoryCtrl', [
             3: 'Вывоз'
         };
         $scope.statusList = OrderStatusService.getList();
-        $scope.items = (function (list) {
-            var deliveryType, statusCode, barcode, number;
-            list.forEach(function (item) {
-                deliveryType = item.delivery_type || -1;
-                statusCode = (item.status && item.status.code) ? item.status.code : 0;
-                barcode = (item.items && item.items[0] && item.items[0].barcode) ? item.items[0].barcode : '';
-                number = (item.number) ? item.number : '';
-                item.humanReadable = {
-                    'deliveryType': deliveryTypes[deliveryType],
-                    'status': OrderStatusService.getLabel(statusCode),
-                    'barcode': barcode,
-                    'number': number
-                };
-            });
-            return list;
-        }(historyData.data.orders));
+        $scope.items=[];
+        var currentTableState = {};
+        $scope.getOrders = function (tableState) {
+            currentTableState = tableState;
+            console.log(tableState);
+            var pagination = tableState.pagination || {};
+            var pagerLimit = pagination.number || 20;
+            var predicated = tableState.search.predicateObject || {};
+            var filter = {
+                skip: pagination.start || 0,
+                limit: pagerLimit
+            };
+            filter = _.assign(filter, predicated);
+            RestOrdersService.getList(filter).then(function (responseList) {
+                // респонз сохраняем в собственный ордерс, и рисуется таблица
+                $scope.items = responseList;
+                // incoming это похоже наличие какого то документа, дальше проходится по списку и ищется есть ли там документы какие то - Номер поступления
+                var incomingStorage = {};
+                var deliveryType, statusCode, barcode, number;
+                responseList.forEach(function (order, idx) {
+                    deliveryType = order.delivery_type || -1;
+                    statusCode = (order.status && order.status.code) ? order.status.code : 0;
+                    barcode = (order.items && order.items[0] && order.items[0].barcode) ? order.items[0].barcode : '';
+                    number = (order.number) ? order.number : '';
+                    order.humanReadable = {
+                        'deliveryType': deliveryTypes[deliveryType],
+                        'status': OrderStatusService.getLabel(statusCode),
+                        'barcode': barcode,
+                        'number': number
+                    };
+                    order.incoming && (
+                        incomingStorage[order.incoming] || (
+                            incomingStorage[order.incoming] = []
+                        )
+                            , incomingStorage[order.incoming].push(idx)
+                    )
+                });
+                tableState.pagination.numberOfPages = Math.ceil(responseList.count / pagerLimit)
+            })
+        };
         $scope.$watch('search.status.code', function (newVal, a, $scope) {
             if (newVal === null && $scope.search && $scope.search.status) {
                 $scope.search.status.code = '';

@@ -6,19 +6,17 @@ app.factory('OrdersHistoryData', ['$http', 'AuthorizationData', function($http, 
     };
     function downloadART(item) {
 			return $http({
-                cache: !1,
+                cache: false,
                 responseType: "blob",
 				method:req.method,
 				url:req.url+'/'+item+'/'+'print-act-receiving-transfer',
-				headers:{
-                    'authentication-token': AuthorizationData.getToken()
-				}
+				headers:req.headers
 			}).then(function successCallback(response) {
                 return response;
             }, function errorCallback(response) {
                 return response;
             });
-    };
+    }
 	function getData() {
 	    return $http(req).then(function successCallback(response) {
 			return response;
