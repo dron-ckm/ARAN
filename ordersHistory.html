@@ -4,61 +4,52 @@
 	<div class="filters-form">
 		<form action="#">
 			<fieldset>
-				<div role="tablist" bs-collapse class="filters">
-					<h3 class="filters__title">
-				        <a bs-collapse-toggle>
+				<div role="tablist" class="filters">
+					<h4 class="filters__title clearfix text-right">
+				        <a data-toggle="collapse" data-target=".filters__collapse">
 				        	<i class="fa fa-filter" aria-hidden="true"></i>
 				        	Фильтр
 				        </a>
-				     </h3>
-				    <div class="filters__collapse" role="tabpanel" bs-collapse-target>
-				    	<div class="row">
-							<div class="form-group col-sm-2 col-md-2">
-								<label>Дата заказа</label>
-								<input type="text" class="form-control red" placeholder="Enter text" value="" ng-model="search.date">
-							</div>
-							<div class="form-group col-sm-2 col-md-2">
-								<label>Статус заказа</label>
-								<input type="text" class="form-control" placeholder="Enter text" value="" ng-model="search.status">
-							</div>
-							<div class="form-group col-sm-2 col-md-2">
-								<label>Тип заказа</label>
-								<input type="text" class="form-control" placeholder="Enter text" value="" ng-model="search.num">
-							</div>
-							<div class="form-group col-sm-2 col-md-2">
-								<label>Номер штрих-кода</label>
-								<input type="text" class="form-control" placeholder="Enter text" value="" ng-model="search.code">
-							</div>
-							<div class="form-group col-sm-4 col-md-4">
-								<label>№ отправления магазина</label>
-								<input type="text" class="form-control" placeholder="Enter text" value="" ng-model="search.shopNum">
-							</div>
-						</div>
+				     </h4>
+				    <div class="filters__collapse" role="tabpanel">
 						<div class="row">
-							<div class="form-group col-sm-2 col-md-2">
-								<label>Город отправителя</label>
-								<input type="text" class="form-control red" placeholder="Enter text" value="" ng-model="search.city">
-							</div>
-							<div class="form-group col-sm-2 col-md-2">
-								<label>Название магазина</label>
-								<input type="text" class="form-control red" placeholder="Enter text" value="" ng-model="search.shopName">
-							</div>
-							<div class="form-group col-sm-2 col-md-2">
-								<label>Город получателя</label>
-								<input type="text" class="form-control" placeholder="Enter text" value="" ng-model="search.where">
-							</div>
-							<div class="form-group col-sm-2 col-md-2">
-								<label>Телефон получателя</label>
-								<input type="text" class="form-control red" placeholder="Enter text" value="" ng-model="search.phone">
-							</div>
-							<div class="form-group col-sm-4 col-md-4">
-								<label>ФИО получателя</label>
-								<input type="text" class="form-control red" placeholder="Enter text" value="" ng-model="search.fio">
-							</div>
+							<label class="control-label col">Дата заказа
+								<select class="form-control" ng-model="search.date">
+									<option value="">Любая</option>
+									<option value="">Последние сутки</option>
+									<option value="">Последняя неделя</option>
+									<option value="">Последний месяц</option>
+								</select></label>
+							<label class="control-label col">Статус заказа
+								<select class="form-control" ng-model="search.status.code"
+										ng-options="status.code as status.name for status in statusList">
+									<option value="">Любой</option>
+								</select></label>
+							<label class="control-label col">Тип заказа
+								<input type="text" class="form-control" placeholder="Enter text" value=""
+									   ng-model="search.num">
+							</label>
+
+
+								<label class="control-label col">Номер штрих-кода
+								<input type="text" class="form-control" placeholder="Enter text" value="" ng-model="search.code"></label>
+
+								<label class="control-label col">№ отправления магазина
+								<input type="text" class="form-control" placeholder="Enter text" value="" ng-model="search.shopNum"></label>
+								<label class="control-label col">Город отправителя
+								<input type="text" class="form-control red" placeholder="Enter text" value="" ng-model="search.city"></label>
+								<label class="control-label col">Название магазина
+								<input type="text" class="form-control red" placeholder="Enter text" value="" ng-model="search.shopName"></label>
+								<label class="control-label col">Город получателя
+								<input type="text" class="form-control" placeholder="Enter text" value="" ng-model="search.where"></label>
+								<label class="control-label col">Телефон получателя
+								<input type="text" class="form-control red" placeholder="Enter text" value="" ng-model="search.phone"></label>
+								<label class="control-label col">ФИО получателя
+								<input type="text" class="form-control red" placeholder="Enter text" value="" ng-model="search.fio"></label>
 						</div>
 				    </div>
 			    </div>
-				
+
 			</fieldset>
 		</form>
 	</div>
@@ -73,8 +64,8 @@
 			<th>Статус</th>
 			<th>&nbsp;</th>
 		</tr>
-		<tr ng-repeat="item in filteredItems = ( items | filter:search )" ng-dblclick="showInfo(item)">
-			<td><input type="checkbox" ng-model="item.checked" ng-change="checkboxChanged(item.checked)"></td>
+		<tr ng-repeat="item in filteredItems = ( items | filter:search)" ng-dblclick="showInfo(item)">
+			<td><input type="checkbox" ng-model="item.checked" ng-change="checkboxChanged(item.checked)" /></td>
 			<td>{{item.humanReadable.deliveryType}}</td>
 			<td>{{item.humanReadable.number}}</td>
 			<td>{{item.humanReadable.barcode}}</td>

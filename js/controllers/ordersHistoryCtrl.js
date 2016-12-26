@@ -5,43 +5,36 @@ app.controller('ordersHistoryCtrl', [
     'OrdersHistoryData',
     '$filter',
     'FileSaver',
-    function ($scope, $modal, historyData, OrdersHistoryData, $filter, FileSaver) {
+    'OrderStatusService',
+    function ($scope, $modal, historyData, OrdersHistoryData, $filter, FileSaver, OrderStatusService) {
         var deliveryTypes = {
             '-1': ' ',
             1: 'Доставка',
             2: 'Курьер',
             3: 'Вывоз'
         };
-        var statusList = {
-            '-1': 'Неизвестный',
-            2: "Создан",
-            3: "Выгружен в veeroute",
-            5: "Загружен в машину",
-            7: "Доставлен",
-            11: "Част. Доставлен",
-            13: "Не доставлен",
-            17: "Возвращён",
-            19: "Част. Загружен",
-            23: "Не загружен",
-            29: "Част. Возвращён",
-            31: "Принят"
-        };
+        $scope.statusList = OrderStatusService.getList();
         $scope.items = (function (list) {
             var deliveryType, statusCode, barcode, number;
             list.forEach(function (item) {
                 deliveryType = item.delivery_type || -1;
-                statusCode = (item.status) ? (item['status']['code']) ? item['status']['code'] : -1 : -1;
-                barcode = (item.items[0]) ? (item.items[0].barcode) ? item.items[0].barcode : '' : '';
+                statusCode = (item.status && item.status.code) ? item.status.code : 0;
+                barcode = (item.items && item.items[0] && item.items[0].barcode) ? item.items[0].barcode : '';
                 number = (item.number) ? item.number : '';
                 item.humanReadable = {
                     'deliveryType': deliveryTypes[deliveryType],
-                    'status': statusList[statusCode],
+                    'status': OrderStatusService.getLabel(statusCode),
                     'barcode': barcode,
                     'number': number
                 };
             });
             return list;
         }(historyData.data.orders));
+        $scope.$watch('search.status.code', function (newVal, a, $scope) {
+            if (newVal === null && $scope.search && $scope.search.status) {
+                $scope.search.status.code = '';
+            }
+        });
         $scope.getPrintPdf = function (item) {
             return OrdersHistoryData.downloadART(item._id).then(function (t) {
                 var o = new Blob([t.data], {type: "application/vnd.openxmlformats-officedocument.wordprocessingml.document"});
