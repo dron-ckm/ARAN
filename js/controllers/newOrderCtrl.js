@@ -1,4 +1,5 @@
-app.controller('newOrderCtrl', ['$scope', 'SenderData', '$filter', '$http', 'AuthorizationData', function($scope, SenderData, $filter, $http, AuthorizationData){
+app.controller('newOrderCtrl', ['$scope', 'SenderData', '$filter', '$http', 'AuthorizationData', '$state', 
+	function($scope, SenderData, $filter, $http, AuthorizationData, $state){
 	var STEPS_COUNT = 4,
 		maxStep = $scope.currentStep = 1;
 
@@ -13,6 +14,7 @@ app.controller('newOrderCtrl', ['$scope', 'SenderData', '$filter', '$http', 'Aut
 			width: null,
 			length: null,
 			volume: null,
+			products: [],
 			// TODO move to function prototype
 			getVolume: function(){
 				this.volume = this.height * this.width * this.length || 0;
@@ -78,12 +80,14 @@ app.controller('newOrderCtrl', ['$scope', 'SenderData', '$filter', '$http', 'Aut
 		}
 	}
 	$scope.addCargo = function($event) {
+		$event.preventDefault();
 		$scope.newOrder.cargo.cargos.push({
 			// TODO: use new C
 			height: null,
 			width: null,
 			length: null,
 			volume: null,
+			products: [],
 			// TODO move to function prototype
 			getVolume: function(){
 				this.volume = this.height * this.width * this.length || 0;
@@ -92,8 +96,26 @@ app.controller('newOrderCtrl', ['$scope', 'SenderData', '$filter', '$http', 'Aut
 		});
 	}
 
-	
+	$scope.addGoods = function($event, index) {
+		$event.preventDefault();
+		$scope.newOrder.cargo.cargos[index].products.push({
+			// TODO: use new C
+			name: null,
+			akrtikul: null,
+			price: null,
+			customerPrice: null,
+			count: null
+		});
+	}
 
+	$scope.removeGoodsByNumber = function(cargoIndex, productIndex, $event) {
+		$event.preventDefault();
+		$scope.newOrder.cargo.cargos[cargoIndex].products.splice(productIndex, 1);
+	}
+
+	$scope.save = function(){
+		$state.go('ordersHistory');
+	}
 
 	$scope.newOrder.shops = angular.copy(SenderData.getData());
 
