@@ -95,7 +95,7 @@
             </thead>
             <tbody ng-repeat="order in items">
             <tr class="pointer">
-                <td ng-click="showInfo(order)">
+                <td>
                     <input type="checkbox" ng-model="order.checked" ng-change="checkboxChanged(order.checked)"/>
                 </td>
                 <td ng-click="showInfo(order)">{{order.humanReadable.deliveryType}}</td>
