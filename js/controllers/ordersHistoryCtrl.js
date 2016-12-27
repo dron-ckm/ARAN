@@ -120,10 +120,6 @@ app.controller('ordersHistoryCtrl', [
         };
         // инфа о заказе
         $scope.shownItem = null;
-        $scope.titleText = 'Информация';
-        $scope.changeDataView = function (item) {
-            $scope.titleText = item.isOrderDataShown ? 'История изменения' : 'Информация'
-        };
         $scope.isShownItem = function (item) {
             return $scope.shownItem == item;
         };
