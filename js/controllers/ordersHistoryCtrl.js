@@ -8,20 +8,29 @@ app.controller('ordersHistoryCtrl', [
     'OrderStatusService',
     'RestOrdersService',
     function ($scope, $modal, historyData, OrdersHistoryData, $filter, FileSaver, OrderStatusService,RestOrdersService) {
+        //todo переделать под сервис
         var deliveryTypes = {
-            '-1': ' ',
             1: 'Доставка',
             2: 'Курьер',
-            3: 'Вывоз'
+            3: 'Вывоз',
+            4:'Самовывоз'
         };
+        $scope.deliveryTypes = [];
+        angular.forEach(deliveryTypes, function (value, key) {
+            $scope.deliveryTypes.push({
+                'code': key,
+                'name': value
+            });
+        });
+        // todo end
         $scope.statusList = OrderStatusService.getList();
         $scope.items=[];
+        $scope.pagingBy=5;
         var currentTableState = {};
         $scope.getOrders = function (tableState) {
             currentTableState = tableState;
-            console.log(tableState);
             var pagination = tableState.pagination || {};
-            var pagerLimit = pagination.number || 20;
+            var pagerLimit = pagination.number || $scope.pagingBy;
             var predicated = tableState.search.predicateObject || {};
             var filter = {
                 skip: pagination.start || 0,
@@ -35,12 +44,11 @@ app.controller('ordersHistoryCtrl', [
                 var incomingStorage = {};
                 var deliveryType, statusCode, barcode, number;
                 responseList.forEach(function (order, idx) {
-                    deliveryType = order.delivery_type || -1;
                     statusCode = (order.status && order.status.code) ? order.status.code : 0;
                     barcode = (order.items && order.items[0] && order.items[0].barcode) ? order.items[0].barcode : '';
                     number = (order.number) ? order.number : '';
                     order.humanReadable = {
-                        'deliveryType': deliveryTypes[deliveryType],
+                        'deliveryType': deliveryTypes[order.delivery_type]||' ',
                         'status': OrderStatusService.getLabel(statusCode),
                         'barcode': barcode,
                         'number': number
