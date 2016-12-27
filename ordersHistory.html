@@ -104,7 +104,7 @@
                 <td ng-click="showInfo(order)">{{order.location.address}}</td>
                 <td ng-click="showInfo(order)">{{order.price}}</td>
                 <td ng-click="showInfo(order)">{{order.humanReadable.status}}{{order.sender}}</td>
-                <td><a ng-click="getPrintPdf(order)"><i class="fa fa-print"></i> Печать</a></td>
+                <td><a ng-click="getSticker(order)"><i class="fa fa-print"></i> Печать</a></td>
             </tr>
             <tr ng-show="isShownItem(order)" class="no-hover-effects order-detail-preview">
                 <td colspan="8">
@@ -240,8 +240,11 @@
             </tfoot>
         </table>
         <button class="btn btn-success" ng-click="printActs()"
-                ng-show="(getCheckedItems().length > 0 ) && (filteredItems.length !== 0)">Распечатать акт
+                ng-show="(getCheckedItems().length > 0 ) && (items.length !== 0)">Распечатать акт
             приема-передачи
+        </button>
+        <button class="btn btn-success" ng-click="getStickers()"
+                ng-show="(getCheckedItems().length > 0 ) && (items.length !== 0)">Распечатать этикетки
         </button>
     </div>
     <div class="alert alert-danger" ng-show="items.length === 0">
