@@ -117,7 +117,7 @@
                             <div class="order-history__switcher">
                                 <input type="checkbox" id="item-{{order._id}}" ng-change="changeDataView(order)"
                                        ng-model="order.isOrderDataShown">
-                                <label for="item-{{order._id}}">изменить вид</label>
+                                <label for="item-{{order._id}}">история изменений</label>
                             </div>
                         </div>
                         <div class="row order-history__data" ng-show="!order.isOrderDataShown">
@@ -125,20 +125,20 @@
                                 <dl>
                                     <dt>Данные отправителя</dt>
                                     <dd>ФИО - <br>
-                                        город - <br>
-                                        контактное лицо -
+                                        Город - <br>
+                                        Контактное лицо -
                                         <br>
-                                        контактный телефон -
-                                        <br> название магазина, от которого осуществляется
+                                        Контактный телефон -
+                                        <br> Название магазина, от которого осуществляется
                                         доставка <br>
                                     </dd>
                                     <dt>Данные получателя</dt>
                                     <dd>
                                         Получатель - {{order.client.name}} <br>
-                                        город - {{order.location.city}}<br>
-                                        контактное лицо - {{order.client.contact_person}}<br>
-                                        контактный телефон - {{order.client.contact_number}} <br>
-                                        куда - {{order.location.address}}
+                                        Город - {{order.location.city}}<br>
+                                        Контактное лицо - {{order.client.contact_person}}<br>
+                                        Контактный телефон - {{order.client.contact_number}} <br>
+                                        Куда - {{order.location.address}}
                                     </dd>
 
                                 </dl>
@@ -162,19 +162,18 @@
                                         <div>
                                             <table style="width: 100%;" class="table table-bordered">
                                                 <thead>
-                                                <td>артикул</td>
-                                                <td>название</td>
-                                                <td>штрихкод</td>
-                                                <td>цена</td>
+	                                                <td>Артикул</td>
+	                                                <td>Название</td>
+	                                                <td>Штрих-код</td>
+	                                                <td>Цена</td>
                                                 </thead>
                                                 <tbody ng-repeat="products in order.items">
-
-                                                <tr>
-                                                    <td>{{products.article}}</td>
-                                                    <td>{{products.name}}</td>
-                                                    <td>{{products.barcode}}</td>
-                                                    <td>{{products.cost}}</td>
-                                                </tr>
+	                                                <tr>
+	                                                    <td>{{products.article}}</td>
+	                                                    <td>{{products.name}}</td>
+	                                                    <td>{{products.barcode}}</td>
+	                                                    <td>{{products.cost}}</td>
+	                                                </tr>
                                                 </tbody>
                                             </table>
                                         </div>
@@ -224,10 +223,10 @@
             <tfoot>
             <tr>
                 <td colspan="1"></td>
-                <td class=text-center st-pagination st-items-by-page=pagingBy colspan=6></td>
+                <td class="text-center" st-pagination st-items-by-page="pagingBy" colspan="6"></td>
                 <td class="text-center" colspan="1">
                     <label><select class="form-control form-control-inline pagination" ng-model="pagingBy">
-                        <option value="5" ng-selected selected="selected">по 5</option>
+                        <option value="5" ng-selected="true">по 5</option>
                         <option value="10">по 10</option>
                         <option value="20">по 20</option>
                         <option value="30">по 30</option>
