@@ -333,7 +333,6 @@ input.ng-invalid {
 .block {
   display: block;
 }
-
 .col {
   padding-left: 15px;
   padding-right: 15px;
@@ -345,6 +344,9 @@ input.ng-invalid {
   content: '';
   display: inline-block;
   width: 100%;
+}
+.block {
+  display: block;
 }
 .h-mb-20 {
   margin-bottom: 20px;
