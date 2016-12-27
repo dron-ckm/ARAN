@@ -69,22 +69,23 @@ var app = angular.module('app', [
       Restangular.setRestangularFields({
           id: "_id"
       });
-    $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState) {
-
-      var shouldLogin = (toState.name !== 'login') && !AuthorizationData.getToken();
-
-      $rootScope.stateIsLoading = true;
-
-      if (shouldLogin) {
+      $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState) {
+          var shouldLogin = (toState.name !== 'login') && !AuthorizationData.getToken();
+          $rootScope.stateIsLoading = true;
+          if (shouldLogin) {
+              $state.go('login');
+              event.preventDefault();
+              return;
+          }
+      });
+      $rootScope.$on('$stateChangeSuccess', function () {
+          $rootScope.stateIsLoading = false;
+      });
+      $rootScope.isLoggedIn = function () {
+          return !!AuthorizationData.getToken()
+      };
+      $rootScope.logOut = function () {
+          AuthorizationData.removeToken();
           $state.go('login');
-          event.preventDefault();
-          return;
       }
-    });
-    $rootScope.$on('$stateChangeSuccess',function(){
-      $rootScope.stateIsLoading = false;
-    });
-
-
-
-  })
+  });
