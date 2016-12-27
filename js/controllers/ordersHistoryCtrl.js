@@ -132,8 +132,17 @@ app.controller('ordersHistoryCtrl', [
             templateUrl: 'modals/modalOrderInfo.html',
             show: false
         });
+        var shownItem=null;
+        $scope.isShownInfo=function (item) {
+          return item==shownItem;
+        };
+        $scope.hideInfo=function () {
+            shownItem=null;
+        };
         $scope.showInfo = function (item) {
-            myModal.$promise.then(myModal.show);
+            // console.log(this,item);
+            shownItem=item;
+            // myModal.$promise.then(myModal.show);
         };
     }
 ]);

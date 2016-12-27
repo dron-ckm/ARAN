@@ -97,8 +97,8 @@
                 <th>&nbsp;</th>
             </tr>
             </thead>
-            <tbody>
-            <tr ng-repeat="item in items">
+            <tbody ng-repeat="item in items">
+            <tr ng-dblclick="showInfo(item)">
                 <td>
                     <input type="checkbox" ng-model="item.checked" ng-change="checkboxChanged(item.checked)"/>
                 </td>
@@ -110,10 +110,19 @@
                 <td>{{item.humanReadable.status}}</td>
                 <td><a ng-click="getPrintPdf(item)"><i class="fa fa-print"></i> Печать</a></td>
             </tr>
+            <tr ng-show="isShownInfo(item)">
+                <td colspan="8">test test {{item._id}}</td>
+                </tr>
             </tbody>
             <tfoot>
-            <tr>
-                <td class=text-center st-pagination st-items-by-page=pagingBy colspan=16></td>
+            <tr><td></td>
+                <td class=text-center st-pagination st-items-by-page=pagingBy colspan=6></td>
+                <td class="text-center"><select class="form-control" ng-model="pagingBy">
+                    <option value="5" selected="selected">5</option>
+                    <option value="10">10</option>
+                    <option value="20">20</option>
+                    <option value="30">30</option>
+                </select></td>
             </tr>
             </tfoot>
         </table>
