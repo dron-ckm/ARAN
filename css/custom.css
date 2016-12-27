@@ -321,9 +321,15 @@ h1 {
   overflow: hidden;
   min-height: 20px;
 }
+input.ng-invalid {
+  border-color: #a94442 !important;
+}
 .pointer {
   cursor: pointer;
 }
 .block {
   display: block;
+}
+.h-mb-20 {
+  margin-bottom: 20px;
 }

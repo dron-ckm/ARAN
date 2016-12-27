@@ -23,32 +23,32 @@
 						</button>
 				    </div>
 			  	</div>
-				<div class="form-group" ng-class="{'has-error': step1form.citySender.$invalid}">
+				<div class="form-group">
 				    <label class="col-sm-4 col-md-4 control-label">Город отправителя</label>
 				    <div class="col-sm-8 col-md-8">
 				        <input type="text" class="form-control" name="citySender" ng-model="newOrder.selectedShop.city" required>
 				    </div>
 			  	</div>
-			  	<div class="form-group" ng-class="{'has-error': step1form.address.$invalid}">
+			  	<div class="form-group">
 				    <label class="col-sm-4 col-md-4 control-label">Адрес, с которого производится отправка</label>
 				    <div class="col-sm-8 col-md-8">
 				      <input type="text" class="form-control" name="address" ng-model="newOrder.selectedShop.addressFrom" required>
 				    </div>
 			  	</div>
-			  	<div class="form-group" ng-class="{'has-error': step1form.phone.$invalid}">
+			  	<div class="form-group">
 				    <label class="col-sm-4 col-md-4 control-label">Контактный телефон отправителя</label>
 				    <div class="col-sm-8 col-md-8">
 				      <input type="text" class="form-control" name="phone" ng-model="newOrder.selectedShop.phone" required>
 				    </div>
 			  	</div>
-			  	<div class="form-group" ng-class="{'has-error': step1form.person.$invalid}">
+			  	<div class="form-group">
 				    <label class="col-sm-4 col-md-4 control-label">Контактное лицо</label>
 				    <div class="col-sm-8 col-md-8">
 				      <input type="text" class="form-control" name="person" ng-model="newOrder.selectedShop.contactName" required>
 				    </div>
 			  	</div>
 
-				<div class="form-group" ng-class="{'has-error': step1form.deliveryCity.$invalid}">
+				<div class="form-group">
 				    <label class="col-sm-4 col-md-4 control-label">Город получателя</label>
 				    <div class="col-sm-8 col-md-8">
 				      <input type="text" value="" placeholder="Город" autocomplete="off" data-kladr-type="city" class="form-control kladr_city"  ng-model="newOrder.selectedShop.getterCity" required name="deliveryCity">
@@ -185,13 +185,13 @@
 							  	</div>
 							</div>
 							<div ng-show="newOrder.deliveryType == 2 || newOrder.deliveryType == 5">
-							  	<div class="form-group" ng-class="{'has-error': step3aform.street.$invalid}">
+							  	<div class="form-group">
 								    <label class="col-sm-4 col-md-4 control-label">Улица:</label>
 								    <div class="col-sm-8 col-md-8">
 								      <input type="text" value="" placeholder="Улица" autocomplete="off" name="street" class="form-control kladr_street" ng-model="newOrder.recipient.street" required>
 								    </div>
 							  	</div>
-							  	<div class="form-group" ng-class="{'has-error': step3aform.building.$invalid}">
+							  	<div class="form-group">
 								    <label class="col-sm-4 col-md-4 control-label">Номер дома(офиса):</label>
 								    <div class="col-sm-8 col-md-8">
 								      	<input type="text" class="form-control kladr_building" name="building" ng-model="newOrder.recipient.bilding" required>
@@ -204,20 +204,20 @@
 								    </div>
 							  	</div>
 							</div>
-							<div class="form-group" ng-class="{'has-error': step3aform.getterFIO.$invalid}">
+							<div class="form-group">
 							    <label class="col-sm-4 col-md-4 control-label">ФИО получателя:</label>
 							    <div class="col-sm-8 col-md-8">
 							      	<input type="text" class="form-control" name="getterFIO" ng-model="newOrder.recipient.person" required>
 							    </div>
 						  	</div>
-						  	<div class="form-group" ng-class="{'has-error': step3aform.getterPhone.$invalid}">
+						  	<div class="form-group">
 							    <label class="col-sm-4 col-md-4 control-label">Телефон получателя:</label>
 							    <div class="col-sm-8 col-md-8">
 							      	<input type="text" class="form-control" name="getterPhone" ng-model="newOrder.recipient.phone" required>
 							    </div>
 						  	</div>
 
-						  	<div class="form-group" ng-class="{'has-error': step3aform.date.$invalid}">
+						  	<div class="form-group">
 						    	<label class="col-sm-4 col-md-4 control-label">Дата доставки</label>
 					    		<div class="col-sm-8 col-md-8">
 							    	<div class="input-group">
@@ -240,17 +240,15 @@
 					<button class="btn btn-primary" ng-click="goNext($event)" ng-disabled="step3aform.$invalid">Далее</button>
 				</div>
 			</div>
-			
 		</div>
-	
 	</div>
 	<div ng-show="currentStep === 4 && newOrder.deliveryType != 1">
 		<div class="col-sm-12 col-md-12">
-			<form action="#" class="form-horizontal js-form-address" name="step4form">
+			<form action="#" class="form-horizontal js-form-address" name="step4form" novalidate>
 				<fieldset>
 					<div class="row">
 						<h4>Данные о товаре в заказе</h4>
-					  	<div class="form-group" ng-class="{'has-error': step4form.number.$invalid}">
+					  	<div class="form-group">
 						    <label class="col-sm-4 col-md-4 control-label">Номер заказа магазина:</label>
 						    <div class="col-sm-8 col-md-8">
 						      	<input type="text" class="form-control" name="number" ng-model="newOrder.cargo.number" ng-pattern="/^[a-zа-я0-9]+$/i" required>
@@ -283,18 +281,18 @@
 						      	<button class="btn btn-block btn-danger" ng-click="removePlace($event)">-</button>
 						    </div>
 						    <div class="col-sm-2 col-md-2">
-						      	<button class="btn btn-block btn-success" ng-click="addCargo($event)">Добвить товар</button>
+						      	<button class="btn btn-block btn-info" ng-click="addCargo($event)">Добвить грузоместо</button>
 						    </div>
 					  	</div>
 					  	<h4>Данные о заказе</h4>
-					  	<div ng-repeat="cargo in newOrder.cargo.cargos">
+					  	<div ng-repeat="(cargoIndex, cargo) in newOrder.cargo.cargos">
 					  		<div class="form-group">
 					  			<div class="col-sm-4 col-md-4 text-right">
 					  				<label class="control-label block">&nbsp;</label>
 						  			<label class="control-label">Габариты грузоместа</label>
 						  		</div>
 						  		<div class="col-sm-8 col-md-8">
-						  			<div class="row">
+						  			<div class="row h-mb-20">
 						  				<div class="col-sm-2 col-md-2">
 								  			<label class="control-label">Вес <span class="small">(кг)</span></label>
 								  			<input type="text" class="form-control" name="weight" ng-model="cargo.weight" required>
@@ -318,27 +316,34 @@
 								  			<label class="control-label block">&nbsp;</label>
 								  			<label class="control-label">или</label>
 								  		</div>
-								  		<div class="col-sm-2 col-md-2" ng-class="{'has-error': step4form.value.$invalid}">
+								  		<div class="col-sm-2 col-md-2">
 								  			<label class="control-label">Объем (м<sup>3</sup>)</label>
 								  			<input type="text" class="form-control" name="value" ng-model="cargo.volume" required>
 								  		</div>
 						  			</div>
+						  			<div class="row">
+						  				<div class="col-sm-9 col-md-9 text-center">
+						  				</div>
+						  				<div class="col-sm-3 col-md-3 text-center">
+								  			<button class="btn btn-block btn-info" ng-click="addGoods($event, $index)">Добвить товар</button>
+								  		</div>
+						  			</div>
 						  		</div>
-
 							</div>
-							<div class="form-group" ng-repeat = "product in cargo.products">
-					  			<div class="col-sm-1 col-md-1 text-right">
-					  				<label class="control-label block">&nbsp;</label>
-						  			<label class="control-label">Товар</label>
-						  		</div>
+							<div class="form-group" ng-show="cargo.products.length > 0">
+								<div class="col-sm-12 col-md-12">
+									<h4>Товар</h4>
+								</div>
+							</div>
+							<div class="form-group" ng-repeat="product in cargo.products">
 						  		<div class="col-sm-5 col-md-5">
 						  			<label class="control-label small">Наименование товара</label>
-						  			<input type="text" class="form-control" name="weight" ng-model="product.name" required>
+						  			<input type="text" class="form-control" name="goodsName" ng-model="product.name" required>
 						  		</div>
-						  		<div class="col-sm-1 col-md-1" ng-class="{'has-error': step4form.code.$error.pattern}">
+						  		<div class="col-sm-1 col-md-1" ng-class="{'has-error': step4form.akrtikul.$error.pattern}">
 						  			<label class="control-label small">Артикул</label>
-						  			<input type="text" class="form-control" name="code" ng-model="product.code" ng-pattern="/^[a-zа-я0-9]+$/i">
-									<div class="error-text"  ng-show="step4form.code.$error.pattern">Только арабские цифры или буквы кириллицы/латиницы</div>
+						  			<input type="text" class="form-control" name="akrtikul" ng-model="product.akrtikul" ng-pattern="/^[a-zа-я0-9]+$/i">
+									<div class="error-text"  ng-show="step4form.akrtikul.$error.pattern">Только арабские цифры или буквы кириллицы/латиницы</div>
 						  		</div>
 						  		<div class="col-sm-2 col-md-2">
 						  			<label class="control-label small">Оценочна стоимость</label>
@@ -352,6 +357,10 @@
 						  			<label class="control-label">Количество</label>
 						  			<input type="text" class="form-control" name="" ng-model="product.count">
 						  		</div>
+						  		<div class="col-sm-1 col-md-1 text-right small">
+					  				<label class="control-label block">&nbsp;</label>
+						  			<button class="btn btn-danger btn-block" ng-click="removeGoodsByNumber(cargoIndex, $index, $event)">-</button>
+						  		</div>
 							</div>
 					  		<hr>
 					  	</div>
@@ -359,7 +368,7 @@
 				</fieldset>
 			</form>
 			<div class="row text-right">
-	  			<button type="submit" class="btn btn-success" ng-click="goNext($event)">Оформить заказ</button>
+	  			<button type="submit" class="btn btn-success" ng-click="goNext($event)" ng-disabled="step4form.$invalid">Оформить заказ</button>
 	  		</div>
 		</div>
 	</div>
@@ -443,7 +452,24 @@
 			<dd>{{newOrder.cargo.placesCount}}</dd>
 			<dt>Товары:</dt>
 			<dd>
-				{{newOrder.cargo.cargos}}
+				<table class="acts-table">
+					<tr>
+						<th>Название</th>
+						<th>Артикул</th>
+						<th>Цена</th>
+						<th>Цена для покупателя</th>
+						<th>Количество</th>
+					</tr>
+					<tbody ng-repeat="cargo in newOrder.cargo.cargos">
+						<tr ng-repeat="product in cargo.products">
+							<td>{{product.name}}</td>
+							<td>{{product.akrtikul}}</td>
+							<td>{{product.price}}</td>
+							<td>{{product.customerPrice}}</td>
+							<td>{{product.count}}</td>
+						</tr>
+					</tbody>
+				</table>
 			</dd>
 		</dl>
 		<!--
