@@ -2,9 +2,11 @@ var app = angular.module('app', [
     'ui.router',
     'ngCookies',
     'ngSanitize',
-    'mgcrea.ngStrap'
-  ])
-  .config(['$urlRouterProvider', '$stateProvider', function($urlRouterProvider, $stateProvider) {
+    'mgcrea.ngStrap',
+    'ngFileSaver',
+    'restangular',
+    'smart-table'
+  ]).config(['$urlRouterProvider', '$stateProvider', function($urlRouterProvider, $stateProvider) {
     $urlRouterProvider.otherwise('/');
     $stateProvider
       .state('home', {
@@ -57,10 +59,16 @@ var app = angular.module('app', [
         templateUrl: 'newOrder.html',
         controller: 'newOrderCtrl'
       })
-      
+
   }])
-  .run(function ($rootScope, $state, $location, AuthorizationData, $cookies) {
-  
+  .run(function ($rootScope, $state, $location, AuthorizationData,Restangular, $cookies) {
+      Restangular.setBaseUrl("https://cdocs-wh.arancom.ru/");
+      Restangular.setDefaultHeaders({
+          "Authentication-Token": AuthorizationData.getToken()
+      });
+      Restangular.setRestangularFields({
+          id: "_id"
+      });
     $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState) {
 
       var shouldLogin = (toState.name !== 'login') && !AuthorizationData.getToken();
@@ -78,5 +86,5 @@ var app = angular.module('app', [
     });
 
 
-  
+
   })
