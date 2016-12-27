@@ -351,3 +351,26 @@ input.ng-invalid {
 .h-mb-20 {
   margin-bottom: 20px;
 }
+.table {
+  display: table;
+  font-size: 13px;
+}
+.table-row {
+  display: table-row;
+  padding: 10px;
+}
+.table-row:nth-child(2n) {
+  background: #e6e6e6;
+}
+.table-cell {
+  display: inline-block;
+}
+.info_parent {
+  margin: 30px;
+}
+.info_children {
+  padding: 5px 0;
+}
+.filters__title {
+  text-align: right;
+}
