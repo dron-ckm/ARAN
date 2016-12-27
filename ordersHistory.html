@@ -1,27 +1,33 @@
 <style>
-	.table {
-		display:table;
-		font-size:13px;
-	}
-	.table-row {
-		display:table-row;
-		padding:10px;
-	}
-	.table-row:nth-child(2n) {
-		background:#e6e6e6;
-	}
-	.table-cell {
-		display:inline-block;
-	}
-	.info_parent {
-		margin:30px;
-	}
-	.info_children {
-		padding: 5px 0;
-	}
-	.filters__title {
-		text-align:right;
-	}
+    .table {
+        display: table;
+        font-size: 13px;
+    }
+
+    .table-row {
+        display: table-row;
+        padding: 10px;
+    }
+
+    .table-row:nth-child(2n) {
+        background: #e6e6e6;
+    }
+
+    .table-cell {
+        display: inline-block;
+    }
+
+    .info_parent {
+        margin: 30px;
+    }
+
+    .info_children {
+        padding: 5px 0;
+    }
+
+    .filters__title {
+        text-align: right;
+    }
 
 </style>
 <div class="row">
@@ -37,23 +43,23 @@
                                 Фильтр
                             </a>
                         </h4>
-                        <div class="filters__collapse" role="tabpanel">
+                        <div class="filters__collapse collapse" role="tabpanel">
                             <div class="row">
-                                <label class="control-label col">Дата заказа (пока не работает)
-                                    <select class="form-control" ng-model="search.date">
+                                <label class="control-label col" hidden>Дата заказа (пока не работает)
+                                    <select class="form-control" st-search="filter_by_created_at">
                                         <option value="">Любая</option>
-                                        <option value="">Последние сутки</option>
+                                        <option value="12.26.2016">Последние сутки</option>
                                         <option value="">Последняя неделя</option>
                                         <option value="">Последний месяц</option>
                                     </select></label>
-                                <label class="control-label col">Статус заказа
+                                <label class="control-label col alert">Статус заказа
                                     <select class="form-control" st-search="status">
                                         <option value="">Любой</option>
                                         <option ng-repeat="status in statusList" ng-value="{{status.code}}">
                                             {{status.name}}
                                         </option>
                                     </select></label>
-                                <label class="control-label col">Тип заказа
+                                <label class="control-label col alert">Тип заказа
                                     <select class="form-control" st-search="delivery_type">
                                         <option value="">Любой</option>
                                         <option ng-repeat="delivery_type in deliveryTypes"
@@ -62,36 +68,37 @@
                                     </select>
                                 </label>
 
-                                <label class="control-label col">Номер штрих-кода
-                                    <input type="text" class="form-control" placeholder="Enter text" st-search="barcode"
+                                <label class="control-label col" hidden>Номер штрих-кода
+                                    <input type="text" class="form-control" placeholder="Enter text"
+                                           st-search="items__barcode"
                                            value=""
                                     >
                                 </label>
 
-                                <label class="control-label col">№ отправления магазина
-                                    <input type="text" class="form-control" placeholder="Enter text" value=""
-                                           ng-model="search.shopNum">
+                                <label class="control-label col alert">№ заказа
+                                    <input type="text" class="form-control" st-search="number" placeholder="Enter text"
+                                           value="">
                                 </label>
-                                <label class="control-label col">Город отправителя
+                                <label class="control-label col" hidden>Город отправителя
                                     <input type="text" class="form-control red" placeholder="Enter text" value=""
                                            ng-model="search.city">
                                 </label>
-                                <label class="control-label col">Название магазина
+                                <label class="control-label col" hidden>Название магазина
                                     <input type="text" class="form-control red" placeholder="Enter text" value=""
                                            ng-model="search.shopName">
                                 </label>
-                                <label class="control-label col">Город получателя
+                                <label class="control-label col alert">Город получателя
                                     <input type="text" class="form-control" placeholder="Enter text" value=""
                                            st-search="location__address">
                                 </label>
 
-                                <label class="control-label col">Телефон получателя
+                                <label class="control-label col alert">Телефон получателя
                                     <input type="text" class="form-control" placeholder="Enter text"
                                            st-search="client__contact_number" value=""
                                     >
                                 </label>
 
-                                <label class="control-label col">ФИО получателя
+                                <label class="control-label col alert">ФИО получателя
                                     <input type="text" class="form-control" placeholder="Enter text"
                                            st-search="client__contact_person" value=""
                                     >
@@ -114,7 +121,7 @@
                     <input type="checkbox" ng-model="isMasterChecked" ng-change="toggleMasterCheckbox(isMasterChecked)">
                 </th>
                 <th>Тип заказа</th>
-                <th>Номер заказа магазина</th>
+                <th>Номер заказа</th>
                 <th>Штрих-код</th>
                 <th>Куда</th>
                 <th>Стоимость</th>
@@ -122,32 +129,143 @@
                 <th>&nbsp;</th>
             </tr>
             </thead>
-            <tbody ng-repeat="item in items">
-            <tr ng-dblclick="showInfo(item)">
-                <td>
-                    <input type="checkbox" ng-model="item.checked" ng-change="checkboxChanged(item.checked)"/>
+            <tbody ng-repeat="order in items">
+            <tr class="pointer">
+                <td ng-click="showInfo(order)">
+                    <input type="checkbox" ng-model="order.checked" ng-change="checkboxChanged(order.checked)"/>
                 </td>
-                <td>{{item.humanReadable.deliveryType}}</td>
-                <td>{{item.humanReadable.number}}</td>
-                <td>{{item.humanReadable.barcode}}</td>
-                <td>{{item.location.address}}</td>
-                <td>{{item.price}}</td>
-                <td>{{item.humanReadable.status}}</td>
-                <td><a ng-click="getPrintPdf(item)"><i class="fa fa-print"></i> Печать</a></td>
+                <td ng-click="showInfo(order)">{{order.humanReadable.deliveryType}}</td>
+                <td ng-click="showInfo(order)">{{order.number}}</td>
+                <td ng-click="showInfo(order)">{{order.humanReadable.barcode}}</td>
+                <td ng-click="showInfo(order)">{{order.location.address}}</td>
+                <td ng-click="showInfo(order)">{{order.price}}</td>
+                <td ng-click="showInfo(order)">{{order.humanReadable.status}}{{order.sender}}</td>
+                <td><a ng-click="getPrintPdf(order)"><i class="fa fa-print"></i> Печать</a></td>
             </tr>
-            <tr ng-show="isShownInfo(item)">
-                <td colspan="8">test test {{item._id}}</td>
-                </tr>
+            <tr ng-show="isShownItem(order)">
+                <td colspan="8">
+                    <div class="order-history">
+                        <div class="order-history__header">
+                            <h4 class="order-history__title">{{titleText}}</h4>
+                            <div class="order-history__switcher">
+                                <input type="checkbox" id="item-{{order._id}}" ng-change="changeDataView(order)"
+                                       ng-model="order.isOrderDataShown">
+                                <label for="item-{{order._id}}">изменить вид</label>
+                            </div>
+                        </div>
+                        <div class="row order-history__data" ng-show="!order.isOrderDataShown">
+                            <div class="col-xs-6">
+                                <dl>
+                                    <dt>Данные отправителя</dt>
+                                    <dd>ФИО - <br>
+                                        город - <br>
+                                        контактное лицо -
+                                        <br>
+                                        контактный телефон -
+                                        <br> название магазина, от которого осуществляется
+                                        доставка <br>
+                                    </dd>
+                                    <dt>Данные получателя</dt>
+                                    <dd>
+                                        Получатель - {{order.client.name}} <br>
+                                        город - {{order.location.city}}<br>
+                                        контактное лицо - {{order.client.contact_person}}<br>
+                                        контактный телефон - {{order.client.contact_number}} <br>
+                                        куда - {{order.location.address}}
+                                    </dd>
+
+                                </dl>
+                            </div>
+                            <div class="col-xs-6">
+                                <dl>
+
+                                    <dt> Номер заказа магазина</dt>
+                                    <dd>{{order.number}}</dd>
+                                    <dt> Стоимость доставки для получателя, р.</dt>
+                                    <dd> {{order.price_delivery}}</dd>
+                                    <dt>Способ оплаты</dt>
+                                    <dd>{{order.humanReadable.payment}}</dd>
+                                    <dt>Количество мест</dt>
+                                    <dd>{{order.items.length}}</dd>
+                                    <dt>Список товаров с артикулом, названием, оценочной стоимостью, стоимостью для
+                                        получателя,
+                                        количеством
+                                    </dt>
+                                    <dd>
+                                        <div>
+                                            <table style="width: 100%;" class="table table-bordered">
+                                                <thead>
+                                                <td>артикул</td>
+                                                <td>название</td>
+                                                <td>штрихкод</td>
+                                                <td>цена</td>
+                                                </thead>
+                                                <tbody ng-repeat="products in order.items">
+
+                                                <tr>
+                                                    <td>{{products.article}}</td>
+                                                    <td>{{products.name}}</td>
+                                                    <td>{{products.barcode}}</td>
+                                                    <td>{{products.cost}}</td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </dd>
+                                </dl>
+                            </div>
+                        </div>
+
+                        <table class="acts-table acts-table_type_changes-history table table-bordered"
+                               ng-show="order.isOrderDataShown">
+                            <thead>
+                            <tr>
+                                <th>Добавлен</th>
+                                <th>Добавил</th>
+                                <th>Для</th>
+                                <th>Статус</th>
+                                <th>Доп. статус</th>
+                                <th>Тип</th>
+                                <th>Дата и время события</th>
+                                <th>Место события</th>
+                                <th>Подпись</th>
+                                <th>Комментарий</th>
+                                <th>Описание</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="s in order.statuses">
+                                <td>{{ s.created_at | date: 'dd.MM.yyyy HH:mm':'+0300' }}</td>
+                                <td>{{ s.creator_cache }}</td>
+                                <td>{{ s.id }}</td>
+                                <td>{{ vm.codes[s.code] }}</td>
+                                <td>{{ vm.additionalCodes[s.additional_code] }}</td>
+                                <td>{{ vm.types[s.type] }}</td>
+                                <td>{{ s.event_time_utc|date:'dd.MM.yyyy HH:mm':'+0300' }}</td>
+                                <td>{{ s.location }}</td>
+                                <td>{{ s.signed_by }}</td>
+                                <td>{{ s.comment }}</td>
+                                <td>{{ s.description }}</td>
+                            </tr>
+                            </tbody>
+
+                        </table>
+                    </div>
+                </td>
+            </tr>
             </tbody>
             <tfoot>
-            <tr><td></td>
+            <tr>
+                <td colspan="1"></td>
                 <td class=text-center st-pagination st-items-by-page=pagingBy colspan=6></td>
-                <td class="text-center"><select class="form-control" ng-model="pagingBy">
-                    <option value="5" selected="selected">5</option>
-                    <option value="10">10</option>
-                    <option value="20">20</option>
-                    <option value="30">30</option>
-                </select></td>
+                <td class="text-center" colspan="1">
+                    <label><select class="form-control form-control-inline pagination" ng-model="pagingBy">
+                        <option value="5" ng-selected selected="selected">по 5</option>
+                        <option value="10">по 10</option>
+                        <option value="20">по 20</option>
+                        <option value="30">по 30</option>
+                    </select></label>
+                </td>
             </tr>
             </tfoot>
         </table>
@@ -159,151 +277,151 @@
         </p>
     </div>
 
-  <!--
-	<div class="filters-form">
-		<form action="#">
-			<fieldset>
-				<div role="tablist" bs-collapse class="filters" data-start-collapsed="true">
-					<h3 class="filters__title">
-				        <a bs-collapse-toggle>
-				        	<i class="fa fa-filter" aria-hidden="true"></i>
-				        	Фильтр
-				        </a>
-				     </h3>
-				    <div class="filters__collapse" role="tabpanel" bs-collapse-target>
-				    	<div class="row">
-							<div class="form-group col-sm-2 col-md-2">
-								<label>Дата заказа</label>
-								<input type="text" class="form-control red" placeholder="Enter text" value="" ng-model="search.date">
-							</div>
-							<div class="form-group col-sm-2 col-md-2">
-								<label>Статус заказа</label>
-								<input type="text" class="form-control" placeholder="Enter text" value="" ng-model="search.status">
-							</div>
-							<div class="form-group col-sm-2 col-md-2">
-								<label>Тип заказа</label>
-								<input type="text" class="form-control" placeholder="Enter text" value="" ng-model="search.num">
-							</div>
-							<div class="form-group col-sm-2 col-md-2">
-								<label>Номер штрих-кода</label>
-								<input type="text" class="form-control" placeholder="Enter text" value="" ng-model="search.code">
-							</div>
-							<div class="form-group col-sm-4 col-md-4">
-								<label>№ отправления магазина</label>
-								<input type="text" class="form-control" placeholder="Enter text" value="" ng-model="search.shopNum">
-							</div>
-						</div>
-						<div class="row">
-							<div class="form-group col-sm-2 col-md-2">
-								<label>Город отправителя</label>
-								<input type="text" class="form-control red" placeholder="Enter text" value="" ng-model="search.city">
-							</div>
-							<div class="form-group col-sm-2 col-md-2">
-								<label>Название магазина</label>
-								<input type="text" class="form-control red" placeholder="Enter text" value="" ng-model="search.shopName">
-							</div>
-							<div class="form-group col-sm-2 col-md-2">
-								<label>Город получателя</label>
-								<input type="text" class="form-control" placeholder="Enter text" value="" ng-model="search.where">
-							</div>
-							<div class="form-group col-sm-2 col-md-2">
-								<label>Телефон получателя</label>
-								<input type="text" class="form-control red" placeholder="Enter text" value="" ng-model="search.phone">
-							</div>
-							<div class="form-group col-sm-4 col-md-4">
-								<label>ФИО получателя</label>
-								<input type="text" class="form-control red" placeholder="Enter text" value="" ng-model="search.fio">
-							</div>
-						</div>
-				    </div>
-			    </div>
-				
-			</fieldset>
-		</form>
-	</div>
-	<div class="table">
-		<div class="table-row col-sm-12 col-md-12">
-			<div class="table-cell col-sm-1 col-md-1"><input type="checkbox" ng-model="isMasterChecked" ng-change="toggleMasterCheckbox(isMasterChecked)"></div>
-			<div class="table-cell col-sm-2 col-md-2">Тип заказа</div>
-			<div class="table-cell col-sm-2 col-md-2">Номер заказа магазина</div>
-			<div class="table-cell col-sm-1 col-md-1">Штрих-код</div>
-			<div class="table-cell col-sm-1 col-md-1">Куда</div>
-			<div class="table-cell col-sm-1 col-md-1">Стоимость</div>
-			<div class="table-cell col-sm-2 col-md-2">Статус</div>
-			<div class="table-cell col-sm-2 col-md-2">&nbsp;</div>
-		</div>
-		<div ng-repeat="item in filteredItems = ( items | filter:search )" ng-dblclick="showInfo(item)" class="table-row col-sm-12 col-md-12">
-			<div class="table-cell col-sm-1 col-md-1"><input type="checkbox" ng-model="item.checked" ng-change="checkboxChanged(item.checked)"></div>
-			<div class="table-cell col-sm-2 col-md-2">{{item.num}}</div>
-			<div class="table-cell col-sm-2 col-md-2">{{item.shopNum}}</div>
-			<div class="table-cell col-sm-1 col-md-1">{{item.code}}</div>
-			<div class="table-cell col-sm-1 col-md-1">{{item.where}}</div>
-			<div class="table-cell col-sm-1 col-md-1">{{item.price}}</div>
-			<div class="table-cell col-sm-2 col-md-2">{{item.status}}</div>
-			<div class="table-cell col-sm-2 col-md-2"><a href="#"><i class="fa fa-print"></i> Печать</a></div>
-			<div class="info_parent" ng-if="item.showInView">
-				<div class="info_children">Данные отправителя</div>
-				<div class="info_children">(ФИО, город, контактное лицо, контактный телефон, название магазина, от которого осуществляется доставка)</div>
-				<div class="info_children">Данные получателя</div>
-				<div class="info_children">(ФИО, город, контактное лицо, контактный телефон)</div>
-				<div class="info_children"> Номер заказа магазина</div>
-				<div class="info_children"> 7777 </div>
-				<div class="info_children"> Стоимость доставки для получателя</div>
-				<div class="info_children"> 777p</div>
-				<div class="info_children">Способ оплаты</div>
-				<div class="info_children">Visa</div>
-				<div class="info_children">Количество мест</div>
-				<div class="info_children">4</div>
-				<div class="info_children">Список товаров с артикулом, названием, оценочной стоимостью, стоимостью для получателя, количеством</div>
-				<div class="info_children">asasasasas</div>
-            </div>
-        </div>
-    -->
-        <!--<table class="acts-table">-->
-		<!--<tr>-->
-			<!--<th><input type="checkbox" ng-model="isMasterChecked" ng-change="toggleMasterCheckbox(isMasterChecked)"></th>-->
-			<!--<th>Тип заказа</th>-->
-			<!--<th>Номер заказа магазина</th>-->
-			<!--<th>Штрих-код</th>-->
-			<!--<th>Куда</th>-->
-			<!--<th>Стоимость</th>-->
-			<!--<th>Статус</th>-->
-			<!--<th>&nbsp;</th>-->
-		<!--</tr>-->
-		<!--<tr ng-repeat="item in filteredItems = ( items | filter:search )" ng-dblclick="showInfo(item)">-->
-			<!--<td><input type="checkbox" ng-model="item.checked" ng-change="checkboxChanged(item.checked)"></td>-->
-			<!--<td>{{item.num}}</td>-->
-			<!--<td>{{item.shopNum}}</td>-->
-			<!--<td>{{item.code}}</td>-->
-			<!--<td>{{item.where}}</td>-->
-			<!--<td>{{item.price}}</td>-->
-			<!--<td>{{item.status}}</td>-->
-			<!--<td><a href="#"><i class="fa fa-print"></i> Печать</a></td>-->
-		<!--</tr>-->
-		<!--<tr ng-repeat="">-->
-			<!--<td>Данные отправителя</td>-->
-			<!--<td>Данные получателя</td>-->
-			<!--<td> Номер заказа магазина</td>-->
-			<!--<td> Стоимость доставки для получателя</td>-->
-			<!--<td>Способ оплаты</td>-->
-			<!--<td>Количество мест</td>-->
-			<!--<td>Список товаров с артикулом, названием, оценочной стоимостью, стоимостью для получателя, количеством</td>-->
-		<!--</tr>-->
-		<!--<tr>-->
-			<!--<td>(ФИО, город, контактное лицо, контактный телефон, название магазина, от которого осуществляется доставка)</td>-->
-			<!--<td>(ФИО, город, контактное лицо, контактный телефон)</td>-->
-			<!--<td> 7777 </td>-->
-			<!--<td> 777p</td>-->
-			<!--<td>Visa</td>-->
-			<!--<td>4</td>-->
-			<!--<td>asdasdas</td>-->
-		<!--</tr>-->
-	<!--</table>-->
-  <!--
-	<button class="btn btn-success" ng-click="printActs()" ng-show="(getCheckedItems().length > 0 ) && (filteredItems.length != 0)">Распечатать акт приема-передачи </button>
-	<div class="alert alert-danger" ng-show="filteredItems.length == 0">
-	  <p><strong>Внимание</strong> По заданным параметрам не найдено ни одного заказа, измените параметры поиска</p>
-	</div>
--->
+    <!--
+      <div class="filters-form">
+          <form action="#">
+              <fieldset>
+                  <div role="tablist" bs-collapse class="filters" data-start-collapsed="true">
+                      <h3 class="filters__title">
+                          <a bs-collapse-toggle>
+                              <i class="fa fa-filter" aria-hidden="true"></i>
+                              Фильтр
+                          </a>
+                       </h3>
+                      <div class="filters__collapse" role="tabpanel" bs-collapse-target>
+                          <div class="row">
+                              <div class="form-group col-sm-2 col-md-2">
+                                  <label>Дата заказа</label>
+                                  <input type="text" class="form-control red" placeholder="Enter text" value="" ng-model="search.date">
+                              </div>
+                              <div class="form-group col-sm-2 col-md-2">
+                                  <label>Статус заказа</label>
+                                  <input type="text" class="form-control" placeholder="Enter text" value="" ng-model="search.status">
+                              </div>
+                              <div class="form-group col-sm-2 col-md-2">
+                                  <label>Тип заказа</label>
+                                  <input type="text" class="form-control" placeholder="Enter text" value="" ng-model="search.num">
+                              </div>
+                              <div class="form-group col-sm-2 col-md-2">
+                                  <label>Номер штрих-кода</label>
+                                  <input type="text" class="form-control" placeholder="Enter text" value="" ng-model="search.code">
+                              </div>
+                              <div class="form-group col-sm-4 col-md-4">
+                                  <label>№ отправления магазина</label>
+                                  <input type="text" class="form-control" placeholder="Enter text" value="" ng-model="search.shopNum">
+                              </div>
+                          </div>
+                          <div class="row">
+                              <div class="form-group col-sm-2 col-md-2">
+                                  <label>Город отправителя</label>
+                                  <input type="text" class="form-control red" placeholder="Enter text" value="" ng-model="search.city">
+                              </div>
+                              <div class="form-group col-sm-2 col-md-2">
+                                  <label>Название магазина</label>
+                                  <input type="text" class="form-control red" placeholder="Enter text" value="" ng-model="search.shopName">
+                              </div>
+                              <div class="form-group col-sm-2 col-md-2">
+                                  <label>Город получателя</label>
+                                  <input type="text" class="form-control" placeholder="Enter text" value="" ng-model="search.where">
+                              </div>
+                              <div class="form-group col-sm-2 col-md-2">
+                                  <label>Телефон получателя</label>
+                                  <input type="text" class="form-control red" placeholder="Enter text" value="" ng-model="search.phone">
+                              </div>
+                              <div class="form-group col-sm-4 col-md-4">
+                                  <label>ФИО получателя</label>
+                                  <input type="text" class="form-control red" placeholder="Enter text" value="" ng-model="search.fio">
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+
+              </fieldset>
+          </form>
+      </div>
+      <div class="table">
+          <div class="table-row col-sm-12 col-md-12">
+              <div class="table-cell col-sm-1 col-md-1"><input type="checkbox" ng-model="isMasterChecked" ng-change="toggleMasterCheckbox(isMasterChecked)"></div>
+              <div class="table-cell col-sm-2 col-md-2">Тип заказа</div>
+              <div class="table-cell col-sm-2 col-md-2">Номер заказа магазина</div>
+              <div class="table-cell col-sm-1 col-md-1">Штрих-код</div>
+              <div class="table-cell col-sm-1 col-md-1">Куда</div>
+              <div class="table-cell col-sm-1 col-md-1">Стоимость</div>
+              <div class="table-cell col-sm-2 col-md-2">Статус</div>
+              <div class="table-cell col-sm-2 col-md-2">&nbsp;</div>
+          </div>
+          <div ng-repeat="item in filteredItems = ( items | filter:search )" ng-dblclick="showInfo(item)" class="table-row col-sm-12 col-md-12">
+              <div class="table-cell col-sm-1 col-md-1"><input type="checkbox" ng-model="item.checked" ng-change="checkboxChanged(item.checked)"></div>
+              <div class="table-cell col-sm-2 col-md-2">{{item.num}}</div>
+              <div class="table-cell col-sm-2 col-md-2">{{item.shopNum}}</div>
+              <div class="table-cell col-sm-1 col-md-1">{{item.code}}</div>
+              <div class="table-cell col-sm-1 col-md-1">{{item.where}}</div>
+              <div class="table-cell col-sm-1 col-md-1">{{item.price}}</div>
+              <div class="table-cell col-sm-2 col-md-2">{{item.status}}</div>
+              <div class="table-cell col-sm-2 col-md-2"><a href="#"><i class="fa fa-print"></i> Печать</a></div>
+              <div class="info_parent" ng-if="item.showInView">
+                  <div class="info_children">Данные отправителя</div>
+                  <div class="info_children">(ФИО, город, контактное лицо, контактный телефон, название магазина, от которого осуществляется доставка)</div>
+                  <div class="info_children">Данные получателя</div>
+                  <div class="info_children">(ФИО, город, контактное лицо, контактный телефон)</div>
+                  <div class="info_children"> Номер заказа магазина</div>
+                  <div class="info_children"> 7777 </div>
+                  <div class="info_children"> Стоимость доставки для получателя</div>
+                  <div class="info_children"> 777p</div>
+                  <div class="info_children">Способ оплаты</div>
+                  <div class="info_children">Visa</div>
+                  <div class="info_children">Количество мест</div>
+                  <div class="info_children">4</div>
+                  <div class="info_children">Список товаров с артикулом, названием, оценочной стоимостью, стоимостью для получателя, количеством</div>
+                  <div class="info_children">asasasasas</div>
+              </div>
+          </div>
+      -->
+    <!--<table class="acts-table">-->
+    <!--<tr>-->
+    <!--<th><input type="checkbox" ng-model="isMasterChecked" ng-change="toggleMasterCheckbox(isMasterChecked)"></th>-->
+    <!--<th>Тип заказа</th>-->
+    <!--<th>Номер заказа магазина</th>-->
+    <!--<th>Штрих-код</th>-->
+    <!--<th>Куда</th>-->
+    <!--<th>Стоимость</th>-->
+    <!--<th>Статус</th>-->
+    <!--<th>&nbsp;</th>-->
+    <!--</tr>-->
+    <!--<tr ng-repeat="item in filteredItems = ( items | filter:search )" ng-dblclick="showInfo(item)">-->
+    <!--<td><input type="checkbox" ng-model="item.checked" ng-change="checkboxChanged(item.checked)"></td>-->
+    <!--<td>{{item.num}}</td>-->
+    <!--<td>{{item.shopNum}}</td>-->
+    <!--<td>{{item.code}}</td>-->
+    <!--<td>{{item.where}}</td>-->
+    <!--<td>{{item.price}}</td>-->
+    <!--<td>{{item.status}}</td>-->
+    <!--<td><a href="#"><i class="fa fa-print"></i> Печать</a></td>-->
+    <!--</tr>-->
+    <!--<tr ng-repeat="">-->
+    <!--<td>Данные отправителя</td>-->
+    <!--<td>Данные получателя</td>-->
+    <!--<td> Номер заказа магазина</td>-->
+    <!--<td> Стоимость доставки для получателя</td>-->
+    <!--<td>Способ оплаты</td>-->
+    <!--<td>Количество мест</td>-->
+    <!--<td>Список товаров с артикулом, названием, оценочной стоимостью, стоимостью для получателя, количеством</td>-->
+    <!--</tr>-->
+    <!--<tr>-->
+    <!--<td>(ФИО, город, контактное лицо, контактный телефон, название магазина, от которого осуществляется доставка)</td>-->
+    <!--<td>(ФИО, город, контактное лицо, контактный телефон)</td>-->
+    <!--<td> 7777 </td>-->
+    <!--<td> 777p</td>-->
+    <!--<td>Visa</td>-->
+    <!--<td>4</td>-->
+    <!--<td>asdasdas</td>-->
+    <!--</tr>-->
+    <!--</table>-->
+    <!--
+      <button class="btn btn-success" ng-click="printActs()" ng-show="(getCheckedItems().length > 0 ) && (filteredItems.length != 0)">Распечатать акт приема-передачи </button>
+      <div class="alert alert-danger" ng-show="filteredItems.length == 0">
+        <p><strong>Внимание</strong> По заданным параметрам не найдено ни одного заказа, измените параметры поиска</p>
+      </div>
+  -->
 
 </div>

@@ -7,13 +7,19 @@ app.controller('ordersHistoryCtrl', [
     'FileSaver',
     'OrderStatusService',
     'RestOrdersService',
-    function ($scope, $modal, historyData, OrdersHistoryData, $filter, FileSaver, OrderStatusService,RestOrdersService) {
+    'SenderData',
+    function ($scope, $modal, historyData, OrdersHistoryData, $filter, FileSaver, OrderStatusService, RestOrdersService,SenderData) {
         //todo переделать под сервис
         var deliveryTypes = {
             1: 'Доставка',
             2: 'Курьер',
             3: 'Вывоз',
-            4:'Самовывоз'
+            4: 'Самовывоз'
+        };
+        var payment_methods = {
+            2: 'Предоплата',
+            3: 'Оплата наличными',
+            5: 'Оплата картой'
         };
         $scope.deliveryTypes = [];
         angular.forEach(deliveryTypes, function (value, key) {
@@ -24,8 +30,8 @@ app.controller('ordersHistoryCtrl', [
         });
         // todo end
         $scope.statusList = OrderStatusService.getList();
-        $scope.items=[];
-        $scope.pagingBy=5;
+        $scope.items = [];
+        $scope.pagingBy = 5;
         var currentTableState = {};
         $scope.getOrders = function (tableState) {
             currentTableState = tableState;
@@ -46,13 +52,13 @@ app.controller('ordersHistoryCtrl', [
                 responseList.forEach(function (order, idx) {
                     statusCode = (order.status && order.status.code) ? order.status.code : 0;
                     barcode = (order.items && order.items[0] && order.items[0].barcode) ? order.items[0].barcode : '';
-                    number = (order.number) ? order.number : '';
                     order.humanReadable = {
-                        'deliveryType': deliveryTypes[order.delivery_type]||' ',
+                        'deliveryType': deliveryTypes[order.delivery_type] || ' ',
                         'status': OrderStatusService.getLabel(statusCode),
                         'barcode': barcode,
-                        'number': number
+                        'payment':payment_methods[order.payment_method]
                     };
+                    order.isOrderDataShown = false;
                     order.incoming && (
                         incomingStorage[order.incoming] || (
                             incomingStorage[order.incoming] = []
@@ -63,11 +69,6 @@ app.controller('ordersHistoryCtrl', [
                 tableState.pagination.numberOfPages = Math.ceil(responseList.count / pagerLimit)
             })
         };
-        $scope.$watch('search.status.code', function (newVal, a, $scope) {
-            if (newVal === null && $scope.search && $scope.search.status) {
-                $scope.search.status.code = '';
-            }
-        });
         $scope.getPrintPdf = function (item) {
             return OrdersHistoryData.downloadART(item._id).then(function (t) {
                 var o = new Blob([t.data], {type: "application/vnd.openxmlformats-officedocument.wordprocessingml.document"});
@@ -116,33 +117,18 @@ app.controller('ordersHistoryCtrl', [
         $scope.printActs = function () {
             // TODO
             alert('PRINT! ');
-        }
-        function modalOrderInfoCtrl($scope) {
-            $scope.isOrderDataShown = false;
-            $scope.titleText = 'Информация';
-            $scope.changeDataView = function () {
-                $scope.titleText = $scope.isOrderDataShown ? 'История изменения' : 'Информация'
-                console.log('!!', $scope.isOrderDataShown);
-            }
-        }
-
-        modalOrderInfoCtrl.$inject = ['$scope'];
-        var myModal = $modal({
-            controller: modalOrderInfoCtrl,
-            templateUrl: 'modals/modalOrderInfo.html',
-            show: false
-        });
-        var shownItem=null;
-        $scope.isShownInfo=function (item) {
-          return item==shownItem;
         };
-        $scope.hideInfo=function () {
-            shownItem=null;
+        // инфа о заказе
+        $scope.shownItem = null;
+        $scope.titleText = 'Информация';
+        $scope.changeDataView = function (item) {
+            $scope.titleText = item.isOrderDataShown ? 'История изменения' : 'Информация'
+        };
+        $scope.isShownItem = function (item) {
+            return $scope.shownItem == item;
         };
         $scope.showInfo = function (item) {
-            // console.log(this,item);
-            shownItem=item;
-            // myModal.$promise.then(myModal.show);
+            $scope.shownItem = ($scope.isShownItem(item)) ? null : item;
         };
     }
 ]);
