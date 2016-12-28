@@ -96,6 +96,11 @@ app.controller('newOrderCtrl', ['$scope', 'SenderData', '$filter', '$http', 'Aut
 		});
 	}
 
+	$scope.removeCargo = function(cargoIndex, $event){
+		$event.preventDefault();
+		$scope.newOrder.cargo.cargos.splice(cargoIndex, 1);
+	}
+
 	$scope.addGoods = function($event, index) {
 		$event.preventDefault();
 		$scope.newOrder.cargo.cargos[index].products.push({

@@ -1,8 +1,3 @@
-<style>
-	.sizes {
-		padding:0 !important;
-	}
-</style>
 <div class="row js-kladr-form-address">
 	<h1 class="text-center">Новый заказ</h1>
 	<ul class="steps" ng-show="currentStep < 4 || (currentStep <= 4 && newOrder.deliveryType != 1) ">
@@ -122,24 +117,15 @@
 						  			<label class="control-label">Габариты забора</label>
 						  		</div>
 						  		<div class="col-sm-1 col-md-1">
-						  			<label class="control-label">вес(кг)</label>
-						  			<input type="text" class="form-control" name="weight" ng-model="newOrder.measurements.weight" required>
+						  			<label class="control-label">Вес(кг)</label>
+						  			<input type="number" class="form-control" name="weight" ng-model="newOrder.measurements.weight" required>
 						  		</div>
-								<div class="col-sm-6 col-md-6">
-									<div class="col-sm-12 col-md-12 text-center sizes">
-										<label class="control-label" style="padding-left:36px;">Габариты (см)</label>
-									</div>
-									<span class="col-sm-1 col-md-1 sizes text-center"></span>
-									<div class="col-sm-3 col-md-3 sizes">
-						  				<input type="text" class="form-control" name="" ng-model="newOrder.measurements.length" ng-disabled="newOrder.measurements.volume">
-									</div>
-									<span class="col-sm-1 col-md-1 sizes text-center">--</span>
-									<div class="col-sm-3 col-md-3 sizes">
-										<input type="text" class="form-control" name="" ng-model="newOrder.measurements.width" ng-disabled="newOrder.measurements.volume">
-									</div>
-									<span class="col-sm-1 col-md-1 sizes text-center">--</span>
-									<div class="col-sm-3 col-md-3 sizes">
-										<input type="text" class="form-control" name="" ng-model="newOrder.measurements.height" ng-disabled="newOrder.measurements.volume">
+								<div class="col-sm-6 col-md-6 text-center">
+									<label class="control-label">Габариты (см)</label>
+									<div class="custom-form-group">
+										<input type="number" class="col-sm-4 col-md-4" placeholder="Длинна" ng-model="newOrder.measurements.length">
+										<input type="number" class="col-sm-4 col-md-4" placeholder="Ширина" ng-model="newOrder.measurements.width">
+										<input type="number" class="col-sm-4 col-md-4" placeholder="Высота" ng-model="newOrder.measurements.height">
 									</div>
 						  		</div>
 						  		<div class="col-sm-1 col-md-1 text-center">
@@ -148,7 +134,7 @@
 						  		</div>
 						  		<div class="col-sm-2 col-md-2">
 						  			<label class="control-label">Объем (м<sup>3</sup>)</label>
-						  			<input type="text" class="form-control" name="" ng-model="newOrder.measurements.volume" ng-disabled="newOrder.measurements.height || newOrder.measurements.width || newOrder.measurements.length">
+						  			<input type="number" class="form-control" ng-model="newOrder.measurements.volume" required data-bound-model="newOrder.measurements.length * newOrder.measurements.width * newOrder.measurements.height">
 						  		</div>
 					  		</div>
 						</div>
@@ -166,7 +152,7 @@
 				</form>
 				<div class="text-right row">
 					<button class="btn btn-primary" ng-click="goNext($event)" ng-if="newOrder.deliveryType != 1" ng-disabled="step3form.$invalid">Далее</button>
-					<button type="submit" class="btn btn-success" ng-if="newOrder.deliveryType == 1" ng-click="goNext($event)">Оформить заказ</button>
+					<button type="submit" class="btn btn-success" ng-disabled="step3form.$invalid" ng-if="newOrder.deliveryType == 1" ng-click="goNext($event)">Оформить заказ</button>
 				</div>
 			</div>
 			<div  ng-show="newOrder.deliveryType != 1">
@@ -271,15 +257,17 @@
 					  	</div>
 					  	<div class="form-group">
 						    <label class="col-sm-4 col-md-4 control-label">Количество мест</label>
-						    <div class="col-sm-4 col-md-4">
-						      	<input type="text" class="form-control" name="places" ng-model="newOrder.cargo.placesCount" disabled>
+						    <div class="col-sm-2 col-md-2">
+						      	<input type="text" class="form-control" name="places" ng-model="newOrder.cargo.placesCount" data-bound-model="newOrder.cargo.cargos.length" disabled>
 						    </div>
+						    <!--
 						    <div class="col-sm-1 col-md-1">
 						      	<button class="btn btn-block btn-primary" ng-click="addPlace($event)">+</button>
 						    </div>
 						    <div class="col-sm-1 col-md-1">
 						      	<button class="btn btn-block btn-danger" ng-click="removePlace($event)">-</button>
 						    </div>
+						    -->
 						    <div class="col-sm-2 col-md-2">
 						      	<button class="btn btn-block btn-info" ng-click="addCargo($event)">Добвить грузоместо</button>
 						    </div>
@@ -295,22 +283,15 @@
 						  			<div class="row h-mb-20">
 						  				<div class="col-sm-2 col-md-2">
 								  			<label class="control-label">Вес <span class="small">(кг)</span></label>
-								  			<input type="text" class="form-control" name="weight" ng-model="cargo.weight" required>
+								  			<input type="number" class="form-control" name="weight" ng-model="cargo.weight" required>
 								  		</div>
-								  		<div class="col-sm-1 col-md-1 text-center">
-								  			<label class="control-label block">&nbsp;</label>
-								  		</div>
-								  		<div class="col-sm-2 col-md-2">
-								  			<label class="control-label">длина <span class="small">(см)</span></label>
-								  			<input type="text" class="form-control" name="" ng-model="cargo.length" ng-change="place.getVolume()">
-								  		</div>
-								  		<div class="col-sm-2 col-md-2">
-								  			<label class="control-label">ширина <span class="small">(см)</span></label>
-								  			<input type="text" class="form-control" name="" ng-model="cargo.width" ng-change="place.getVolume()">
-								  		</div>
-								  		<div class="col-sm-2 col-md-2">
-								  			<label class="control-label">высота <span class="small">(см)</span></label>
-								  			<input type="text" class="form-control" name="" ng-model="cargo.height" ng-change="place.getVolume()">
+								  		<div class="col-sm-6 col-md-6 text-center">
+											<label class="control-label">Габариты (см)</label>
+											<div class="custom-form-group">
+												<input type="number" class="col-sm-4 col-md-4" placeholder="Длинна" ng-model="cargo.length">
+												<input type="number" class="col-sm-4 col-md-4" placeholder="Ширина" ng-model="cargo.width">
+												<input type="number" class="col-sm-4 col-md-4" placeholder="Высота" ng-model="cargo.height">
+											</div>
 								  		</div>
 								  		<div class="col-sm-1 col-md-1 text-center">
 								  			<label class="control-label block">&nbsp;</label>
@@ -318,7 +299,11 @@
 								  		</div>
 								  		<div class="col-sm-2 col-md-2">
 								  			<label class="control-label">Объем (м<sup>3</sup>)</label>
-								  			<input type="text" class="form-control" name="value" ng-model="cargo.volume" required>
+								  			<input type="number" class="form-control" ng-model="cargo.volume" required data-bound-model="cargo.length * cargo.width * cargo.height">
+								  		</div>
+								  		<div class="col-sm-1 col-md-1">
+								  			<label class="control-label block">&nbsp;</label>
+								  			<button class="btn btn-block btn-danger" ng-click="removeCargo(cargoIndex, $event)">-</button>
 								  		</div>
 						  			</div>
 						  			<div class="row">
