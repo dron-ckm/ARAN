@@ -327,6 +327,35 @@ h1 {
 input.ng-invalid {
   border-color: #a94442 !important;
 }
+.custom-form-group {
+  display: block;
+  width: 100%;
+  height: 34px;
+  padding: 6px 0;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #555;
+  background-color: #fff;
+  background-image: none;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  -webkit-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+  transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+}
+.custom-form-group.disabled {
+  background-color: #ebebe4;
+}
+.custom-form-group input {
+  border: 0;
+  padding: 0 15px;
+  margin: 0;
+  border-left: 1px solid #ccc;
+}
+.custom-form-group input:first-child {
+  border: 0;
+}
 .pointer {
   cursor: pointer;
 }

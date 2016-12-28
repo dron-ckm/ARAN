@@ -110,6 +110,7 @@
                 <td colspan="8">
                     <div class="order-history">
                         <div class="order-history__header">
+
                             <ul class="nav nav-tabs">
                                 <li class="active"><a class="pointer active" data-toggle="tab"
                                                        data-target=".item-{{order._id}}-tab-1">Информация</a>
@@ -140,12 +141,10 @@
                                                 контактный телефон - {{order.client.contact_number}} <br>
                                                 куда - {{order.location.address}}
                                             </dd>
-
                                         </dl>
                                     </div>
                                     <div class="col-xs-6">
                                         <dl>
-
                                             <dt> Номер заказа магазина</dt>
                                             <dd>{{order.number}}</dd>
                                             <dt> Стоимость доставки для получателя, р.</dt>
@@ -227,10 +226,10 @@
             <tfoot>
             <tr>
                 <td colspan="1"></td>
-                <td class=text-center st-pagination st-items-by-page=pagingBy colspan=6></td>
+                <td class="text-center" st-pagination st-items-by-page="pagingBy" colspan="6"></td>
                 <td class="text-center" colspan="1">
                     <label><select class="form-control form-control-inline pagination" ng-model="pagingBy">
-                        <option value="5" ng-selected selected="selected">по 5</option>
+                        <option value="5" ng-selected="true">по 5</option>
                         <option value="10">по 10</option>
                         <option value="20">по 20</option>
                         <option value="30">по 30</option>
