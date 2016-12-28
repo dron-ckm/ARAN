@@ -33,6 +33,38 @@ app.controller('ordersHistoryCtrl', [
         $scope.items = [];
         $scope.pagingBy = 5;
         var currentTableState = {};
+        $scope.getSticker = function (order) {
+            console.log(order);
+            order.withHttpConfig({
+                cache: false,
+                responseType: "blob"
+            }).customGET("get-stickers").then(function (responseData) {
+                console.log(responseData);
+                var o = new Blob([responseData], {
+                    type: "application/pdf"
+                });
+                FileSaver.saveAs(o, "Этикетки " + order.number + ".pdf")
+            })
+        };
+        $scope.getStickers = function () {
+            var orders = $scope.getCheckedItems()||false;
+            if (orders) {
+                var orderIds = _.map(orders,'_id');
+                console.log(orderIds);
+                RestOrdersService.one("get-stickers").withHttpConfig({
+                    cache: false,
+                    responseType: "blob"
+                }).customGET("", {
+                    orders: orderIds.join(",")
+                }).then(function (responseData) {
+                    console.log(responseData);
+                    var e = new Blob([responseData], {
+                        type: "application/pdf"
+                    });
+                    FileSaver.saveAs(e, "Этикетки " + orderIds.join(",") + ".pdf")
+                })
+            }
+        };
         $scope.getOrders = function (tableState) {
             currentTableState = tableState;
             var pagination = tableState.pagination || {};
@@ -48,7 +80,7 @@ app.controller('ordersHistoryCtrl', [
                 $scope.items = responseList;
                 // incoming это похоже наличие какого то документа, дальше проходится по списку и ищется есть ли там документы какие то - Номер поступления
                 var incomingStorage = {};
-                var deliveryType, statusCode, barcode, number;
+                var statusCode, barcode;
                 responseList.forEach(function (order, idx) {
                     statusCode = (order.status && order.status.code) ? order.status.code : 0;
                     barcode = (order.items && order.items[0] && order.items[0].barcode) ? order.items[0].barcode : '';
@@ -104,7 +136,7 @@ app.controller('ordersHistoryCtrl', [
             } else {
                 checkAll();
             }
-        }
+        };
         $scope.checkboxChanged = function (checked) {
             if (checked) {
                 if ($scope.getCheckedItems().length === $scope.items.length) {
@@ -113,19 +145,15 @@ app.controller('ordersHistoryCtrl', [
             } else {
                 $scope.isMasterChecked = false;
             }
-        }
+        };
         $scope.printActs = function () {
             // TODO
             alert('PRINT! ');
         };
         // инфа о заказе
         $scope.shownItem = null;
-        $scope.titleText = 'Информация';
-        $scope.changeDataView = function (item) {
-            $scope.titleText = item.isOrderDataShown ? 'История изменения' : 'Информация'
-        };
         $scope.isShownItem = function (item) {
-            return $scope.shownItem == item;
+            return $scope.shownItem === item;
         };
         $scope.showInfo = function (item) {
             $scope.shownItem = ($scope.isShownItem(item)) ? null : item;

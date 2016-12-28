@@ -73,6 +73,11 @@
 							<span>Обратная связь</span>
 						</a>
 					</li>
+					<li ng-cloak ng-show="isLoggedIn()">
+						<a ng-click="logOut()" class="pointer">
+							<i class="ion-log-out"></i>
+							<span>Выйти</span></a>
+					</li>
 				</ul>
 			</div>
 		</div>

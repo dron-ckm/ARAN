@@ -403,3 +403,10 @@ input.ng-invalid {
 .filters__title {
   text-align: right;
 }
+.no-hover-effects:hover,
+.no-hover-effects:hover td {
+  background: none !important;
+}
+.order-detail-preview .tab-pane {
+  padding-top: 15px;
+}

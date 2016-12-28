@@ -410,7 +410,7 @@ h1 {
 }
 
 input.ng-invalid {
-	border-color: #a94442 !important;
+  border-color: #a94442 !important;
 }
 
 .custom-form-group {
@@ -454,7 +454,6 @@ input.ng-invalid {
   display: block;
 }
 
-
 .col {
   padding-left: 15px;
   padding-right: 15px;
@@ -469,8 +468,13 @@ input.ng-invalid {
   }
 }
 
-.block {display: block;}
-.h-mb-20 {margin-bottom: 20px;}
+.block {
+  display: block;
+}
+
+.h-mb-20 {
+  margin-bottom: 20px;
+}
 
 .table {
   display: table;
@@ -500,4 +504,15 @@ input.ng-invalid {
 
 .filters__title {
   text-align: right;
+}
+
+.no-hover-effects {
+  &:hover {
+    &, & td {
+      background: none !important;
+    }
+  }
+}
+.order-detail-preview .tab-pane{
+  padding-top: 15px;
 }

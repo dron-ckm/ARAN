@@ -11,7 +11,7 @@ app.service('SenderData', ['$http', function($http){
 		addressFrom: 'asd',
 		phone: '800',
 		contactName: 'name',
-		shopName: 'shop'
+		shopName: 'shop2'
 	}];
 
 	function getData(){

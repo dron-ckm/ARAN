@@ -3,6 +3,9 @@ app.service('AuthorizationData', ['$cookies', function($cookies){
 		user: '',
 		password: '',
 		token: '',
+		removeToken:function () {
+			$cookies.remove('_token');
+        },
 		getToken: function() {
 			var token = $cookies.get('_token') || null;
 			this.token = token;

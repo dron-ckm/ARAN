@@ -1,21 +1,34 @@
-app.factory('RestOrdersService', ['Restangular', function(Restangular){
-    function i(t) {
-        t.setResponseInterceptor(function (t, e, o, i, r, l) {
-            if ([
-                    "application/octet-stream",
-                    "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
-                ].indexOf(r.headers("Content-Type")) >= 0) return t;
-            var n;
-            return "getList" === e ? (n = t.orders, n.count = t.count) : n = t.order, n
-        });
-        t.addErrorInterceptor(function (t, e, i) {
-            if (400 !== t.status) {
-                return true
-            } else {
-                return t.data && t.data.msg && toastr.error(t.data.msg), e.reject(), !1
-            }
-        });
-    }
+app.factory('RestOrdersService', [
+    'Restangular',
+    function (Restangular) {
+        function config(t) {
+            t.setResponseInterceptor(function (data, operation, model, url, response, deferred) {
+                if ([
+                        "application/octet-stream",
+                        "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                    ].indexOf(response.headers("Content-Type")) >= 0) {
+                    return data;
+                }
+                var n;
+                if ("getList" === operation) {
+                    n = data.orders;
+                    n.count = data.count;
+                    return n
+                } else {
+                    return data
+                }
+            });
+            t.addErrorInterceptor(function (response, e, i) {
+                if (400 !== response.status) {
+                    return true
+                } else {
+                    response.data && response.data.msg && toastr.error(response.data.msg);
+                    e.reject();
+                    return false
+                }
+            });
+        }
 
-    return Restangular.withConfig(i).service("orders")
-}]);
+        return Restangular.withConfig(config).service("orders")
+    }
+]);
