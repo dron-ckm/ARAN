@@ -5,7 +5,8 @@ app.factory('RestOrdersService', [
             t.setResponseInterceptor(function (data, operation, model, url, response, deferred) {
                 if ([
                         "application/octet-stream",
-                        "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                        "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+                        "application/pdf"
                     ].indexOf(response.headers("Content-Type")) >= 0) {
                     return data;
                 }
@@ -15,7 +16,7 @@ app.factory('RestOrdersService', [
                     n.count = data.count;
                     return n
                 } else {
-                    return data
+                    return data.order
                 }
             });
             t.addErrorInterceptor(function (response, e, i) {

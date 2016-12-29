@@ -1,7 +1,7 @@
 app.controller('senderDataCtrl', ['$scope', 'SenderData', function($scope, SenderData){
 	$scope.senders = SenderData.getData();
 	$scope.isChangeEvailable = false;
-
+	SenderData.getDataRest();
 	$scope.toggleEdit = function(){
 		$scope.isChangeEvailable = !$scope.isChangeEvailable;
 	}
