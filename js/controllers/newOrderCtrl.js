@@ -151,6 +151,7 @@ app.controller('newOrderCtrl', ['$scope', 'SenderData', '$filter', '$http', 'Aut
 
 	$scope.save = function(){
 		var order = $scope.newOrder;
+		
 		var req = {
 			method: 'POST',
 			url: 'https://cdocs-wh.arancom.ru/orders',
@@ -235,6 +236,7 @@ app.controller('newOrderCtrl', ['$scope', 'SenderData', '$filter', '$http', 'Aut
 				}
 			}*/
 		});
+		//console.log('Result', result);
 		return result;
 	}
 
