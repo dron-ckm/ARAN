@@ -341,22 +341,22 @@
 						  			<label class="control-label small">Наименование товара</label>
 						  			<input type="text" class="form-control" name="goodsName" ng-model="product.name" required>
 						  		</div>
-						  		<div class="col-sm-1 col-md-1" ng-class="{'has-error': step4form.akrtikul.$error.pattern}">
+						  		<div class="col-sm-1 col-md-1" ng-class="{'has-error': step4form.article.$error.pattern}">
 						  			<label class="control-label small">Артикул</label>
-						  			<input type="text" class="form-control" name="akrtikul" ng-model="product.akrtikul" ng-pattern="/^[a-zа-я0-9]+$/i">
-									<div class="error-text"  ng-show="step4form.akrtikul.$error.pattern">Только арабские цифры или буквы кириллицы/латиницы</div>
+						  			<input type="text" class="form-control" name="article" ng-model="product.article" ng-pattern="/^[a-zа-я0-9]+$/i">
+									<div class="error-text"  ng-show="step4form.article.$error.pattern">Только арабские цифры или буквы кириллицы/латиницы</div>
 						  		</div>
 						  		<div class="col-sm-2 col-md-2">
 						  			<label class="control-label small">Оценочна стоимость</label>
-						  			<input type="text" class="form-control" name="" ng-model="product.price">
+						  			<input type="text" class="form-control" name="" ng-model="product.cost">
 						  		</div>
 						  		<div class="col-sm-2 col-md-2">
 						  			<label class="control-label small">Стоимость для покупателя</label>
-						  			<input type="text" class="form-control" name="" ng-model="product.customerPrice">
+						  			<input type="text" class="form-control" name="" ng-model="product.client_cost">
 						  		</div>
 						  		<div class="col-sm-1 col-md-1 small">
 						  			<label class="control-label">Количество</label>
-						  			<input type="text" class="form-control" name="" ng-model="product.count">
+						  			<input type="text" class="form-control" name="" ng-model="product.quantity">
 						  		</div>
 						  		<div class="col-sm-1 col-md-1 text-right small">
 					  				<label class="control-label block">&nbsp;</label>
@@ -464,23 +464,23 @@
 					<tbody ng-repeat="cargo in newOrder.cargo.cargos">
 						<tr ng-repeat="product in cargo.products">
 							<td>{{product.name}}</td>
-							<td>{{product.akrtikul}}</td>
-							<td>{{product.price}}</td>
-							<td>{{product.customerPrice}}</td>
-							<td>{{product.count}}</td>
+							<td>{{product.article}}</td>
+							<td>{{product.cost}}</td>
+							<td>{{product.client_cost}}</td>
+							<td>{{product.quantity}}</td>
 						</tr>
 					</tbody>
 				</table>
 			</dd>
 		</dl>
 		
-		<!--
+
 		<p>1 {{newOrder.selectedShop}}</p>
 		<p>2 {{newOrder.deliveryType}}</p>
 		<p>3a {{newOrder.measurements}}</p>
 		<p>3b {{newOrder.recipient}}</p>
 		<p>4 {{newOrder.cargo}}</p>
-		-->
+
 		
 
 		<div class="text-right">

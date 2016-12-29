@@ -16,6 +16,7 @@ app.controller('newOrderCtrl', ['$scope', 'SenderData', '$filter', '$http', 'Aut
 		alert('warehouses ERROR ' + response);
     });
 
+	// TODO: $scope.newOrder = new Obj()
 	$scope.newOrder = {};
 	$scope.newOrder.recipient = {};
 	$scope.newOrder.recipient.timeEnd =  new Date();
@@ -33,6 +34,7 @@ app.controller('newOrderCtrl', ['$scope', 'SenderData', '$filter', '$http', 'Aut
 			$scope.newOrder.recipient.timeStart.setFullYear(year);
 		}
 	});
+	$scope.newOrder.measurements = {};
 	$scope.newOrder.deliveryType = 1;
 	$scope.newOrder.cargo = {};
 	$scope.newOrder.cargo.placesCount = 1;
@@ -135,10 +137,10 @@ app.controller('newOrderCtrl', ['$scope', 'SenderData', '$filter', '$http', 'Aut
 		$scope.newOrder.cargo.cargos[index].products.push({
 			// TODO: use new C
 			name: null,
-			akrtikul: null,
-			price: null,
-			customerPrice: null,
-			count: null
+			article: null,
+			cost: null,
+			client_cost: null,
+			quantity: null
 		});
 	}
 
@@ -149,8 +151,6 @@ app.controller('newOrderCtrl', ['$scope', 'SenderData', '$filter', '$http', 'Aut
 
 	$scope.save = function(){
 		var order = $scope.newOrder;
-		return;
-
 		var req = {
 			method: 'POST',
 			url: 'https://cdocs-wh.arancom.ru/orders',
@@ -162,12 +162,12 @@ app.controller('newOrderCtrl', ['$scope', 'SenderData', '$filter', '$http', 'Aut
 					contact_number: order.recipient.phone
 				},
 				comment : order.recipient.comments,
-				consignor: PersonalData.getSavedData.user.work_at,
+				consignor: PersonalData.getSavedData().user.work_at,
 				date: order.recipient.date,
 				delivery_type: order.deliveryType,
 				drop_windows: [{start: order.recipient.timeStart, end: order.recipient.timeEnd}], // -------
 				groupedItems: getAllGoods(true),
-				items: getAllGoods(false),
+				items: getAllGoods(true),
 				location: {
 					apartment: order.recipient.flat,	// Квартира (*):
 					building: order.recipient.bilding,		// Строение:
@@ -178,17 +178,19 @@ app.controller('newOrderCtrl', ['$scope', 'SenderData', '$filter', '$http', 'Aut
 				number: order.cargo.number, // УНЗ:
 				payment_method: order.cargo.paymentType.value,  	// newOrder.cargo.paymentType.value
 				price: order.cargo.price,							// Стоимость заказа:        *************
-				price_delivery: rder.cargo.price,   				// Стоимость доставки (*):  *************
+				price_delivery: order.cargo.price,   				// Стоимость доставки (*):  *************
 				statuses: [],
-				warehouse: order.measurements.selectedStorage._id		// ??
+				warehouse: order.measurements.selectedStorage ? order.measurements.selectedStorage._id : null		// ??
 			}
 	    };
+
 		$http(req).then(function successCallback(response) {
-			console.log('RESPONSE', response);
+			console.log('RESPONSE SAVE NEW ORDER', response);
+			$state.go('ordersHistory');
 	    }, function errorCallback(response) {
 			alert('ERROR ' + response)
 	    });
-		$state.go('ordersHistory');
+		
 	}
         SenderData.getData().then(function (response) {
             $scope.newOrder.shops = SenderData.parse(response);
@@ -203,8 +205,21 @@ app.controller('newOrderCtrl', ['$scope', 'SenderData', '$filter', '$http', 'Aut
 	function getAllGoods(grouped){
 		var result = [],
 			copy;
+
+		/*
+		article: "Артикул:" + 
+		barcode:"Штрихкод:"
+		client_cost:333     +
+		cost:277.5          +
+		name:"Наименование:"
+		quantity:1			+
+		volume:444
+		weight:388.5
+		*/
+
 		$scope.newOrder.cargo.cargos.forEach(function(cargoPlace, i){
-			if (grouped){
+			result = result.concat(cargoPlace.products);
+			/*if (grouped){
 				// all items grouped
 				result = result.concat(cargoPlace.products);
 			} else {
@@ -218,7 +233,7 @@ app.controller('newOrderCtrl', ['$scope', 'SenderData', '$filter', '$http', 'Aut
 						result = result.concat();
 					}
 				}
-			}
+			}*/
 		});
 		return result;
 	}
