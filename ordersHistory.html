@@ -14,9 +14,10 @@
                         <div class="filters__collapse collapse" role="tabpanel">
                             <div class="row">
                                 <label class="control-label col" hidden>Дата заказа (пока не работает)
+                                    <!-- created_at -->
                                     <select class="form-control" st-search="filter_by_created_at">
                                         <option value="">Любая</option>
-                                        <option value="12.26.2016">Последние сутки</option>
+                                        <option value="2016-12-28T12:11:49.024000+0300">Последние сутки</option>
                                         <option value="">Последняя неделя</option>
                                         <option value="">Последний месяц</option>
                                     </select></label>
@@ -28,6 +29,9 @@
                                         </option>
                                     </select></label>
                                 <label class="control-label col alert">Тип заказа
+                                    <!-- вывоз = забор, переделать -->
+                                    <!-- самовывоз = доставка до терминала -->
+                                    <!-- курьер и доставка - это наша доставка, что то одно из них, посмотреть в апи -->
                                     <select class="form-control" st-search="delivery_type">
                                         <option value="">Любой</option>
                                         <option ng-repeat="delivery_type in deliveryTypes"

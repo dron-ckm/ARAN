@@ -181,12 +181,15 @@ app.controller('newOrderCtrl', ['$scope', 'SenderData', '$filter', '$http', 'Aut
 	    });
 		$state.go('ordersHistory');
 	}
-
-	$scope.newOrder.shops = angular.copy(SenderData.getData());
-
-	if ($scope.newOrder.shops.length === 1) {
-		$scope.newOrder.selectedShop = $scope.newOrder.shops[0];
-	}
+        SenderData.getData().then(function (response) {
+            $scope.newOrder.shops = SenderData.parse(response);
+            $scope.newOrder.selectedShop = $scope.newOrder.shops[0];
+        });
+	// $scope.newOrder.shops = angular.copy(SenderData.getData());
+    //
+	// if ($scope.newOrder.shops.length === 1) {
+	// 	$scope.newOrder.selectedShop = $scope.newOrder.shops[0];
+	// }
 
 	function getAllGoods(grouped){
 		var result = [],
