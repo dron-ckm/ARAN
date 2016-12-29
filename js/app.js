@@ -12,7 +12,12 @@ var app = angular.module('app', [
       .state('home', {
         url: '/',
         templateUrl: 'home.html',
-        controller: 'homeCtrl'
+        controller: 'homeCtrl',
+         resolve: {
+          contactData: function (PersonalData) {
+            return PersonalData.getRequestData();
+          }
+        }
       })
       .state('login', {
         url: '/login',

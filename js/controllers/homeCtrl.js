@@ -1,8 +1,11 @@
-app.controller('homeCtrl', ['$scope', '$http', 'PersonalData', function($scope, $http, PersonalData){
+app.controller('homeCtrl', ['$scope', 'contactData', 'PersonalData', function($scope, contactData, PersonalData){
 	$scope.isChangeEvailable = false;
+	/*
 	$scope.organizationName = PersonalData.organizationName;
 	$scope.contactPerson = PersonalData.contactPerson;
-	$scope.contactPhone = PersonalData.contactPhone;
+	$scope.contactPhone = PersonalData.contactPhone;*/
+
+	console.log(contactData.data, PersonalData.getSavedData());
 
 	$scope.toggleEdit = function(){
 		$scope.isChangeEvailable = !$scope.isChangeEvailable;

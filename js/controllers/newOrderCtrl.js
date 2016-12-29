@@ -1,7 +1,20 @@
-app.controller('newOrderCtrl', ['$scope', 'SenderData', '$filter', '$http', 'AuthorizationData', '$state', 
-	function($scope, SenderData, $filter, $http, AuthorizationData, $state){
+app.controller('newOrderCtrl', ['$scope', 'SenderData', '$filter', '$http', 'AuthorizationData', '$state', 'PersonalData',
+	function($scope, SenderData, $filter, $http, AuthorizationData, $state, PersonalData){
 	var STEPS_COUNT = 4,
 		maxStep = $scope.currentStep = 1;
+
+	var warehousesReq = {
+      method: 'GET',
+      url: 'https://cdocs-wh.arancom.ru/warehouses',
+      headers: {'authentication-token': AuthorizationData.getToken()}
+    };
+    
+	$http(warehousesReq).then(function successCallback(response) {
+		console.log('warehouses', response);
+		$scope.newOrder.aranStorages = response.data.warehouses;
+    }, function errorCallback(response) {
+		alert('warehouses ERROR ' + response);
+    });
 
 	$scope.newOrder = {};
 	$scope.newOrder.deliveryType = 1;
@@ -26,15 +39,15 @@ app.controller('newOrderCtrl', ['$scope', 'SenderData', '$filter', '$http', 'Aut
 	$scope.paymentType = [
 		{
 			name: 'Предоплата (заказ полностью предоплачен)',
-			value : 1
-		},
-		{
-			name: 'Оплата наличными при получении',
 			value : 2
 		},
 		{
-			name: 'Оплата картой при получении',
+			name: 'Оплата наличными при получении',
 			value : 3
+		},
+		{
+			name: 'Оплата картой при получении',
+			value : 5
 		}
 	];
 
@@ -119,6 +132,53 @@ app.controller('newOrderCtrl', ['$scope', 'SenderData', '$filter', '$http', 'Aut
 	}
 
 	$scope.save = function(){
+		var order = $scope.newOrder;
+		return;
+
+		var req = {
+			method: 'POST',
+			url: 'https://cdocs-wh.arancom.ru/orders',
+			headers: {'authentication-token': AuthorizationData.getToken()},
+			data: {
+				client: {
+					name: "--Наименование получателя",
+					contact_person: order.recipient.person,
+					contact_number: order.recipient.phone
+				},
+				comment : order.recipient.comments,
+				consignor: PersonalData.getSavedData.user.work_at,
+				date: order.recipient.date,
+				delivery_type: order.deliveryType,
+				drop_windows: [{start: "2016-12-28T07:00:00.000Z", end: "2016-12-28T13:00:00.000Z"}], // -------
+				groupedItems: getAllGoods(true),
+				items: getAllGoods(false),
+				location: {
+					apartment: "43",	// Квартира (*):
+					building: "42",		// Строение:
+					city: "Город",
+					district: "Район",
+					house: order.recipient.bilding, 		// Дом (*):
+					housing: "41",		// Корпус:
+					postal_code: "Индекс", // -------
+					region: "Регион",   // 
+					street: order.recipient.street
+				},
+				number: order.cargo.number, // УНЗ:
+				payment_method: order.cargo.paymentType.value,  	// newOrder.cargo.paymentType.value
+				price: order.cargo.price,			// Стоимость заказа:
+				price_additional: -4, 	// Стоимость доп. услуг:
+				price_delivery: -1,   	// Стоимость доставки (*):
+				price_delivery_mkad: -2, // Стоимость дост. (МКАД):
+				price_lifting: -3,    	// Стоимость подъёма:
+				statuses: [],
+				warehouse: order.measurements.selectedStorage._id		// ??
+			}
+	    };
+		$http(req).then(function successCallback(response) {
+			console.log('RESPONSE', response);
+	    }, function errorCallback(response) {
+			alert('ERROR ' + response)
+	    });
 		$state.go('ordersHistory');
 	}
 
@@ -128,17 +188,28 @@ app.controller('newOrderCtrl', ['$scope', 'SenderData', '$filter', '$http', 'Aut
 		$scope.newOrder.selectedShop = $scope.newOrder.shops[0];
 	}
 
-	var req = {
-      method: 'GET',
-      url: 'https://cdocs-wh.arancom.ru/warehouses',
-      headers: {'authentication-token': AuthorizationData.getToken()}
-    };
-    
-	$http(req).then(function successCallback(response) {
-		$scope.newOrder.aranStorages = response.data.warehouses;
-    }, function errorCallback(response) {
-		alert('ERROR ' + response)
-    });
+	function getAllGoods(grouped){
+		var result = [],
+			copy;
+		$scope.newOrder.cargo.cargos.forEach(function(cargoPlace, i){
+			if (grouped){
+				// all items grouped
+				result = result.concat(cargoPlace.products);
+			} else {
+				// all items
+				result = result.concat(cargoPlace.products); // remove
+				return result;								 // remove
+
+				if (cargoPlace.products.count){
+					for(var i=0; i < cargoPlace.products.count; i++) {
+						copy = angular.copy(cargoPlace.products);
+						result = result.concat();
+					}
+				}
+			}
+		});
+		return result;
+	}
 
 
 	// kladr-api js START
