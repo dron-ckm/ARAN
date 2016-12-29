@@ -17,6 +17,22 @@ app.controller('newOrderCtrl', ['$scope', 'SenderData', '$filter', '$http', 'Aut
     });
 
 	$scope.newOrder = {};
+	$scope.newOrder.recipient = {};
+	$scope.newOrder.recipient.timeEnd =  new Date();
+	$scope.newOrder.recipient.timeStart =  new Date();
+	$scope.$watch('newOrder.recipient.date', function(newVal){
+		if (newVal){
+			var month = newVal.getUTCMonth();
+			var day = newVal.getUTCDate();
+			var year = newVal.getUTCFullYear();
+			$scope.newOrder.recipient.timeEnd.setDate(day);
+			$scope.newOrder.recipient.timeEnd.setMonth(month);
+			$scope.newOrder.recipient.timeEnd.setFullYear(year);
+			$scope.newOrder.recipient.timeStart.setDate(day);
+			$scope.newOrder.recipient.timeStart.setMonth(month);
+			$scope.newOrder.recipient.timeStart.setFullYear(year);
+		}
+	});
 	$scope.newOrder.deliveryType = 1;
 	$scope.newOrder.cargo = {};
 	$scope.newOrder.cargo.placesCount = 1;
@@ -141,7 +157,7 @@ app.controller('newOrderCtrl', ['$scope', 'SenderData', '$filter', '$http', 'Aut
 			headers: {'authentication-token': AuthorizationData.getToken()},
 			data: {
 				client: {
-					name: "--Наименование получателя",
+					name: order.recipient.person,
 					contact_person: order.recipient.person,
 					contact_number: order.recipient.phone
 				},
@@ -149,27 +165,20 @@ app.controller('newOrderCtrl', ['$scope', 'SenderData', '$filter', '$http', 'Aut
 				consignor: PersonalData.getSavedData.user.work_at,
 				date: order.recipient.date,
 				delivery_type: order.deliveryType,
-				drop_windows: [{start: "2016-12-28T07:00:00.000Z", end: "2016-12-28T13:00:00.000Z"}], // -------
+				drop_windows: [{start: order.recipient.timeStart, end: order.recipient.timeEnd}], // -------
 				groupedItems: getAllGoods(true),
 				items: getAllGoods(false),
 				location: {
-					apartment: "43",	// Квартира (*):
-					building: "42",		// Строение:
-					city: "Город",
-					district: "Район",
+					apartment: order.recipient.flat,	// Квартира (*):
+					building: order.recipient.bilding,		// Строение:
+					city: order.selectedShop.getterCity,
 					house: order.recipient.bilding, 		// Дом (*):
-					housing: "41",		// Корпус:
-					postal_code: "Индекс", // -------
-					region: "Регион",   // 
 					street: order.recipient.street
 				},
 				number: order.cargo.number, // УНЗ:
 				payment_method: order.cargo.paymentType.value,  	// newOrder.cargo.paymentType.value
-				price: order.cargo.price,			// Стоимость заказа:
-				price_additional: -4, 	// Стоимость доп. услуг:
-				price_delivery: -1,   	// Стоимость доставки (*):
-				price_delivery_mkad: -2, // Стоимость дост. (МКАД):
-				price_lifting: -3,    	// Стоимость подъёма:
+				price: order.cargo.price,							// Стоимость заказа:        *************
+				price_delivery: rder.cargo.price,   				// Стоимость доставки (*):  *************
 				statuses: [],
 				warehouse: order.measurements.selectedStorage._id		// ??
 			}
