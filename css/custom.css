@@ -410,3 +410,16 @@ input.ng-invalid {
 .order-detail-preview .tab-pane {
   padding-top: 15px;
 }
+.table-like {
+  display: table;
+  width: 100%;
+}
+.table-like .table-row-like {
+  display: table-row;
+}
+.table-like .table-row-like .table-cell-like {
+  display: table-cell;
+}
+.table-like .table-row-like .table-cell-like.text-right {
+  text-align: right !important;
+}

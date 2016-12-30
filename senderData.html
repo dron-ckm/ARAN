@@ -1,11 +1,12 @@
 <div class="row">
-	<h1 class="text-center" ng-click="test(senders)">Данные отправителя</h1>
-	<form action="#" class="form-horizontal">
+	<h1 class="text-center">Данные отправителя</h1>
+	<form name="places_loading_form" class="form-horizontal">
 		<fieldset ng-repeat="sender in senders">
+			<div ng-class="{'alert alert-warning':sender.new}">
 			<div class="form-group">
 			    <label class="col-sm-4 col-md-4 control-label">Название магазина</label>
 			    <div class="col-sm-8 col-md-8">
-			      <input type="text" class="form-control" name="" ng-model="sender.shopName" ng-disabled="!isChangeEvailable">
+			      <input type="text" ng-required="true" required="required" class="form-control" name="" ng-model="sender.shopName" ng-disabled="!isChangeEvailable">
 			    </div>
 		  	</div>
 		  	<div role="tablist" bs-collapse data-start-collapsed="true">
@@ -17,15 +18,31 @@
 			     </h5>
 			    <div class="filters__collapse" role="tabpanel" bs-collapse-target>
 			    	<div class="form-group">
-					    <label class="col-sm-4 col-md-4 control-label">Город</label>
+					    <label class="col-sm-4 col-md-4 control-label">Город *</label>
 					    <div class="col-sm-8 col-md-8">
-					      <input type="text" class="form-control" name="" ng-model="sender.city" ng-disabled="!isChangeEvailable">
+					      <input ng-required="true" required="required" type="text" class="form-control" name="" ng-model="sender.city" ng-disabled="!isChangeEvailable"  title=""/>
 					    </div>
 				  	</div>
 				  	<div class="form-group">
 					    <label class="col-sm-4 col-md-4 control-label">Адрес, с которого производится отправка</label>
 					    <div class="col-sm-8 col-md-8">
-					      <input type="text" class="form-control" name="" ng-model="sender.addressFrom" ng-disabled="!isChangeEvailable">
+							<div class="table-like">
+								<div class="input-group table-row-like">
+									<div class="input-group-addon table-cell-like text-right">Улица *</div>
+									<input type="text" class="form-control" ng-required="true" name=""
+										   ng-model="sender.street" required="required" ng-disabled="!isChangeEvailable">
+								</div>
+								<div class="input-group table-row-like">
+									<div class="input-group-addon table-cell-like text-right">Дом *</div>
+									<input type="text" class="form-control" ng-required="true" ng-minlength="1"  name=""
+										   ng-model="sender.house" required="required" ng-disabled="!isChangeEvailable">
+								</div>
+								<div class="input-group table-row-like">
+									<div class="input-group-addon table-cell-like text-right">Офис/квартира</div>
+									<input type="text" class="form-control" name=""
+										   ng-model="sender.apartment" ng-disabled="!isChangeEvailable">
+								</div>
+							</div>
 					    </div>
 				  	</div>
 				  	<div class="form-group">
@@ -43,21 +60,24 @@
 					<div class="text-right"><button class="btn btn-danger" ng-click="rmSender(sender.id,$event)">Удалить</button></div>
 				</div>
 		    </div>
-			
+			</div>
 		  	<hr>
 		</fieldset>
+		<div class="form-group">
+			<label class="col-sm-4 col-md-4 control-label">&nbsp;</label>
+			<div class="col-sm-8 col-md-8">
+				<button type="submit" class="btn btn-success" ng-disabled="places_loading_form.$invalid" ng-click="addSender()">Добавить отправителя</button>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-12 col-md-12 text-right">
+				<button type="submit" class="btn btn-warning" ng-click="toggleEdit()">Изменить</button>
+				<button type="submit" class="btn btn-success" ng-disabled="places_loading_form.$invalid" ng-click="saveAll()">Сохранить</button>
+			</div>
+		</div>
+		<br>
+		<div class="alert alert-danger" ng-show="places_loading_form.$invalid">Проверьте корректность заполнения полей</div>
+		<div class="alert alert-danger" ng-show="unSaved">Сохраните изменения прежде чем продолжить</div>
 	</form>
-	
-	<div class="form-group">
-	    <label class="col-sm-4 col-md-4 control-label">&nbsp;</label>
-	    <div class="col-sm-8 col-md-8">
-	      <button type="submit" class="btn btn-success" ng-click="addSender()">Добавить отправителя</button>
-	    </div>
-  	</div>
-  	<div class="row">
-  		<div class="col-sm-12 col-md-12 text-right">
-	  		<button type="submit" class="btn btn-warning" ng-click="toggleEdit()">Изменить</button>
-  			<button type="submit" class="btn btn-success" ng-click="saveAll()">Сохранить</button>
-  		</div>
-  	</div>
+
 </div>
