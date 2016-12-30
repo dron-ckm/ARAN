@@ -1,4 +1,4 @@
-app.service('AuthorizationData', ['$cookies', function($cookies){
+app.service('AuthorizationData', ['$cookies', '$rootScope', function($cookies, $rootScope){
 	var data = {
 		user: '',
 		password: '',

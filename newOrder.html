@@ -105,11 +105,22 @@
 						    	<label class="col-sm-2 col-md-2 control-label">Дата забора</label>
 					    		<div class="col-sm-10 col-md-10">
 							    	<div class="input-group">
-								        <input type="text" class="form-control" data-bs-show="isDateAwayShown" ng-model="newOrder.measurements.selectedDate" name="date" bs-datepicker placeholder="дд.мм.гггг" data-date-format="dd.MM.yyyy">
+								        <input type="text" class="form-control" data-bs-show="isDateAwayShown" ng-model="newOrder.measurements.selectedDate" name="date" bs-datepicker placeholder="дд.мм.гггг" data-date-format="dd.MM.yyyy" data-min-date="today">
 								        <div class="input-group-addon pointer" ng-click="toggleDateAway()"><i class="fa fa-calendar"></i></div>
 								    </div>
 					    		</div>
 				    		</div>
+					  	</div>
+					  	<div class="form-group">
+					  		<div class="row">
+						    	<label class="col-sm-2 col-md-2 control-label">Интервал</label>
+					    		<div class="col-sm-2 col-md-2">
+							        <input type="text" class="form-control" size="8" ng-model="newOrder.measurements.timeStart" name="time" bs-timepicker data-time-format="HH:mm" data-length="1" data-minute-step="1" data-arrow-behavior="picker">
+					    		</div>
+					    		<div class="col-sm-2 col-md-2">
+							        <input type="text" class="form-control" size="8" ng-model="newOrder.measurements.timeEnd" name="time" bs-timepicker data-time-format="HH:mm" data-length="1" data-minute-step="1" data-arrow-behavior="picker">
+					    		</div>
+					    	</div>
 					  	</div>
 					  	<div class="form-group">
 						  	<div class="row">
@@ -139,6 +150,7 @@
 						  		</div>
 					  		</div>
 						</div>
+						<!--
 						<div class="form-group">
 							<div class="row">
 						  		<label class="col-sm-2 col-md-2 control-label">Выбор склада АРАН:</label>
@@ -149,6 +161,7 @@
 					  			</div>
 				  			</div>
 						</div>
+						-->
 					</fieldset>
 				</form>
 				<div class="text-right row">
@@ -214,11 +227,12 @@
 						    	<label class="col-sm-4 col-md-4 control-label">Дата доставки</label>
 					    		<div class="col-sm-8 col-md-8">
 							    	<div class="input-group">
-								        <input type="text" class="form-control" ng-model="newOrder.recipient.date" name="date" bs-datepicker placeholder="дд.мм.гггг" data-date-format="dd.MM.yyyy" required data-bs-show="isDateDeliveryShown">
+								        <input type="text" class="form-control" ng-model="newOrder.recipient.date" name="date" bs-datepicker placeholder="дд.мм.гггг" data-date-format="dd.MM.yyyy" required data-bs-show="isDateDeliveryShown" data-min-date="today">
 								        <div class="input-group-addon pointer" ng-click="toggleDeliveryDate()"><i class="fa fa-calendar"></i></div>
 								    </div>
 					    		</div>
 						  	</div>
+						  	<!--
 							<div class="form-group">
 						    	<label class="col-sm-4 col-md-4 control-label">Окна доставки:</label>
 					    		<div class="col-sm-2 col-md-2">
@@ -228,6 +242,7 @@
 							        <input type="text" class="form-control" size="8" ng-model="newOrder.recipient.timeEnd" name="time" bs-timepicker data-time-format="HH:mm" data-length="1" data-minute-step="1" data-arrow-behavior="picker">
 					    		</div>
 						  	</div>
+						  	-->
 						  	<div class="form-group">
 							    <label class="col-sm-4 col-md-4 control-label">Комментарий:</label>
 							    <div class="col-sm-8 col-md-8">
@@ -248,13 +263,15 @@
 			<form action="#" class="form-horizontal js-form-address" name="step4form" novalidate>
 				<fieldset>
 					<div class="row">
-						<h4>Данные о товаре в заказе</h4>
-					  	<div class="form-group">
-						    <label class="col-sm-4 col-md-4 control-label">Номер заказа магазина:</label>
-						    <div class="col-sm-8 col-md-8">
-						      	<input type="text" class="form-control" name="number" ng-model="newOrder.cargo.number" ng-pattern="/^[a-zа-я0-9]+$/i" required>
-						      	<div class="error-text"  ng-show="step4form.number.$error.pattern">Поле может содержать только арабские цифры или буквы кириллицы/латиницы</div>
-						    </div>
+						<div>
+							<h4>Данные о товаре в заказе</h4>
+						  	<div class="form-group">
+							    <label class="col-sm-4 col-md-4 control-label">Номер заказа магазина:</label>
+							    <div class="col-sm-8 col-md-8">
+							      	<input type="text" class="form-control" name="number" ng-model="newOrder.cargo.number" ng-pattern="/^[a-zа-я0-9]+$/i" required>
+							      	<div class="error-text"  ng-show="step4form.number.$error.pattern">Поле может содержать только арабские цифры или буквы кириллицы/латиницы</div>
+							    </div>
+						  	</div>
 					  	</div>
 					  	<div class="form-group" ng-class="{'has-error': step4form.price.$invalid || step4form.price.$error.pattern}">
 						    <label class="col-sm-4 col-md-4 control-label">Стоимость доставки для покупателя:</label>
@@ -440,38 +457,40 @@
 			</dl>
 		</div>
 		<br>
-		<h4>Данные о товаре в заказе</h4>
-		<dl class="full-info">
-			<dt>Номер заказа магазина:</dt>
-			<dd>{{newOrder.cargo.number}}</dd>
-			<dt>Стоимость доставки для покупателя:</dt>
-			<dd>{{newOrder.cargo.price}}</dd>
-			<dt>Способ оплаты:</dt>
-			<dd>{{newOrder.cargo.paymentType.name}}</dd>
-			<dt>Количество мест:</dt>
-			<dd>{{newOrder.cargo.placesCount}}</dd>
-			<dt>Товары:</dt>
-			<dd>
-				<table class="acts-table">
-					<tr>
-						<th>Название</th>
-						<th>Артикул</th>
-						<th>Цена</th>
-						<th>Цена для покупателя</th>
-						<th>Количество</th>
-					</tr>
-					<tbody ng-repeat="cargo in newOrder.cargo.cargos">
-						<tr ng-repeat="product in cargo.products">
-							<td>{{product.name}}</td>
-							<td>{{product.article}}</td>
-							<td>{{product.cost}}</td>
-							<td>{{product.client_cost}}</td>
-							<td>{{product.quantity}}</td>
+		<div ng-show="newOrder.deliveryType !== 1">
+			 <h4>Данные о товаре в заказе</h4>
+			<dl class="full-info">
+				<dt>Номер заказа магазина:</dt>
+				<dd>{{newOrder.cargo.number}}</dd>
+				<dt>Стоимость доставки для покупателя:</dt>
+				<dd>{{newOrder.cargo.price}}</dd>
+				<dt>Способ оплаты:</dt>
+				<dd>{{newOrder.cargo.paymentType.name}}</dd>
+				<dt>Количество мест:</dt>
+				<dd>{{newOrder.cargo.placesCount}}</dd>
+				<dt>Товары:</dt>
+				<dd>
+					<table class="acts-table">
+						<tr>
+							<th>Название</th>
+							<th>Артикул</th>
+							<th>Цена</th>
+							<th>Цена для покупателя</th>
+							<th>Количество</th>
 						</tr>
-					</tbody>
-				</table>
-			</dd>
-		</dl>
+						<tbody ng-repeat="cargo in newOrder.cargo.cargos">
+							<tr ng-repeat="product in cargo.products">
+								<td>{{product.name}}</td>
+								<td>{{product.article}}</td>
+								<td>{{product.cost}}</td>
+								<td>{{product.client_cost}}</td>
+								<td>{{product.quantity}}</td>
+							</tr>
+						</tbody>
+					</table>
+				</dd>
+			</dl>
+		</div>
 		
 		<!--
 		<p>1 {{newOrder.selectedShop}}</p>

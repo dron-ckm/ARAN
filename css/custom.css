@@ -18,6 +18,11 @@ h1 {
 #sidebar-black {
   width: 350px !important;
 }
+.main-sidebar .current-user .user-name,
+#sidebar-black .current-user .user-name {
+  padding-top: 20px;
+  margin: 0;
+}
 .login-form {
   max-width: 400px;
   margin: 0 auto;

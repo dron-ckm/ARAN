@@ -14,6 +14,7 @@ app.controller('loginCtrl', ['$scope', '$http', 'AuthorizationData', '$state', '
 		$http(req).then(function successCallback(response) {
 			AuthorizationData.setData(response.data);
 			$rootScope.stateIsLoading = false;
+			$rootScope.userName = $scope.login;
 			$state.go('home');
 		}, function errorCallback(response) {
 			$rootScope.stateIsLoading = false;
