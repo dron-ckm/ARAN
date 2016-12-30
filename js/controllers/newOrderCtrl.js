@@ -1,5 +1,5 @@
-app.controller('newOrderCtrl', ['$scope', 'SenderData', '$filter', '$http', 'AuthorizationData', '$state', 'PersonalData',
-	function($scope, SenderData, $filter, $http, AuthorizationData, $state, PersonalData){
+app.controller('newOrderCtrl', ['$scope', 'SenderData', '$filter', '$http', 'AuthorizationData', '$state', 'PersonalData', '$rootScope',
+	function($scope, SenderData, $filter, $http, AuthorizationData, $state, PersonalData, $rootScope){
 	var STEPS_COUNT = 4,
 		maxStep = $scope.currentStep = 1;
 
@@ -13,7 +13,7 @@ app.controller('newOrderCtrl', ['$scope', 'SenderData', '$filter', '$http', 'Aut
 		console.log('warehouses', response);
 		$scope.newOrder.aranStorages = response.data.warehouses;
     }, function errorCallback(response) {
-		alert('warehouses ERROR ' + response);
+		alert('warehouses ERROR ' + response.data.msg);
     });
 
 	// TODO: $scope.newOrder = new Obj()
@@ -151,7 +151,7 @@ app.controller('newOrderCtrl', ['$scope', 'SenderData', '$filter', '$http', 'Aut
 
 	$scope.save = function(){
 		var order = $scope.newOrder;
-		
+
 		var req = {
 			method: 'POST',
 			url: 'https://cdocs-wh.arancom.ru/orders',
@@ -162,18 +162,18 @@ app.controller('newOrderCtrl', ['$scope', 'SenderData', '$filter', '$http', 'Aut
 					contact_person: order.recipient.person,
 					contact_number: order.recipient.phone
 				},
-				comment : order.recipient.comments,
-				consignor: PersonalData.getSavedData().user.work_at,
+				comment: getAllGoods(false),//order.recipient.comments,
+				consignor: null,
 				date: order.recipient.date,
 				delivery_type: order.deliveryType,
 				drop_windows: [{start: order.recipient.timeStart, end: order.recipient.timeEnd}], // -------
 				groupedItems: getAllGoods(true),
 				items: getAllGoods(true),
 				location: {
-					apartment: order.recipient.flat,	// Квартира (*):
-					building: order.recipient.bilding,		// Строение:
+					apartment: order.recipient.flat,
+					building: order.recipient.bilding,
 					city: order.selectedShop.getterCity,
-					house: order.recipient.bilding, 		// Дом (*):
+					house: order.recipient.bilding,
 					street: order.recipient.street
 				},
 				number: order.cargo.number, // УНЗ:
@@ -185,41 +185,51 @@ app.controller('newOrderCtrl', ['$scope', 'SenderData', '$filter', '$http', 'Aut
 			}
 	    };
 
-		$http(req).then(function successCallback(response) {
-			console.log('RESPONSE SAVE NEW ORDER', response);
-			$state.go('ordersHistory');
-	    }, function errorCallback(response) {
-			alert('ERROR ' + response)
-	    });
+	    $rootScope.stateIsLoading = true;
+
+	    PersonalData.getSavedData().then(function(result) {
+			req.data.consignor = result.user.work_at;
+
+			$http(req).then(function successCallback(response) {
+				console.log('RESPONSE SAVE NEW ORDER', response);
+				$state.go('ordersHistory');
+		    }, function errorCallback(response) {
+				alert('Ошибка! ' + response.data.msg)
+				$rootScope.stateIsLoading = false;
+		    });
+		});
 		
 	}
-        SenderData.getData().then(function (response) {
-            $scope.newOrder.shops = SenderData.parse(response);
-            $scope.newOrder.selectedShop = $scope.newOrder.shops[0];
-        });
-	// $scope.newOrder.shops = angular.copy(SenderData.getData());
-    //
-	// if ($scope.newOrder.shops.length === 1) {
-	// 	$scope.newOrder.selectedShop = $scope.newOrder.shops[0];
-	// }
+    SenderData.getData().then(function (response) {
+        $scope.newOrder.shops = SenderData.parse(response);
+        $scope.newOrder.selectedShop = $scope.newOrder.shops[0];
+    });
 
 	function getAllGoods(grouped){
 		var result = [],
 			copy;
 
-		/*
-		article: "Артикул:" + 
-		barcode:"Штрихкод:"
-		client_cost:333     +
-		cost:277.5          +
-		name:"Наименование:"
-		quantity:1			+
-		volume:444
-		weight:388.5
-		*/
+		console.log($scope.newOrder.cargo);
+
+		function tempObj(opts){
+			this.article = "Артикул";
+			this.barcode = "Штрихкод";
+			this.client_cost = $scope.newOrder.cargo.price;
+			this.cost = $scope.newOrder.cargo.price;
+			this.name = "Наименование";
+			this.quantity = 1;
+			this.volume = opts.volume;
+			this.weight = opts.weight;
+		}
 
 		$scope.newOrder.cargo.cargos.forEach(function(cargoPlace, i){
-			result = result.concat(cargoPlace.products);
+			//console.log(i, cargoPlace);
+			if (grouped){
+				result.push(new tempObj(cargoPlace));
+			} else {
+				result = result.concat(cargoPlace.products);
+			}
+			//result = result.concat(cargoPlace.products);
 			/*if (grouped){
 				// all items grouped
 				result = result.concat(cargoPlace.products);
@@ -236,7 +246,6 @@ app.controller('newOrderCtrl', ['$scope', 'SenderData', '$filter', '$http', 'Aut
 				}
 			}*/
 		});
-		//console.log('Result', result);
 		return result;
 	}
 

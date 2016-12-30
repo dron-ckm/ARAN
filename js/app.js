@@ -15,7 +15,7 @@ var app = angular.module('app', [
         controller: 'homeCtrl',
          resolve: {
           contactData: function (PersonalData) {
-            return PersonalData.getRequestData();
+            return PersonalData.getSavedData();
           }
         }
       })

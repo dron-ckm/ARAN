@@ -1,7 +1,7 @@
-app.controller('homeCtrl', ['$scope', 'contactData', 'PersonalData', function($scope, contactData, PersonalData){
+app.controller('homeCtrl', ['$scope', 'contactData', function($scope, contactData){
 	$scope.isChangeEvailable = false;
 
-	$scope.organizationName = PersonalData.getSavedData().user.work_at;
+	$scope.organizationName = contactData.user.work_at;
 
 	$scope.toggleEdit = function(){
 		$scope.isChangeEvailable = !$scope.isChangeEvailable;

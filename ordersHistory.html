@@ -157,18 +157,14 @@
                                             <dd>{{order.humanReadable.payment}}</dd>
                                             <dt>Количество мест</dt>
                                             <dd>{{order.items.length}}</dd>
-                                            <dt>Список товаров с артикулом, названием, оценочной стоимостью, стоимостью
-                                                для
-                                                получателя,
-                                                количеством
-                                            </dt>
+                                            <dt>Список товаров с артикулом, названием, оценочной стоимостью, стоимостью для получателя, количеством</dt>
                                             <dd>
                                                 <div>
                                                     <table style="width: 100%;" class="table table-bordered">
                                                         <thead>
                                                         <td>артикул</td>
                                                         <td>название</td>
-                                                        <td>штрихкод</td>
+                                                       <!--  <td>штрихкод</td> -->
                                                         <td>цена</td>
                                                         </thead>
                                                         <tbody ng-repeat="products in order.items">
@@ -176,7 +172,7 @@
                                                         <tr>
                                                             <td>{{products.article}}</td>
                                                             <td>{{products.name}}</td>
-                                                            <td>{{products.barcode}}</td>
+                                                            <!-- <td>{{products.barcode}}</td> -->
                                                             <td>{{products.cost}}</td>
                                                         </tr>
                                                         </tbody>

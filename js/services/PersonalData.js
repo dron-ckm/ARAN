@@ -1,4 +1,4 @@
-app.service('PersonalData', ['AuthorizationData', '$http', function(AuthorizationData, $http){
+app.service('PersonalData', ['AuthorizationData', '$http', '$q', function(AuthorizationData, $http, $q){
 	var personalDataObj = {},
 		req = {
 			method: 'GET',
@@ -7,23 +7,25 @@ app.service('PersonalData', ['AuthorizationData', '$http', function(Authorizatio
     	};
 
 	function getRequestData() {
-	    return $http(req).then(function successCallback(response) {
+	    var deferred = $q.defer();
+
+        $http(req).then(function successCallback(response) {
 	    	personalDataObj = response.data;
-			return response;
+	    	deferred.resolve(response.data);
 	    }, function errorCallback(response) {
-			return response;
+	    	deferred.reject(response)
 	    });
+        return deferred.promise;
 	}
-	//TODO: DRY !!! leave only one func
+
 	function getSavedData(){
 		if (Object.keys(personalDataObj).length === 0) {
-			return getRequestData()
+			return $q.when(getRequestData())
 		}
-		return personalDataObj
+		return $q.when(personalDataObj)
 	}
 
 	return {
-		getRequestData: getRequestData,
 		getSavedData: getSavedData
 	}
 }]);
