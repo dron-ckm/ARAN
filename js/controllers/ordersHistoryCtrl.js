@@ -37,12 +37,10 @@ app.controller('ordersHistoryCtrl', [
         $scope.pagingBy = 5;
         var currentTableState = {};
         $scope.getSticker = function (order) {
-            console.log(order);
             order.withHttpConfig({
                 cache: false,
                 responseType: "blob"
             }).customGET("get-stickers").then(function (responseData) {
-                console.log(responseData);
                 var o = new Blob([responseData], {
                     type: "application/pdf"
                 });
