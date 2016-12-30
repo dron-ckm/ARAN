@@ -1,4 +1,5 @@
-app.controller('senderDataCtrl', ['$scope', 'SenderData', function($scope, SenderData){
+app.controller('senderDataCtrl', ['$scope', 'SenderData', '$rootScope', function($scope, SenderData, $rootScope){
+	$rootScope.pageTitle = 'Данные отправителя';
 	function selfUpdate(response) {
         $scope.senders = SenderData.parse(response);
     }
@@ -18,11 +19,11 @@ app.controller('senderDataCtrl', ['$scope', 'SenderData', function($scope, Sende
     };
 	$scope.addSender = function(){
 		SenderData.addData({
-			city: '3M',
-			addressFrom: 'asd',
-			phone: '800',
-			contactName: 'name',
-			shopName: 'shop'
+			city: '',
+			addressFrom: '',
+			phone: '',
+			contactName: '',
+			shopName: ''
 		}).then(selfUpdate);
 	}
 }]);

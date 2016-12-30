@@ -27,7 +27,7 @@ var app = angular.module('app', [
       .state('conditions', {
         url: '/conditions',
         templateUrl: 'conditions.html',
-        controller: 'conditions'
+        controller: 'conditionsCtrl'
       })
       .state('registry', {
         url: '/registry',
@@ -79,6 +79,7 @@ var app = angular.module('app', [
           $rootScope.stateIsLoading = true;
           if (shouldLogin) {
               $state.go('login');
+              $rootScope.stateIsLoading = false;
               event.preventDefault();
               return;
           }

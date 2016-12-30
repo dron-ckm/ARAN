@@ -1,4 +1,5 @@
 app.controller('loginCtrl', ['$scope', '$http', 'AuthorizationData', '$state', '$rootScope', function($scope, $http, AuthorizationData, $state, $rootScope){
+	$rootScope.pageTitle = 'АРАН: Центр обработки заказов';
 	$scope.authorize = function($event){
 		var req = {
 			method: 'POST',
@@ -16,7 +17,7 @@ app.controller('loginCtrl', ['$scope', '$http', 'AuthorizationData', '$state', '
 			$state.go('home');
 		}, function errorCallback(response) {
 			$rootScope.stateIsLoading = false;
-			alert('LOGIN ERROR', response);
+			alert('LOGIN ERROR', response.data.msg);
 		});
 	}
 }]);

@@ -1,5 +1,8 @@
 app.controller('newOrderCtrl', ['$scope', 'SenderData', '$filter', '$http', 'AuthorizationData', '$state', 'PersonalData', '$rootScope',
 	function($scope, SenderData, $filter, $http, AuthorizationData, $state, PersonalData, $rootScope){
+
+	$rootScope.pageTitle = 'Новый заказ';
+
 	var STEPS_COUNT = 4,
 		maxStep = $scope.currentStep = 1;
 
