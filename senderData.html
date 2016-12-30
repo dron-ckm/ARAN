@@ -65,13 +65,13 @@
 		<div class="form-group">
 			<label class="col-sm-4 col-md-4 control-label">&nbsp;</label>
 			<div class="col-sm-8 col-md-8">
-				<button type="submit" class="btn btn-success" ng-disabled="places_loading_form.$invalid" ng-click="addSender()">Добавить отправителя</button>
+				<button type="submit" class="btn btn-success" ng-disabled="places_loading_form.$invalid" ng-click="addSender($event)">Добавить отправителя</button>
 			</div>
 		</div>
 		<div class="row">
 			<div class="col-sm-12 col-md-12 text-right">
-				<button type="submit" class="btn btn-warning" ng-click="toggleEdit()">Изменить</button>
-				<button type="submit" class="btn btn-success" ng-disabled="places_loading_form.$invalid" ng-click="saveAll()">Сохранить</button>
+				<button type="submit" class="btn btn-warning" ng-click="toggleEdit($event)">Изменить</button>
+				<button type="submit" class="btn btn-success" ng-disabled="places_loading_form.$invalid" ng-click="saveAll($event)">Сохранить</button>
 			</div>
 		</div>
 		<br>
