@@ -1,5 +1,8 @@
 app.controller('newOrderCtrl', ['$scope', 'SenderData', '$filter', '$http', 'AuthorizationData', '$state', 'PersonalData', '$rootScope',
 	function($scope, SenderData, $filter, $http, AuthorizationData, $state, PersonalData, $rootScope){
+
+	$rootScope.pageTitle = 'Новый заказ';
+
 	var STEPS_COUNT = 4,
 		maxStep = $scope.currentStep = 1;
 
@@ -19,22 +22,24 @@ app.controller('newOrderCtrl', ['$scope', 'SenderData', '$filter', '$http', 'Aut
 	// TODO: $scope.newOrder = new Obj()
 	$scope.newOrder = {};
 	$scope.newOrder.recipient = {};
-	$scope.newOrder.recipient.timeEnd =  new Date();
-	$scope.newOrder.recipient.timeStart =  new Date();
-	$scope.$watch('newOrder.recipient.date', function(newVal){
+
+	$scope.newOrder.measurements = {};
+	$scope.newOrder.measurements.timeEnd =  new Date();
+	$scope.newOrder.measurements.timeStart =  new Date();
+	$scope.$watch('newOrder.measurements.date', function(newVal){
 		if (newVal){
 			var month = newVal.getUTCMonth();
 			var day = newVal.getUTCDate();
 			var year = newVal.getUTCFullYear();
-			$scope.newOrder.recipient.timeEnd.setDate(day);
-			$scope.newOrder.recipient.timeEnd.setMonth(month);
-			$scope.newOrder.recipient.timeEnd.setFullYear(year);
-			$scope.newOrder.recipient.timeStart.setDate(day);
-			$scope.newOrder.recipient.timeStart.setMonth(month);
-			$scope.newOrder.recipient.timeStart.setFullYear(year);
+			$scope.newOrder.measurements.timeEnd.setDate(day);
+			$scope.newOrder.measurements.timeEnd.setMonth(month);
+			$scope.newOrder.measurements.timeEnd.setFullYear(year);
+			$scope.newOrder.measurements.timeStart.setDate(day);
+			$scope.newOrder.measurements.timeStart.setMonth(month);
+			$scope.newOrder.measurements.timeStart.setFullYear(year);
 		}
 	});
-	$scope.newOrder.measurements = {};
+
 	$scope.newOrder.deliveryType = 1;
 	$scope.newOrder.cargo = {};
 	$scope.newOrder.cargo.placesCount = 1;
@@ -152,6 +157,7 @@ app.controller('newOrderCtrl', ['$scope', 'SenderData', '$filter', '$http', 'Aut
 	$scope.save = function(){
 		var order = $scope.newOrder;
 
+		//
 		var req = {
 			method: 'POST',
 			url: 'https://cdocs-wh.arancom.ru/orders',
@@ -166,7 +172,7 @@ app.controller('newOrderCtrl', ['$scope', 'SenderData', '$filter', '$http', 'Aut
 				consignor: null,
 				date: order.recipient.date,
 				delivery_type: order.deliveryType,
-				drop_windows: [{start: order.recipient.timeStart, end: order.recipient.timeEnd}], // -------
+				drop_windows: null,
 				groupedItems: getAllGoods(true),
 				items: getAllGoods(true),
 				location: {
@@ -184,6 +190,13 @@ app.controller('newOrderCtrl', ['$scope', 'SenderData', '$filter', '$http', 'Aut
 				warehouse: order.measurements.selectedStorage ? order.measurements.selectedStorage._id : null		// ??
 			}
 	    };
+
+	    // Забор - вывоз
+
+	    if (order.deliveryType == 1) {
+	    	req.data.date = order.measurements.date;
+	    	req.data.drop_windows = [{start: order.measurements.timeStart, end: order.measurements.timeEnd}];
+	    }
 
 	    $rootScope.stateIsLoading = true;
 

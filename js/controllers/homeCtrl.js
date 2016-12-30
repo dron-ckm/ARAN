@@ -1,4 +1,5 @@
-app.controller('homeCtrl', ['$scope', 'contactData', function($scope, contactData){
+app.controller('homeCtrl', ['$scope', 'contactData', '$rootScope', function($scope, contactData, $rootScope){
+	$rootScope.pageTitle = 'Контактные данные';
 	$scope.isChangeEvailable = false;
 
 	$scope.organizationName = contactData.user.work_at;

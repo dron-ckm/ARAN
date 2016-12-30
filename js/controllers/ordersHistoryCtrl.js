@@ -8,7 +8,10 @@ app.controller('ordersHistoryCtrl', [
     'OrderStatusService',
     'RestOrdersService',
     'SenderData',
-    function ($scope, $modal, historyData, OrdersHistoryData, $filter, FileSaver, OrderStatusService, RestOrdersService,SenderData) {
+    '$rootScope',
+    function ($scope, $modal, historyData, OrdersHistoryData, $filter, FileSaver, OrderStatusService, RestOrdersService,SenderData, $rootScope) {
+        $rootScope.pageTitle = 'История заказов';
+
         //todo переделать под сервис
         var deliveryTypes = {
             1: 'Доставка',

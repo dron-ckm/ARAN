@@ -39,7 +39,7 @@
 	<div id="wrapper" ng-app="app">
 		<div id="sidebar-default" class="main-sidebar">
 			<div class="current-user">
-
+				<h4 class="user-name">АРАН: Центр обработки заказов</h4>
 			</div>
 			<div class="menu-section">
 				<ul>
@@ -91,7 +91,10 @@
 	  					<i class="ion-navicon"></i>
 	  				</div>
 		          	<div class="page-title">
-		            	Dashboard
+		            	{{pageTitle}}
+		          	</div>
+		          	<div class="page-title pull-right">
+		            	{{userName || 'user'}}
 		          	</div>
 		        </div>
 			</div>
@@ -160,7 +163,6 @@
 	<script src="/js/vendor/smart-table.min.js"></script>
 
 
-
 	<script src="js/services/AuthorizationData.js"></script>
 	<script src="js/services/PersonalData.js"></script>
 	<script src="js/services/OrdersHistoryData.js"></script>
@@ -171,7 +173,7 @@
 	<script src="js/controllers/loginCtrl.js"></script>
 	<script src="js/controllers/homeCtrl.js"></script>
 	<script src="js/controllers/senderDataCtrl.js"></script>
-	<script src="js/controllers/conditions.js"></script>
+	<script src="js/controllers/conditionsCtrl.js"></script>
 	<script src="js/controllers/registryCtrl.js"></script>
 	<script src="js/controllers/actsCheckingCtrl.js"></script>
 	<script src="js/controllers/contactsCtrl.js"></script>

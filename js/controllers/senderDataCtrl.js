@@ -1,5 +1,7 @@
-app.controller('senderDataCtrl', ['$scope', 'SenderData', function($scope, SenderData){
-    $scope.unSaved=false;
+app.controller('senderDataCtrl', ['$scope', 'SenderData', '$rootScope', function($scope, SenderData, $rootScope){
+	$rootScope.pageTitle = 'Данные отправителя';
+  $scope.unSaved=false;
+
 	function selfUpdate(response) {
         $scope.senders = SenderData.parse(response);
         $scope.unSaved=false;
@@ -24,7 +26,7 @@ app.controller('senderDataCtrl', ['$scope', 'SenderData', function($scope, Sende
 		console.log('sender watch triggered');
     }, true);
 	$scope.addSender = function(){
-        $scope.senders.push({
+    $scope.senders.push({
 			id:$scope.senders.length,
 			new:true
 		});
