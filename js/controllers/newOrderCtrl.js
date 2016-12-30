@@ -11,7 +11,7 @@ app.controller('newOrderCtrl', ['$scope', 'SenderData', '$filter', '$http', 'Aut
       url: 'https://cdocs-wh.arancom.ru/warehouses',
       headers: {'authentication-token': AuthorizationData.getToken()}
     };
-    
+
 	$http(warehousesReq).then(function successCallback(response) {
 		console.log('warehouses', response);
 		$scope.newOrder.aranStorages = response.data.warehouses;
@@ -192,16 +192,24 @@ app.controller('newOrderCtrl', ['$scope', 'SenderData', '$filter', '$http', 'Aut
 
 	    PersonalData.getSavedData().then(function(result) {
 			req.data.consignor = result.user.work_at;
-
 			$http(req).then(function successCallback(response) {
-				console.log('RESPONSE SAVE NEW ORDER', response);
-				$state.go('ordersHistory');
+                console.log('RESPONSE SAVE NEW ORDER', response);
+                $http({
+                    method: 'POST',
+                    url: 'https://cdocs-wh.arancom.ru/orders/create-incoming',
+                    headers: {'authentication-token': AuthorizationData.getToken()},
+                    data: {
+                        created_at: new Date
+                    }
+                }).then(function successCallback(response) {
+                    console.log('INCOMING CREATED', response);
+                    $state.go('ordersHistory');
+                });
 		    }, function errorCallback(response) {
-				alert('Ошибка! ' + response.data.msg)
+				alert('Ошибка! ' + response.data.msg);
 				$rootScope.stateIsLoading = false;
 		    });
 		});
-		
 	}
     SenderData.getData().then(function (response) {
         $scope.newOrder.shops = SenderData.parse(response);
