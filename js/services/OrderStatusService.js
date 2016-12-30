@@ -13,7 +13,19 @@ app.service('OrderStatusService', function () {
         });
         return result;
     }
-
+    function getAdditionalStatus(code) {
+        return additionalStatusList[parseInt(code)] ? additionalStatusList[parseInt(code)] : " "
+    }
+    var additionalStatusList = {
+        8: "Нет на адресе",
+        16: "Отказ от заказа",
+        32: "Бой",
+        64: "Брак",
+        128: "Не успели по времени",
+        256: "Нет документов",
+        512: "Нет денег",
+        1024: "Не загружен"
+    };
     var statusList = {
         2: "Создан",
         3: "Выгружен в veeroute",
@@ -28,6 +40,7 @@ app.service('OrderStatusService', function () {
         31: "Принят"
     };
     return {
+        getAdditionalStatus: getAdditionalStatus,
         getLabel: getLabel,
         getList: getList
     }

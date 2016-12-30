@@ -415,6 +415,9 @@ input.ng-invalid {
 .order-detail-preview .tab-pane {
   padding-top: 15px;
 }
+.input-group-btn.print-link-container {
+  font-size: inherit;
+}
 .table-like {
   display: table;
   width: 100%;

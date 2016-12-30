@@ -11,7 +11,10 @@ app.controller('ordersHistoryCtrl', [
     '$rootScope',
     function ($scope, $modal, historyData, OrdersHistoryData, $filter, FileSaver, OrderStatusService, RestOrdersService,SenderData, $rootScope) {
         $rootScope.pageTitle = 'История заказов';
-
+        var types = {
+            2: "Заказ",
+            3: "Груз"
+        };
         //todo переделать под сервис
         var deliveryTypes = {
             1: 'Доставка',
@@ -92,12 +95,21 @@ app.controller('ordersHistoryCtrl', [
                         'payment':payment_methods[order.payment_method]
                     };
                     order.isOrderDataShown = false;
-                    order.incoming && (
-                        incomingStorage[order.incoming] || (
-                            incomingStorage[order.incoming] = []
-                        )
-                            , incomingStorage[order.incoming].push(idx)
-                    )
+                    if (order.incoming) {
+                        if (!incomingStorage[order.incoming]) {
+                            incomingStorage[order.incoming] = [];
+                        }
+                        incomingStorage[order.incoming].push(idx)
+                    }
+                    if (order.statuses&&order.statuses.length) {
+                        order.statuses.forEach(function (oneStatus) {
+                            oneStatus.humanReadable={
+                                'status':OrderStatusService.getLabel(oneStatus.code),
+                                'additionalStatus':OrderStatusService.getAdditionalStatus(oneStatus.additional_code),
+                                'type':(oneStatus.type&&types[oneStatus.type])?types[oneStatus.type]:''
+                            }
+                        })
+                    }
                 });
                 tableState.pagination.numberOfPages = Math.ceil(responseList.count / pagerLimit)
             })
