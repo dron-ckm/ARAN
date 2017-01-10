@@ -16,7 +16,9 @@ app.controller('newOrderCtrl', ['$scope', 'SenderData', '$filter', '$http', 'Aut
 		console.log('warehouses', response);
 		$scope.newOrder.aranStorages = response.data.warehouses;
     }, function errorCallback(response) {
-		alert('warehouses ERROR ' + response.data.msg);
+    	if (response) {
+			alert('warehouses ERROR ' + response.data.msg);
+    	}
     });
 
 	// TODO: $scope.newOrder = new Obj()
@@ -212,8 +214,10 @@ app.controller('newOrderCtrl', ['$scope', 'SenderData', '$filter', '$http', 'Aut
                         created_at: new Date
                     }
                 }).then(function successCallback(response) {
-                    console.log('INCOMING CREATED', response);
-                    $state.go('ordersHistory');
+                	if (response){
+                		console.log('INCOMING CREATED', response);
+                    	$state.go('ordersHistory');
+                	}
                 });
 		    }, function errorCallback(response) {
 				alert('Ошибка! ' + response.data.msg);

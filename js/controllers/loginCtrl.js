@@ -18,7 +18,11 @@ app.controller('loginCtrl', ['$scope', '$http', 'AuthorizationData', '$state', '
 			$state.go('home');
 		}, function errorCallback(response) {
 			$rootScope.stateIsLoading = false;
-			alert('LOGIN ERROR', response.data.msg);
+			if (response && response.data) {
+				alert('LOGIN ERROR', response.data.msg);
+			} else {
+				alert('Сервер на данный момент не доступен. Попробуйте позже');
+			}
 		});
 	}
 }]);
