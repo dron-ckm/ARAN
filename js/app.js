@@ -5,7 +5,8 @@ var app = angular.module('app', [
     'mgcrea.ngStrap',
     'ngFileSaver',
     'restangular',
-    'smart-table'
+    'smart-table',
+    'ui.mask'
   ]).config(['$urlRouterProvider', '$stateProvider', function($urlRouterProvider, $stateProvider) {
     $urlRouterProvider.otherwise('/');
     $stateProvider
@@ -77,6 +78,7 @@ var app = angular.module('app', [
       $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState) {
           var shouldLogin = (toState.name !== 'login') && !AuthorizationData.getToken();
           $rootScope.stateIsLoading = true;
+          $rootScope.userName = AuthorizationData.getLogin();
           if (shouldLogin) {
               $state.go('login');
               $rootScope.stateIsLoading = false;
@@ -91,7 +93,8 @@ var app = angular.module('app', [
           return !!AuthorizationData.getToken()
       };
       $rootScope.logOut = function () {
-          AuthorizationData.removeToken();
+          AuthorizationData.clearData();
+          $rootScope.userName = null;
           $state.go('login');
       }
   });
