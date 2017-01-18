@@ -37,7 +37,7 @@ app.controller('ordersHistoryCtrl', [
         // todo end
         $scope.statusList = OrderStatusService.getList();
         $scope.items = [];
-        $scope.pagingBy = 5;
+        $scope.pagingBy = 20;
         var currentTableState = {};
         $scope.getSticker = function (order) {
             order.withHttpConfig({
