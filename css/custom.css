@@ -87,6 +87,15 @@ h1 {
   width: 100%;
   border-collapse: collapse;
 }
+.acts-table.acts-table_type_grouped tbody:nth-child(even) td {
+  background: #f0f0f0;
+}
+.acts-table.acts-table_type_grouped tbody:nth-child(even) tr:nth-child(even) td {
+  background: #f0f0f0;
+}
+.acts-table.acts-table_type_grouped tr:nth-child(even) td {
+  background: inherit;
+}
 .acts-table th {
   padding: 5px;
 }
@@ -430,4 +439,28 @@ input.ng-invalid {
 }
 .table-like .table-row-like .table-cell-like.text-right {
   text-align: right !important;
+}
+.cargoPlace-holder {
+  border: solid #ccc;
+  border-width: 2px 0 2px 0;
+  padding: 0 10px;
+  margin-bottom: 10px;
+  overflow: hidden;
+}
+.cargoPlace-holder:hover {
+  background: #eee;
+}
+.cargoPlace-holder + .cargoPlace-holder {
+  margin-top: -11px;
+}
+.cargoPlace-holder .cargoPlace-holder__products-holder {
+  float: left;
+  width: 100%;
+  margin-top: -52px;
+  position: relative;
+  z-index: 1;
+}
+.cargoPlace-holder .form-group {
+  position: relative;
+  z-index: 2;
 }

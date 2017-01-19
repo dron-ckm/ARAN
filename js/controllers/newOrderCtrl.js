@@ -159,7 +159,6 @@ app.controller('newOrderCtrl', ['$scope', 'SenderData', '$filter', '$http', 'Aut
 	$scope.save = function(){
 		var order = $scope.newOrder;
 
-		//
 		var req = {
 			method: 'POST',
 			url: 'https://cdocs-wh.arancom.ru/orders',
@@ -170,13 +169,14 @@ app.controller('newOrderCtrl', ['$scope', 'SenderData', '$filter', '$http', 'Aut
 					contact_person: order.recipient.person,
 					contact_number: order.recipient.phone
 				},
-				comment: getAllGoods(false),//order.recipient.comments,
+				comment: order.recipient.comments,
 				consignor: null,
 				date: order.recipient.date,
 				delivery_type: order.deliveryType,
 				drop_windows: null,
-				groupedItems: getAllGoods(true),
-				items: getAllGoods(true),
+				groupedItems: getAllGoods(),
+				items: getAllGoods(),
+				dynamic_attributes: groupAllItems(),
 				location: {
 					apartment: order.recipient.flat,
 					building: order.recipient.bilding,
@@ -218,6 +218,11 @@ app.controller('newOrderCtrl', ['$scope', 'SenderData', '$filter', '$http', 'Aut
                 		console.log('INCOMING CREATED', response);
                     	$state.go('ordersHistory');
                 	}
+                }, function errorCallback(response) {
+                	if (response){
+                		alert('Ошибка! ' + response.data.msg);
+						$rootScope.stateIsLoading = false;
+                	}
                 });
 		    }, function errorCallback(response) {
 				alert('Ошибка! ' + response.data.msg);
@@ -230,46 +235,16 @@ app.controller('newOrderCtrl', ['$scope', 'SenderData', '$filter', '$http', 'Aut
         $scope.newOrder.selectedShop = $scope.newOrder.shops[0];
     });
 
-	function getAllGoods(grouped){
+    function groupAllItems(){
+    	return $scope.newOrder.cargo.cargos;
+    }
+
+	function getAllGoods(){
 		var result = [],
 			copy;
 
-		console.log($scope.newOrder.cargo);
-
-		function tempObj(opts){
-			this.article = "Артикул";
-			this.barcode = "Штрихкод";
-			this.client_cost = $scope.newOrder.cargo.price;
-			this.cost = $scope.newOrder.cargo.price;
-			this.name = "Наименование";
-			this.quantity = 1;
-			this.volume = opts.volume;
-			this.weight = opts.weight;
-		}
-
 		$scope.newOrder.cargo.cargos.forEach(function(cargoPlace, i){
-			//console.log(i, cargoPlace);
-			if (grouped){
-				result.push(new tempObj(cargoPlace));
-			} else {
-				result = result.concat(cargoPlace.products);
-			}
-			//result = result.concat(cargoPlace.products);
-			/*if (grouped){
-				// all items grouped
-				result = result.concat(cargoPlace.products);
-			} else {
-				// all items
-				result = result.concat(cargoPlace.products); // remove
-				return result;								 // remove
-
-				if (cargoPlace.products.count){
-					for(var i=0; i < cargoPlace.products.count; i++) {
-						copy = angular.copy(cargoPlace.products);
-						result = result.concat();
-					}
-				}
-			}*/
+			result = result.concat(cargoPlace.products);
 		});
 		return result;
 	}

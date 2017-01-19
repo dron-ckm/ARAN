@@ -54,6 +54,7 @@ var app = angular.module('app', [
         url: '/ordersHistory',
         templateUrl: 'ordersHistory.html',
         controller: 'ordersHistoryCtrl',
+        // TODO: Doublicating. Page has own data request
         resolve: {
           historyData: function (OrdersHistoryData) {
             return OrdersHistoryData.getData();
@@ -69,9 +70,6 @@ var app = angular.module('app', [
   }])
   .run(function ($rootScope, $state, $location, AuthorizationData,Restangular, $cookies) {
       Restangular.setBaseUrl("https://cdocs-wh.arancom.ru/");
-      Restangular.setDefaultHeaders({
-          "Authentication-Token": AuthorizationData.getToken()
-      });
       Restangular.setRestangularFields({
           id: "_id"
       });
@@ -85,6 +83,10 @@ var app = angular.module('app', [
               event.preventDefault();
               return;
           }
+          // TODO: remove this or move to another place. Runs after every url change
+          Restangular.setDefaultHeaders({
+            "authentication-token": AuthorizationData.getToken()
+          });
       });
       $rootScope.$on('$stateChangeSuccess', function () {
           $rootScope.stateIsLoading = false;
