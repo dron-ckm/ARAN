@@ -220,8 +220,11 @@ app.controller('newOrderCtrl', ['$scope', 'SenderData', '$filter', '$http', 'Aut
                 	}
                 }, function errorCallback(response) {
                 	if (response){
-                		alert('Ошибка! ' + response.data.msg);
-						$rootScope.stateIsLoading = false;
+                		// @hotfix
+                		// TODO - проверить, нужно ли это вообще! походу документ поступления уже создается автоматом и дважды делать не надо
+                		// alert('Ошибка! ' + response.data.msg);
+						// $rootScope.stateIsLoading = false;
+						$state.go('ordersHistory');
                 	}
                 });
 		    }, function errorCallback(response) {

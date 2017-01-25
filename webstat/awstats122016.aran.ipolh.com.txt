@@ -8,33 +8,33 @@ AWSTATS DATA FILE 7.1 (build 1.983)
 # update).
 BEGIN_MAP 27
 POS_GENERAL 1994                
-POS_TIME 2672                
-POS_VISITOR 6641                
-POS_DAY 7263                
-POS_DOMAIN 3323                
-POS_LOGIN 3555                
-POS_ROBOT 3710                
-POS_WORMS 3943                
-POS_EMAILSENDER 4074                
-POS_EMAILRECEIVER 4217                
-POS_SESSION 7672                
-POS_SIDER 7878                
-POS_FILETYPES 4352                
-POS_DOWNLOADS 4537                
-POS_OS 4585                
-POS_BROWSER 4717                
-POS_SCREENSIZE 4999                
-POS_UNKNOWNREFERER 5073                
-POS_UNKNOWNREFERERBROWSER 5160                
-POS_ORIGIN 5242                
-POS_SEREFERRALS 5379                
-POS_PAGEREFS 5523                
-POS_SEARCHWORDS 5671                
-POS_KEYWORDS 5823                
-POS_MISC 2336                
-POS_ERRORS 5882                
-POS_CLUSTER 3411                
-POS_SIDER_404 5981                
+POS_TIME 2665                
+POS_VISITOR 6874                
+POS_DAY 7627                
+POS_DOMAIN 3384                
+POS_LOGIN 3616                
+POS_ROBOT 3771                
+POS_WORMS 4008                
+POS_EMAILSENDER 4139                
+POS_EMAILRECEIVER 4282                
+POS_SESSION 8172                
+POS_SIDER 8381                
+POS_FILETYPES 4417                
+POS_DOWNLOADS 4622                
+POS_OS 4670                
+POS_BROWSER 4804                
+POS_SCREENSIZE 5105                
+POS_UNKNOWNREFERER 5179                
+POS_UNKNOWNREFERERBROWSER 5266                
+POS_ORIGIN 5348                
+POS_SEREFERRALS 5487                
+POS_PAGEREFS 5642                
+POS_SEARCHWORDS 5790                
+POS_KEYWORDS 5942                
+POS_MISC 2329                
+POS_ERRORS 6001                
+POS_CLUSTER 3472                
+POS_SIDER_404 6101                
 END_MAP
 
 # LastLine    = Date of last record processed - Last record line number in last log - Last record offset in last log - Last record signature value
@@ -46,14 +46,14 @@ END_MAP
 # MonthHostsKnown   = Number of hosts known
 # MonthHostsUnKnown = Number of hosts unknown
 BEGIN_GENERAL 8
-LastLine 20161226175247 214 50687 13844521009124
+LastLine 20170101045047 1 0 9433435350438
 FirstTime 20161209194923
-LastTime 20161226175247
-LastUpdate 20161226190101 0 0 0 0 0
-TotalVisits 45                  
-TotalUnique 12                  
+LastTime 20161231031544
+LastUpdate 20170101050101 1 0 0 0 0
+TotalVisits 77                  
+TotalUnique 16                  
 MonthHostsKnown 0                   
-MonthHostsUnknown 12                  
+MonthHostsUnknown 16                  
 END_GENERAL
 
 # Misc ID - Pages - Hits - Bandwidth
@@ -75,33 +75,33 @@ BEGIN_TIME 24
 0 13 81 670451 3 4 6528
 1 10 86 1086706 0 4 0
 2 0 0 0 0 0 0
-3 0 0 0 0 0 0
+3 4 48 530097 1 1 320
 4 0 0 0 0 0 0
-5 0 0 0 0 0 0
-6 0 0 0 0 0 0
+5 0 0 0 1 2 6655
+6 0 0 0 4 49 484344
 7 0 0 0 0 0 0
 8 13 51 579344 0 3 300
-9 0 0 0 0 0 0
-10 3 39 7149 1 2 5930
-11 17 93 908701 8 19 35681
-12 25 174 2028620 4 13 23156
-13 62 312 3732293 3 14 6540
-14 25 139 1517485 10 51 578781
-15 49 303 3660941 6 17 14342
-16 101 678 6211957 2 16 6829
-17 22 165 1426185 3 13 32975
-18 66 330 3976274 14 30 16856
-19 14 48 586824 0 6 300
-20 35 175 2280645 0 2 0
-21 2 2 4176 0 1 0
-22 11 49 314246 0 2 0
+9 26 118 1099135 8 58 486838
+10 11 85 315521 1 4 5930
+11 42 278 3401321 8 26 36581
+12 127 1179 10902966 34 59 40814
+13 89 578 6068949 20 39 13251
+14 41 297 3157881 19 65 582518
+15 109 915 9727373 40 57 32164
+16 121 880 8066552 10 29 16102
+17 51 462 3707711 19 33 44830
+18 104 729 8085786 26 48 21412
+19 51 344 3535763 11 22 4883
+20 60 314 3743956 6 13 2449
+21 13 51 596247 6 10 2112
+22 20 96 894439 0 4 300
 23 0 0 0 0 0 0
 END_TIME
 
 # Domain - Pages - Hits - Bandwidth
 # The 10 first Pages must be first (order not required for others)
 BEGIN_DOMAIN 1
-ip 468 2725 28991997
+ip 905 6592 66170198
 END_DOMAIN
 
 # Cluster ID - Pages - Hits - Bandwidth
@@ -116,8 +116,8 @@ END_LOGIN
 # Robot ID - Hits - Bandwidth - Last visit - Hits on robots.txt
 # The 10 first Hits must be first (order not required for others)
 BEGIN_ROBOT 3
-favicon 10 56017 20161226131214 0
-yandex 7 39494 20161224004951 0
+yandex 107 1033127 20161231155117 0
+favicon 11 62414 20161229124340 0
 twitterbot 1 5642 20161221181540 0
 END_ROBOT
 
@@ -137,13 +137,14 @@ BEGIN_EMAILRECEIVER 0
 END_EMAILRECEIVER
 
 # Files type - Hits - Bandwidth - Bandwidth without compression - Bandwidth after compression
-BEGIN_FILETYPES 6
-css 558 3353013 0 0
-png 104 209931 0 0
-html 297 1205377 0 0
-ttf 114 14011056 0 0
-js 1595 7724428 0 0
-woff 57 2488192 0 0
+BEGIN_FILETYPES 7
+eot 6 461458 0 0
+css 1287 8166165 0 0
+png 238 594170 0 0
+ttf 200 25518688 0 0
+html 571 3678601 0 0
+js 4162 22108252 0 0
+woff 128 5642864 0 0
 END_FILETYPES
 
 # Downloads - Hits - Bandwidth
@@ -153,24 +154,25 @@ END_DOWNLOADS
 # OS ID - Hits
 BEGIN_OS ID - Hits - Pages 5
 winxp 52 14
-winnt 455 81
-winvista 824 147
+winnt 653 103
 linux 43 5
-win7 1351 221
+winvista 1490 241
+win7 4354 542
 END_OS
 
 # Browser ID - Hits - Pages
-BEGIN_BROWSER 10
+BEGIN_BROWSER 11
 firefox50.0 375 51
-chrome55.0.2883.87 510 94
-chrome56.0.2906.0 90 14
+msie8.0 96 8
+chrome55.0.2883.87 2086 287
+chrome56.0.2906.0 540 57
 netscape5.0 4 4
 chrome49.0.2623.110 43 5
 chrome55.0.2883.75 50 12
 firefox51.0 52 14
-chrome54.0.2840.99 1322 228
-chrome54.0.2836.0 91 15
-chrome55.0.2883.21 188 31
+chrome54.0.2840.99 1369 237
+chrome54.0.2836.0 1641 181
+chrome55.0.2883.21 336 49
 END_BROWSER
 
 # Screen size - Hits
@@ -187,16 +189,17 @@ END_UNKNOWNREFERERBROWSER
 
 # Origin - Pages - Hits 
 BEGIN_ORIGIN 6
-From0 76 76
+From0 154 154
 From1 0 0
-From2 0 0
+From2 2 2
 From3 0 0
-From4 392 2649
+From4 749 6436
 From5 0 0
 END_ORIGIN
 
 # Search engine referers ID - Pages - Hits
-BEGIN_SEREFERRALS 0
+BEGIN_SEREFERRALS 1
+yandex 2 2
 END_SEREFERRALS
 
 # External page referers - Pages - Hits
@@ -217,39 +220,45 @@ END_KEYWORDS
 # Errors - Hits - Bandwidth
 BEGIN_ERRORS 2
 206 1 5642
-404 58 17692
+404 255 77775
 END_ERRORS
 
 # URL with 404 errors - Hits - Last URL referer
-BEGIN_SIDER_404 6
-/css/images/spinner.png 22 http://aran.ipolh.com/css/jquery.kladr.min.css
-/css/fonts/glyphicons-halflings-regular.ttf 9 http://aran.ipolh.com/css/bootstrap/bootstrap.min.css
-/js/angular-strap.min.js.map 3 -
-/robots.txt 7 -
-/js/angular.min.js.map 8 -
-/css/fonts/glyphicons-halflings-regular.woff 9 http://aran.ipolh.com/css/bootstrap/bootstrap.min.css
+BEGIN_SIDER_404 8
+/css/images/spinner.png 65 http://aran.ipolh.com/css/jquery.kladr.min.css
+/css/fonts/glyphicons-halflings-regular.ttf 20 http://aran.ipolh.com/css/bootstrap/bootstrap.min.css
+/js/angular-strap.min.js.map 48 -
+/robots.txt 11 -
+/css/fonts/glyphicons-halflings-regular.eot 2 http://aran.ipolh.com/
+/js/angular.min.js.map 53 -
+/css/fonts/glyphicons-halflings-regular.woff 20 http://aran.ipolh.com/css/bootstrap/bootstrap.min.css
+/js/vendor/smart-table.min.js.map 36 -
 END_SIDER_404
 
 # Host - Pages - Hits - Bandwidth - Last visit date - [Start date of last visit] - [Last page of last visit]
 # [Start date of last visit] and [Last page of last visit] are saved only if session is not finished
 # The 10 first Hits must be first (order not required for others)
-BEGIN_VISITOR 12
-77.37.140.145 193 1171 12728575 20161226115941
-31.202.23.226 89 540 5294165 20161213161257
-194.85.138.18 45 233 1557710 20161226175247 20161226175217 /ordersHistory.html
-85.30.242.146 44 239 2961388 20161226150124
-178.140.95.170 24 176 1944073 20161224225142
+BEGIN_VISITOR 16
+77.37.140.145 454 3581 36566127 20161230172524
+31.202.23.226 152 1083 10759628 20161230124153
+85.30.242.146 75 446 5135177 20161229125021
+178.140.95.170 67 626 4651098 20161230174458
+194.85.138.18 63 297 2426446 20161230094600
+95.84.154.243 22 179 2126551 20161228125503
 178.150.235.35 20 88 1158319 20161211225510
-95.84.154.243 18 129 1639998 20161223181337
 93.183.205.230 14 52 567713 20161213165635
 128.72.120.69 12 50 584361 20161221181940
+5.228.252.27 9 47 580193 20161226223022
 212.158.164.5 5 43 543353 20161221185604
 23.101.61.176 2 2 6171 20161212131250
 104.45.18.178 2 2 6171 20161212131250
+178.140.81.108 4 48 530097 20161231031544
+128.72.217.21 1 41 222625 20161230123005
+188.32.234.10 3 7 306168 20161230123008
 END_VISITOR
 
 # Date - Pages - Hits - Bandwidth - Visits
-BEGIN_DAY 14
+BEGIN_DAY 19
 20161209 25 93 1163326 4
 20161210 13 90 740067 1
 20161211 20 88 1158319 2
@@ -263,36 +272,44 @@ BEGIN_DAY 14
 20161223 15 91 884637 3
 20161224 9 47 314014 1
 20161225 12 50 341610 1
-20161226 28 206 2238635 3
+20161226 85 529 5994549 7
+20161227 141 1141 11692849 8
+20161228 17 199 2039865 2
+20161229 113 1125 10919371 6
+20161230 105 1031 8240105 11
+20161231 4 48 530097 1
 END_DAY
 
 # Session range - Number of visits
 BEGIN_SESSION 7
-1h+ 1
-5mn-15mn 6
-30s-2mn 6
-15mn-30mn 5
+1h+ 4
+5mn-15mn 11
+0s-30s 30
+15mn-30mn 7
 2mn-5mn 4
-0s-30s 19
-30mn-1h 3
+30s-2mn 11
+30mn-1h 10
 END_SESSION
 
 # URL - Pages - Bandwidth - Entry - Exit
 # The 10 first Pages must be first (order not required for others)
-BEGIN_SIDER 15
-/ 86 449750 43 6
-/fonts/ionicons.ttf 57 7960164 0 0
-/fonts/fontawesome-webfont.woff 57 2488192 0 2
-/fonts/brankic.ttf 57 6050892 0 0
-/login.html 34 17748 0 7
-/home.html 31 46717 0 3
-/ordersHistory.html 31 153639 1 1
-/modals/modalOrderInfo.html 24 58104 0 7
-/senderData.html 23 62606 0 7
-/newOrder.html 21 399481 0 4
-/conditions.html 20 4454 1 0
-/contacts.html 15 3010 0 5
+BEGIN_SIDER 18
+/ 170 972046 70 7
+/fonts/ionicons.ttf 128 17875456 0 0
+/fonts/fontawesome-webfont.woff 128 5642864 0 3
+/fonts/brankic.ttf 72 7643232 0 0
+/ordersHistory.html 71 932539 3 7
+/home.html 61 91912 1 4
+/newOrder.html 60 1386501 1 12
+/senderData.html 53 149222 0 11
+/login.html 47 24480 0 10
+/modals/modalOrderInfo.html 40 96840 0 11
+/conditions.html 32 6764 1 3
 /modalOrderInfo.html 2 34 0 1
-/actsChecking.html 5 2049 0 1
-/registry.html 5 7785 0 0
+/fonts/fontawesome-webfont.eot 2 76410 1 1
+/fonts/brankic.eot 2 212640 0 1
+/contacts.html 20 4085 0 5
+/fonts/ionicons.eot 2 172408 0 0
+/actsChecking.html 8 3279 0 1
+/registry.html 7 10899 0 0
 END_SIDER

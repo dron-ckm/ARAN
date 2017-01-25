@@ -25,11 +25,13 @@ var app = angular.module('app', [
         templateUrl: 'login.html',
         controller: 'loginCtrl'
       })
+      /*
       .state('conditions', {
         url: '/conditions',
         templateUrl: 'conditions.html',
         controller: 'conditionsCtrl'
       })
+*/
       .state('registry', {
         url: '/registry',
         templateUrl: 'registry.html',

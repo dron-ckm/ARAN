@@ -19,7 +19,7 @@ app.controller('ordersHistoryCtrl', [
         var deliveryTypes = {
             1: 'Доставка',
             2: 'Курьер',
-            3: 'Вывоз',
+            3: 'Забор', // hotfix
             4: 'Самовывоз'
         };
         var payment_methods = {
@@ -171,5 +171,12 @@ app.controller('ordersHistoryCtrl', [
         $scope.showInfo = function (item) {
             $scope.shownItem = ($scope.isShownItem(item)) ? null : item;
         };
+        $scope.resetSmartTable=function(){
+            if(currentTableState.search.predicateObject&&Object.keys(currentTableState.search.predicateObject).length>0){
+                currentTableState.search.predicateObject={};
+                currentTableState.pagination={};
+                $scope.getOrders(currentTableState);
+            }
+        }
     }
 ]);

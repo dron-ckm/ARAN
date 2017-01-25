@@ -60,7 +60,7 @@
 				<div class="form-group">
 					<div class="col-sm-12 col-md-12">
 						<input type="radio" name="radio1" id="r01" ng-model="newOrder.deliveryType" ng-value="1">
-				    	<label class="control-label" for="r01">Забор груза</label>
+				    	<label class="control-label" for="r01">Вывоз груза</label>
 				    </div>
 			  	</div>
 				<div class="form-group">
@@ -142,7 +142,7 @@
 						  		</div>
 						  		<div class="col-sm-2 col-md-2">
 						  			<label class="control-label">Объем (м<sup>3</sup>)</label>
-						  			<input type="number" class="form-control" ng-model="newOrder.measurements.volume" required data-bound-model="newOrder.measurements.length * newOrder.measurements.width * newOrder.measurements.height">
+						  			<input type="number" class="form-control" ng-model="newOrder.measurements.volume" required data-bound-model="newOrder.measurements.length * newOrder.measurements.width * newOrder.measurements.height * 0.01*0.01*0.01">
 						  		</div>
 					  		</div>
 							<div class="form-group">
@@ -190,13 +190,13 @@
 							  	<div class="form-group">
 								    <label class="col-sm-4 col-md-4 control-label">Улица:</label>
 								    <div class="col-sm-8 col-md-8">
-								      <input type="text" value="" placeholder="Улица" autocomplete="off" name="street" class="form-control kladr_street" ng-model="newOrder.recipient.street" required>
+								      <input type="text" value="" placeholder="Улица" autocomplete="off" name="street" class="form-control kladr_street" ng-model="newOrder.recipient.street" ng-required="newOrder.deliveryType == 2 || newOrder.deliveryType == 5">
 								    </div>
 							  	</div>
 							  	<div class="form-group">
 								    <label class="col-sm-4 col-md-4 control-label">Номер дома(офиса):</label>
 								    <div class="col-sm-8 col-md-8">
-								      	<input type="text" class="form-control kladr_building" name="building" ng-model="newOrder.recipient.bilding" required>
+								      	<input type="text" class="form-control kladr_building" name="building" ng-model="newOrder.recipient.bilding" ng-required="newOrder.deliveryType == 2 || newOrder.deliveryType == 5">
 								    </div>
 							  	</div>
 							  	<div class="form-group">
@@ -417,7 +417,7 @@
 		<br>
 		<h4>Тип услуги:</h4>
 		<ul>
-			<li ng-show="newOrder.deliveryType == 1">Забор груза</li>
+			<li ng-show="newOrder.deliveryType == 1">Вывоз груза</li>
 			<li ng-show="newOrder.deliveryType == 2">Доставка Аран до двери</li>
 			<li ng-show="newOrder.deliveryType == 3">Доставка Аран до терминала</li>
 			<li ng-show="newOrder.deliveryType == 4">Доставка до терминала сторонней курьерской службой</li>
@@ -474,7 +474,7 @@
 				<dt>Номер заказа магазина:</dt>
 				<dd>{{newOrder.cargo.number}}</dd>
 				<dt>Стоимость доставки для покупателя:</dt>
-				<dd>{{newOrder.cargo.price}}</dd>
+				<dd>{{newOrder.cargo.price}} руб.</dd>
 				<dt>Способ оплаты:</dt>
 				<dd>{{newOrder.cargo.paymentType.name}}</dd>
 				<dt>Количество мест:</dt>

@@ -6,7 +6,7 @@ app.controller('loginCtrl', ['$scope', '$http', 'AuthorizationData', '$state', '
 			url: 'https://cdocs-wh.arancom.ru/users/login',
 			data: {
 				login: $scope.login,
-				password: 'Ielodebo'//$scope.password//'Ielodebo'
+				password: $scope.password//'Ielodebo'
 			}
 		};
 		$event.preventDefault();
