@@ -12,7 +12,7 @@
 				    <label class="col-sm-4 col-md-4 control-label">Название магазина</label>
 				    <div class="col-sm-8 col-md-8">
 				      	<input type="text" class="form-control" name="" disabled="" ng-model="newOrder.selectedShop.shopName" ng-show="newOrder.shops.length == 1" required>
-				      	<button type="button" class="btn btn-default dropdawn_default" placeholder="Выбирите магазин..." ng-model="newOrder.selectedShop" ng-show="newOrder.shops.length > 1" data-html="1" data-toggle="true" bs-options="shop.shopName for shop in newOrder.shops" bs-select>
+				      	<button type="button" class="btn btn-default dropdawn_default" placeholder="Выберите магазин..." ng-model="newOrder.selectedShop" ng-show="newOrder.shops.length > 1" data-html="1" data-toggle="true" bs-options="shop.shopName for shop in newOrder.shops" bs-select>
 						  Action <span class="caret"></span>
 						</button>
 				    </div>
@@ -157,7 +157,7 @@
 							<div class="row">
 						  		<label class="col-sm-2 col-md-2 control-label">Выбор склада АРАН:</label>
 						  		<div class="col-sm-10 col-md-10">
-					  				<button type="button" class="btn btn-default dropdawn_default" placeholder="Выбирите склад..." ng-model="newOrder.measurements.selectedStorage" data-html="1" data-toggle="true" bs-options="storage.name for storage in newOrder.aranStorages" bs-select>
+					  				<button type="button" class="btn btn-default dropdawn_default" placeholder="Выберите склад..." ng-model="newOrder.measurements.selectedStorage" data-html="1" data-toggle="true" bs-options="storage.name for storage in newOrder.aranStorages" bs-select>
 							  			Action <span class="caret"></span>
 									</button>
 					  			</div>
@@ -180,7 +180,7 @@
 								<div class="form-group">
 								    <label class="col-sm-4 col-md-4 control-label">Адрес терминала</label>
 								    <div class="col-sm-8 col-md-8">
-						  				<button type="button" class="btn btn-default dropdawn_default" placeholder="Выбирите склад..." ng-model="newOrder.recipient.terminal" data-html="1" data-toggle="true" bs-options="storage.name for storage in newOrder.aranStorages" bs-select>
+						  				<button type="button" class="btn btn-default dropdawn_default" placeholder="Выберите склад..." ng-model="newOrder.recipient.terminal" data-html="1" data-toggle="true" bs-options="storage.name for storage in newOrder.aranStorages" bs-select>
 								  			Action <span class="caret"></span>
 										</button>
 						  			</div>
@@ -284,7 +284,7 @@
 					  	<div class="form-group">
 						    <label class="col-sm-4 col-md-4 control-label">Способ оплаты</label>
 						    <div class="col-sm-8 col-md-8">
-						      	<button type="button" class="btn btn-default dropdawn_default" placeholder="Выбирите способ оплаты..." ng-model="newOrder.cargo.paymentType" data-html="1" data-toggle="true" bs-options="item.name for item in paymentType" bs-select>
+						      	<button type="button" class="btn btn-default dropdawn_default" placeholder="Выберите способ оплаты..." ng-model="newOrder.cargo.paymentType" data-html="1" data-toggle="true" bs-options="item.name for item in paymentType" bs-select>
 						  			Action <span class="caret"></span>
 								</button>
 						    </div>
@@ -339,7 +339,7 @@
 								  		</div>
 								  		<div class="col-sm-2 col-md-2">
 								  			<label class="control-label">Объем (м<sup>3</sup>)</label>
-								  			<input type="number" class="form-control" ng-model="cargo.volume" required data-bound-model="cargo.length * cargo.width * cargo.height">
+								  			<input type="number" class="form-control" ng-model="cargo.volume" required data-bound-model="cargo.length * cargo.width * cargo.height * 0.01*0.01*0.01">
 								  		</div>
 								  		<div class="col-sm-1 col-md-1">
 								  			<label class="control-label block">&nbsp;</label>
@@ -350,7 +350,7 @@
 						  				<div class="col-sm-9 col-md-9 text-center">
 						  				</div>
 						  				<div class="col-sm-3 col-md-3 text-center">
-								  			<button class="btn btn-block btn-info" ng-click="addGoods($event, $index)">Добвить товар</button>
+								  			<button class="btn btn-block btn-info" ng-click="addGoods($event, $index)">Добавить товар</button>
 								  		</div>
 						  			</div>
 						  		</div>
