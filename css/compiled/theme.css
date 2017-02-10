@@ -20,6 +20,9 @@ button:focus,
 input[type="submit"]:focus {
   outline: none !important; }
 
+/* ==============================================================================
+// Custom buttons
+// ============================================================================== */
 .button {
   -webkit-font-smoothing: antialiased;
   border: 0;
@@ -62,11 +65,11 @@ input[type="submit"]:focus {
       box-shadow: none;
       background: #E7EBF0;
       background: #E7EBF0;
-      background: -webkit-linear-gradient(#e7ebf0, #e7ebf0);
-      background: -moz-linear-gradient(#e7ebf0, #e7ebf0);
-      background: -ms-linear-gradient(#e7ebf0, #e7ebf0);
-      background: -o-linear-gradient(#e7ebf0, #e7ebf0);
-      background: linear-gradient(#e7ebf0, #e7ebf0); }
+      background: -webkit-linear-gradient(#E7EBF0, #E7EBF0);
+      background: -moz-linear-gradient(#E7EBF0, #E7EBF0);
+      background: -ms-linear-gradient(#E7EBF0, #E7EBF0);
+      background: -o-linear-gradient(#E7EBF0, #E7EBF0);
+      background: linear-gradient(#E7EBF0, #E7EBF0); }
   .button:hover {
     text-decoration: none; }
   .button:active, .button.active {
@@ -126,6 +129,9 @@ input[type="submit"]:focus {
     -o-transition: all 0.1s linear;
     transition: all 0.1s linear; }
 
+/* ==============================================================================
+// Custom pager
+// ============================================================================== */
 .paging a {
   position: relative;
   font-size: 11px;
@@ -149,15 +155,18 @@ input[type="submit"]:focus {
   .paging a i.fa-trash-o {
     font-size: 14px; }
 
+/* ==============================================================================
+// Welcome modal
+// ============================================================================== */
 #welcome-modal .modal-dialog {
   margin-top: 65px; }
 #welcome-modal .modal-content {
   background: #f5f8fc;
-  background: -webkit-linear-gradient(white, #f5f8fc);
-  background: -moz-linear-gradient(white, #f5f8fc);
-  background: -ms-linear-gradient(white, #f5f8fc);
-  background: -o-linear-gradient(white, #f5f8fc);
-  background: linear-gradient(white, #f5f8fc);
+  background: -webkit-linear-gradient(#fff, #f5f8fc);
+  background: -moz-linear-gradient(#fff, #f5f8fc);
+  background: -ms-linear-gradient(#fff, #f5f8fc);
+  background: -o-linear-gradient(#fff, #f5f8fc);
+  background: linear-gradient(#fff, #f5f8fc);
   font-family: "Helvetica Neue", Arial; }
   #welcome-modal .modal-content .modal-header {
     border-bottom: 0; }
@@ -195,6 +204,9 @@ input[type="submit"]:focus {
       display: block;
       margin-top: 10px; }
 
+/* ==============================================================================
+// Form controls
+// ============================================================================== */
 input[type="text"].form-control,
 input[type="email"].form-control,
 input[type="password"].form-control {
@@ -334,6 +346,9 @@ textarea.form-control {
       top: 17px;
       line-height: 0; }
 
+/* ==============================================================================
+// jQuery Validate messages
+// ============================================================================== */
 form label.error {
   position: relative !important;
   display: inline-block !important;
@@ -360,6 +375,9 @@ form label.error {
     left: 30px;
     margin-left: -5px; }
 
+/* ==============================================================================
+// Flot charts tooltip
+// ============================================================================== */
 #flotTip {
   background-color: #000;
   color: #fff;
@@ -373,6 +391,9 @@ form label.error {
     text-align: center;
     font-weight: 600; }
 
+/* ==============================================================================
+// Skin Switcher
+// ============================================================================== */
 .skin-switcher {
   position: fixed;
   right: 0px;
@@ -490,6 +511,9 @@ form label.error {
           -o-transition: all 0.2s linear;
           transition: all 0.2s linear; }
 
+/* ==============================================================================
+// jQuery Datepicker 
+// ============================================================================== */
 .datepicker-dropdown {
   z-index: 9999999 !important; }
 
@@ -498,68 +522,52 @@ form label.error {
 @-webkit-keyframes showProfileInfo {
   0% {
     right: -23%; }
-
   100% {
     right: 0; } }
-
 @-moz-keyframes showProfileInfo {
   0% {
     right: -23%; }
-
   100% {
     right: 0; } }
-
 @-o-keyframes showProfileInfo {
   0% {
     right: -23%; }
-
   100% {
     right: 0; } }
-
 @keyframes showProfileInfo {
   0% {
     right: -23%; }
-
   100% {
     right: 0; } }
-
 /* Fade in left for wizard steps */
 @-webkit-keyframes fadeInLeftStep {
   0% {
     opacity: 0;
     -webkit-transform: translateX(-40px); }
-
   100% {
     opacity: 1;
     -webkit-transform: translateX(0); } }
-
 @-moz-keyframes fadeInLeftStep {
   0% {
     opacity: 0;
     -moz-transform: translateX(-40px); }
-
   100% {
     opacity: 1;
     -moz-transform: translateX(0); } }
-
 @-o-keyframes fadeInLeftStep {
   0% {
     opacity: 0;
     -o-transform: translateX(-40px); }
-
   100% {
     opacity: 1;
     -o-transform: translateX(0); } }
-
 @keyframes fadeInLeftStep {
   0% {
     opacity: 0;
     transform: translateX(-40px); }
-
   100% {
     opacity: 1;
     transform: translateX(0); } }
-
 .fadeInLeftStep {
   -webkit-animation-name: fadeInLeftStep;
   -moz-animation-name: fadeInLeftStep;
@@ -571,38 +579,30 @@ form label.error {
   0% {
     opacity: 0;
     -webkit-transform: translateX(40px); }
-
   100% {
     opacity: 1;
     -webkit-transform: translateX(0); } }
-
 @-moz-keyframes fadeInRightStep {
   0% {
     opacity: 0;
     -moz-transform: translateX(40px); }
-
   100% {
     opacity: 1;
     -moz-transform: translateX(0); } }
-
 @-o-keyframes fadeInRightStep {
   0% {
     opacity: 0;
     -o-transform: translateX(40px); }
-
   100% {
     opacity: 1;
     -o-transform: translateX(0); } }
-
 @keyframes fadeInRightStep {
   0% {
     opacity: 0;
     transform: translateX(40px); }
-
   100% {
     opacity: 1;
     transform: translateX(0); } }
-
 .fadeInRightStep {
   -webkit-animation-name: fadeInRightStep;
   -moz-animation-name: fadeInRightStep;
@@ -614,38 +614,30 @@ form label.error {
   0% {
     opacity: 1;
     -webkit-transform: translateX(0); }
-
   100% {
     opacity: 0;
     -webkit-transform: translateX(-40px); } }
-
 @-moz-keyframes fadeOutLeftStep {
   0% {
     opacity: 1;
     -moz-transform: translateX(0); }
-
   100% {
     opacity: 0;
     -moz-transform: translateX(-40px); } }
-
 @-o-keyframes fadeOutLeftStep {
   0% {
     opacity: 1;
     -o-transform: translateX(0); }
-
   100% {
     opacity: 0;
     -o-transform: translateX(-40px); } }
-
 @keyframes fadeOutLeftStep {
   0% {
     opacity: 1;
     transform: translateX(0); }
-
   100% {
     opacity: 0;
     transform: translateX(-40px); } }
-
 .fadeOutLeftStep {
   -webkit-animation-name: fadeOutLeftStep;
   -moz-animation-name: fadeOutLeftStep;
@@ -657,38 +649,30 @@ form label.error {
   0% {
     opacity: 1;
     -webkit-transform: translateX(0); }
-
   100% {
     opacity: 0;
     -webkit-transform: translateX(40px); } }
-
 @-moz-keyframes fadeOutRightStep {
   0% {
     opacity: 1;
     -moz-transform: translateX(0); }
-
   100% {
     opacity: 0;
     -moz-transform: translateX(40px); } }
-
 @-o-keyframes fadeOutRightStep {
   0% {
     opacity: 1;
     -o-transform: translateX(0); }
-
   100% {
     opacity: 0;
     -o-transform: translateX(40px); } }
-
 @keyframes fadeOutRightStep {
   0% {
     opacity: 1;
     transform: translateX(0); }
-
   100% {
     opacity: 0;
     transform: translateX(40px); } }
-
 .fadeOutRightStep {
   -webkit-animation-name: fadeOutRightStep;
   -moz-animation-name: fadeOutRightStep;
@@ -696,6 +680,9 @@ form label.error {
   animation-name: fadeOutRightStep; }
 
 /* vendor */
+/* ==============================================================================
+// Pagination
+// ============================================================================== */
 .pagination > .active > a,
 .pagination > .active > span,
 .pagination > .active > a:hover,
@@ -715,6 +702,9 @@ form label.error {
   -o-transition: all 0.25s linear;
   transition: all 0.25s linear; }
 
+/* ==============================================================================
+// Modal
+// ============================================================================== */
 .modal-backdrop {
   z-index: 10400; }
   .modal-backdrop.in {
@@ -754,14 +744,23 @@ form label.error {
     transform: translate(0, 0) scale3d(1.1, 1.1, 1.1);
     margin-top: 80px; }
 
+/* ==============================================================================
+// Tooltips
+// ============================================================================== */
 .tooltip {
   font-size: 13px; }
   .tooltip .tooltip-inner {
     font-weight: 600; }
 
+/* ==============================================================================
+// Labels
+// ============================================================================== */
 .label-danger {
   background: #D66363; }
 
+/* ==============================================================================
+// Buttons
+// ============================================================================== */
 .btn.btn-default {
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.2);
   -webkit-transition: all 0.2s linear;
@@ -826,12 +825,21 @@ form label.error {
   .btn.btn-warning:focus, .btn.btn-warning:active {
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.14); }
 
+/* ==============================================================================
+// Input groups
+// ============================================================================== */
 .input-group-addon {
   background-color: #F2F7FA; }
 
+/* ==============================================================================
+// Forms related
+// ============================================================================== */
 .form-horizontal .has-feedback .form-control-feedback {
   right: 8px; }
 
+/* ==============================================================================
+// <code></code>
+// ============================================================================== */
 code {
   color: #256CC7;
   background-color: #F8F2F9; }
@@ -862,8 +870,11 @@ body {
     .main-sidebar {
       position: fixed !important; } }
 
+/* ==============================================================================
+// Sidebar dark
+// ============================================================================== */
 #sidebar-dark {
-  background: #2f343d;
+  background: #2F343D;
   left: 0;
   top: 0;
   position: absolute;
@@ -1014,7 +1025,7 @@ body {
       box-shadow: inset 0px 1px #414852;
       padding: 12px 0px 15px 23px;
       border-top: 1px solid #1A2331;
-      background: #2f343d;
+      background: #2F343D;
       text-decoration: none;
       display: inline-block;
       width: 100%;
@@ -1279,6 +1290,9 @@ body {
               #sidebar-dark .bottom-menu > ul > li .menu li a:hover {
                 color: #000; }
 
+/* ==============================================================================
+// Sidebar black
+// ============================================================================== */
 #sidebar-black {
   background: #111E22;
   left: 0;
@@ -1714,6 +1728,9 @@ body {
               #sidebar-black .bottom-menu > ul > li .menu li a:hover {
                 color: #000; }
 
+/* ==============================================================================
+// Sidebar clear
+// ============================================================================== */
 #sidebar-clear {
   background: #F2F5F8;
   box-shadow: inset 0px -2px 3px rgba(0, 0, 0, 0.25);
@@ -2144,6 +2161,9 @@ body {
               #sidebar-clear .bottom-menu > ul > li .menu li a:hover {
                 color: #000; }
 
+/* ==============================================================================
+// Sidebar flat
+// ============================================================================== */
 #sidebar-flat {
   background: #d8dfe6;
   border-right: 1px solid #b2c1d0;
@@ -2578,6 +2598,9 @@ body {
               #sidebar-flat .bottom-menu > ul > li .menu li a:hover {
                 color: #000; }
 
+/* ==============================================================================
+// Sidebar flat dark
+// ============================================================================== */
 #sidebar-flat-dark {
   background: #363e45;
   border-right: 1px solid #363e45;
@@ -3005,6 +3028,9 @@ body {
               #sidebar-flat-dark .bottom-menu > ul > li .menu li a:hover {
                 color: #000; }
 
+/* ==============================================================================
+// Sidebar default
+// ============================================================================== */
 #sidebar-default {
   background: #2a313a;
   border-right: 1px solid #3C434D;
@@ -3023,7 +3049,7 @@ body {
       width: 80px; } }
   #sidebar-default .current-user {
     position: relative;
-    background: linear-gradient(#3d4a5d, #3f4c5c), #686e78;
+    background: linear-gradient(#3D4A5D, #3F4C5C), #686e78;
     -webkit-box-shadow: inset rgba(255, 255, 255, 0.16) 0 1px 0;
     -moz-box-shadow: inset rgba(255, 255, 255, 0.16) 0 1px 0;
     color: #fff;
@@ -3195,11 +3221,11 @@ body {
             background: #202E3F;
             text-shadow: rgba(0, 0, 0, 0.25) 0 -1px 0;
             background-color: #545E6F;
-            background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #5b6479), color-stop(100%, #4c5566)), #686e78;
-            background: -webkit-linear-gradient(#5b6479, #4c5566), #686e78;
-            background: -moz-linear-gradient(#5b6479, #4c5566), #686e78;
-            background: -o-linear-gradient(#5b6479, #4c5566), #686e78;
-            background: linear-gradient(#5b6479, #4c5566), #686e78;
+            background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #5B6479), color-stop(100%, #4C5566)), #686e78;
+            background: -webkit-linear-gradient(#5B6479, #4C5566), #686e78;
+            background: -moz-linear-gradient(#5B6479, #4C5566), #686e78;
+            background: -o-linear-gradient(#5B6479, #4C5566), #686e78;
+            background: linear-gradient(#5B6479, #4C5566), #686e78;
             -webkit-box-shadow: rgba(0, 0, 0, 0.25) 0 1px 0, inset rgba(255, 255, 255, 0.16) 0 1px 0;
             -moz-box-shadow: rgba(0, 0, 0, 0.25) 0 1px 0, inset rgba(255, 255, 255, 0.16) 0 1px 0;
             box-shadow: rgba(0, 0, 0, 0.25) 0 1px 0, inset rgba(255, 255, 255, 0.16) 0 1px 0; }
@@ -3453,6 +3479,9 @@ body {
               #sidebar-default .bottom-menu > ul > li .menu li a:hover {
                 color: #000; }
 
+/* ==============================================================================
+// Main Content
+// ============================================================================== */
 #content {
   background: #FFF;
   margin-left: 230px;
@@ -4797,7 +4826,7 @@ body {
     box-shadow: inset 0 1px rgba(255, 255, 255, 0.79);
     padding: 10px 18px 12px 20px;
     text-shadow: 1px 1px #fff;
-    background: linear-gradient(#f7f8fc, #f8f9fc);
+    background: linear-gradient(#F7F8FC, #F8F9FC);
     position: relative;
     color: #444; }
     #reports .dataTables_wrapper thead th:after {
@@ -5870,7 +5899,7 @@ body {
         bottom: 0;
         width: 100%;
         height: 100%;
-        background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0) 1%, rgba(0, 0, 0, 0) 26%, rgba(0, 0, 0, 0.37) 71%, rgba(0, 0, 0, 0.51) 100%); }
+        background: -webkit-linear-gradient(top, transparent 1%, transparent 26%, rgba(0, 0, 0, 0.37) 71%, rgba(0, 0, 0, 0.51) 100%); }
       #user-profile .content-wrapper .profile-info .avatar img {
         /*border-radius: 50%;*/
         /*max-width: 62px;*/
@@ -6139,15 +6168,15 @@ body {
           #status #update .current-status .status .color.green {
             background: #96cb4c;
             border: 1px solid #8BC43D;
-            box-shadow: 0px 0px 7px 2px #b3e074, inset 0px 2px 1px -1px rgba(255, 255, 255, 0.8); }
+            box-shadow: 0px 0px 7px 2px #B3E074, inset 0px 2px 1px -1px rgba(255, 255, 255, 0.8); }
           #status #update .current-status .status .color.yellow {
             background: #F0D775;
             border: 1px solid #E0CC7E;
-            box-shadow: 0px 0px 7px 2px #f0d775, inset 0px 2px 1px -1px rgba(255, 255, 255, 0.8); }
+            box-shadow: 0px 0px 7px 2px #F0D775, inset 0px 2px 1px -1px rgba(255, 255, 255, 0.8); }
           #status #update .current-status .status .color.red {
             background: #F56B65;
             border: 1px solid #FC7D77;
-            box-shadow: 0px 0px 7px 2px #ff9b96, inset 0px 2px 1px -1px rgba(255, 255, 255, 0.8); }
+            box-shadow: 0px 0px 7px 2px #FF9B96, inset 0px 2px 1px -1px rgba(255, 255, 255, 0.8); }
       #status #update .current-status .help {
         margin-top: 7px;
         margin-left: 35px; }
@@ -6275,7 +6304,7 @@ body {
       box-shadow: inset 0 1px rgba(255, 255, 255, 0.79);
       padding: 10px 18px 12px 20px;
       text-shadow: 1px 1px #fff;
-      background: linear-gradient(#f7f8fc, #f8f9fc);
+      background: linear-gradient(#F7F8FC, #F8F9FC);
       position: relative;
       color: #444; }
       #search .content-wrapper .results thead th:after {
@@ -6364,11 +6393,11 @@ body {
 
 #signup {
   background: #9795bb;
-  background-image: -webkit-radial-gradient(circle farthest-side at right bottom, #9795bb, #59688d 80%, #426686);
-  background-image: -moz-radial-gradient(circle farthest-side at right bottom, #9795bb, #59688d 80%, #426686);
-  background-image: -o-radial-gradient(circle farthest-side at right bottom, #9795bb, #59688d 80%, #426686);
-  background-image: -ms-radial-gradient(circle farthest-side at right bottom, #9795bb, #59688d 80%, #426686);
-  background-image: radial-gradient(circle farthest-side at right bottom, #9795bb, #59688d 80%, #426686); }
+  background-image: -webkit-radial-gradient(circle farthest-side at right bottom, #9795bb, #59688D 80%, #426686);
+  background-image: -moz-radial-gradient(circle farthest-side at right bottom, #9795bb, #59688D 80%, #426686);
+  background-image: -o-radial-gradient(circle farthest-side at right bottom, #9795bb, #59688D 80%, #426686);
+  background-image: -ms-radial-gradient(circle farthest-side at right bottom, #9795bb, #59688D 80%, #426686);
+  background-image: radial-gradient(circle farthest-side at right bottom, #9795bb, #59688D 80%, #426686); }
   #signup.clear {
     background-image: none;
     background: #F2F5F8; }
@@ -6484,11 +6513,11 @@ body {
 
 #signin {
   background: #9795bb;
-  background-image: -webkit-radial-gradient(circle farthest-side at right bottom, #9795bb, #59688d 80%, #426686);
-  background-image: -moz-radial-gradient(circle farthest-side at right bottom, #9795bb, #59688d 80%, #426686);
-  background-image: -o-radial-gradient(circle farthest-side at right bottom, #9795bb, #59688d 80%, #426686);
-  background-image: -ms-radial-gradient(circle farthest-side at right bottom, #9795bb, #59688d 80%, #426686);
-  background-image: radial-gradient(circle farthest-side at right bottom, #9795bb, #59688d 80%, #426686); }
+  background-image: -webkit-radial-gradient(circle farthest-side at right bottom, #9795bb, #59688D 80%, #426686);
+  background-image: -moz-radial-gradient(circle farthest-side at right bottom, #9795bb, #59688D 80%, #426686);
+  background-image: -o-radial-gradient(circle farthest-side at right bottom, #9795bb, #59688D 80%, #426686);
+  background-image: -ms-radial-gradient(circle farthest-side at right bottom, #9795bb, #59688D 80%, #426686);
+  background-image: radial-gradient(circle farthest-side at right bottom, #9795bb, #59688D 80%, #426686); }
   #signin.clear {
     background-image: none;
     background: #F2F5F8; }
@@ -7307,3 +7336,5 @@ body {
     #email-templates .emails .email img {
       max-height: 345px;
       cursor: pointer; }
+
+/*# sourceMappingURL=theme.css.map */
