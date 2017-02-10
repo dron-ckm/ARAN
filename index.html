@@ -86,7 +86,7 @@
 			<div ng-show="stateIsLoading" class="loading"><span></span></div>
 
 			<div class="container menubar">
-        		<div class="row">
+        		<div class="clearfix">
 		          	<div class="col-xs-12 col-sm-7 page-title">
 		            	{{pageTitle}}
 		          	</div>
@@ -97,7 +97,7 @@
 			</div>
 
 			<div class="container-fluid content-wrapper">
-        <div ui-view></div>
+        		<div class="container-fluid" ui-view></div>
 			</div>
 		</div>
 	</div>

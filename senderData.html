@@ -3,16 +3,16 @@
 		<fieldset ng-repeat="sender in senders">
 			<div ng-class="{'alert alert-warning':sender.new}">
 			<div class="form-group">
-			    <label class="col-sm-4 col-md-4 control-label">Название магазина</label>
+			    <label class="col-sm-4 col-md-4 control-label">Отправитель</label>
 			    <div class="col-sm-8 col-md-8">
 			      <input type="text" ng-required="true" required="required" class="form-control" name="" ng-model="sender.shopName" ng-disabled="!isChangeEvailable">
 			    </div>
 		  	</div>
 		  	<div role="tablist" bs-collapse data-start-collapsed="true">
 				<h5 class="filters__title">
-			        <a bs-collapse-toggle class="pointer">
+			        <a bs-collapse-toggle class="pointer dashed">
 			        	<i class="fa fa-info-circle" aria-hidden="true"></i>
-			        	Дополнительно
+			        	Адрес и контакты
 			        </a>
 			     </h5>
 			    <div class="filters__collapse" role="tabpanel" bs-collapse-target>

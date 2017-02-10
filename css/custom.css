@@ -367,6 +367,12 @@ input.ng-invalid {
 .pointer {
   cursor: pointer;
 }
+.pointer.dashed {
+  border-bottom: 1px dashed;
+}
+.pointer.dashed:hover {
+  text-decoration: none;
+}
 .block {
   display: block;
 }
