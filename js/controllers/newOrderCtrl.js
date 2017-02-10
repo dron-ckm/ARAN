@@ -255,10 +255,6 @@ app.controller('newOrderCtrl', ['$scope', 'SenderData', '$filter', '$http', 'Aut
 
 	var $tooltip = $('.tooltip');
 
-/*	$('.kladr_city').kladr({
-		type: $.kladr.type.city
-	});*/
-
 	$.kladr.setDefault({
 		parentInput: '.js-kladr-form-address',
 		verify: true,
