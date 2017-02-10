@@ -85,21 +85,18 @@
 		<div id="content">
 			<div ng-show="stateIsLoading" class="loading"><span></span></div>
 
-			<div class="menubar">
+			<div class="container menubar">
         		<div class="row">
-	  				<div class="sidebar-toggler visible-xs">
-	  					<i class="ion-navicon"></i>
-	  				</div>
-		          	<div class="page-title">
+		          	<div class="col-xs-12 col-sm-7 page-title">
 		            	{{pageTitle}}
 		          	</div>
-		          	<div class="page-title pull-right">
+		          	<div class="col-xs-12 col-sm-5 text-right page-title pull-right">
 		            	{{userName}}
 		          	</div>
 		        </div>
 			</div>
 
-			<div class="content-wrapper">
+			<div class="container-fluid content-wrapper">
         <div ui-view></div>
 			</div>
 		</div>

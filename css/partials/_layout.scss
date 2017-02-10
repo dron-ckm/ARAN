@@ -1,3 +1,7 @@
+body,html{
+	height: 100%;
+}
+
 body {
 	font-family: $sourceSans;
 	-webkit-font-smoothing: antialiased;
@@ -20,6 +24,7 @@ body {
 	position: relative;
 	-webkit-backface-visibility: hidden;
 	margin: 0 auto;
+	min-height: 100%;
 }
 
 .main-sidebar {
@@ -2939,10 +2944,10 @@ body {
 #content {
 	background: #FFF;
 	margin-left: 230px;
-	padding: 40px;
-	padding-top: 67px;
+    padding-top: 64px;
+    padding-bottom: 40px;
 	position: relative;
-	min-height: 900px;
+	min-height: 100%;
 
 	@include transition(all .3s ease-out);
 
@@ -2963,7 +2968,8 @@ body {
 		left: 0;
 		width: 100%;
 		height: 63px;
-		padding: 20px 40px;
+		padding-top: 20px;
+		padding-bottom: 20px;
 		box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.15);
 		background: rgb(255, 255, 255);
 		z-index: 99;
@@ -3013,8 +3019,8 @@ body {
 		.page-title {
 			float: left;
 			position: relative;
-			font-size: 17px;
-			line-height: 26px;
+			font-size: 18px;
+			line-height: 1.1;
 			color: #333;
 
 			@media (max-width: $maxSmall) {

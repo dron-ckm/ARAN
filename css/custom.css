@@ -8,12 +8,6 @@ h1 {
 #content {
   margin-left: 350px;
 }
-#content .menubar {
-  padding: 15px 40px;
-}
-#content .menubar .page-title {
-  padding-top: 5px;
-}
 .main-sidebar,
 #sidebar-black {
   width: 350px !important;
