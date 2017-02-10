@@ -7,7 +7,11 @@ app.controller('senderDataCtrl', ['$scope', 'SenderData', '$rootScope', function
         $scope.unSaved=false;
     }
 	SenderData.getData().then(selfUpdate);
-	$scope.isChangeEvailable = false;
+	$scope.isChangeEvailable = true;
+    /**
+     * @deprecated
+     * @param $event
+     */
 	$scope.toggleEdit = function($event){
         $event.preventDefault();
         $scope.isChangeEvailable = !$scope.isChangeEvailable;
