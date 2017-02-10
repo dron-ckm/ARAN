@@ -80,11 +80,6 @@ app.controller('newOrderCtrl', ['$scope', 'SenderData', '$filter', '$http', 'Aut
 
 	$scope.goStep = function(number){
 		$scope.currentStep = number; return;
-
-		maxStep = Math.max(maxStep, $scope.currentStep);
-		if (maxStep >= number) {
-			$scope.currentStep = number;
-		}
 	}
 
 	$scope.goNext = function($event){
