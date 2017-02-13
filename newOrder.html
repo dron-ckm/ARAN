@@ -128,7 +128,7 @@
 						  			<label class="control-label">Вес(кг)</label>
 						  			<input type="number" class="form-control" name="weight" ng-model="newOrder.measurements.weight" required>
 						  		</div>
-								<div class="col-sm-6 col-md-6 text-center">
+								<div class="col-sm-6 col-md-6">
 									<label class="control-label">Габариты (см)</label>
 									<div class="custom-form-group">
 										<input type="number" class="col-sm-4 col-md-4" placeholder="Длинна" ng-model="newOrder.measurements.length">
@@ -168,7 +168,7 @@
 				</form>
 				<div class="text-right row">
 					<button class="btn btn-primary" ng-click="goNext($event)" ng-if="newOrder.deliveryType != 1" ng-disabled="step3form.$invalid">Далее</button>
-					<button type="submit" class="btn btn-success" ng-disabled="step3form.$invalid" ng-if="newOrder.deliveryType == 1" ng-click="goNext($event)">Оформить заказ</button>
+					<button type="submit" class="btn btn-success" ng-disabled="step3form.$invalid" ng-if="newOrder.deliveryType == 1" ng-click="goNext($event)">Оформить заявку</button>
 				</div>
 			</div>
 			<div  ng-show="newOrder.deliveryType != 1">
@@ -266,7 +266,7 @@
 				<fieldset>
 					<div class="row">
 						<div>
-							<h4>Данные о товаре в заказе</h4>
+							<h4>Данные о заказе</h4>
 						  	<div class="form-group">
 							    <label class="col-sm-4 col-md-4 control-label">Номер заказа магазина:</label>
 							    <div class="col-sm-8 col-md-8">
@@ -306,7 +306,7 @@
 						      	<button class="btn btn-block btn-info" ng-click="addCargo($event)">Добавить грузоместо</button>
 						    </div>
 					  	</div>
-					  	<h4>Данные о заказе</h4>
+					  	<h4>Данные о товарах</h4>
 					  	<div ng-repeat="(cargoIndex, cargo) in newOrder.cargo.cargos" class="cargoPlace-holder" bs-collapse>
 					  		<div class="form-group">
 					  			<div class="col-sm-2 col-md-2">
@@ -325,7 +325,7 @@
 								  			<label class="control-label">Вес <span class="small">(кг)</span></label>
 								  			<input type="number" class="form-control" name="weight" ng-model="cargo.weight" required>
 								  		</div>
-								  		<div class="col-sm-6 col-md-6 text-center">
+								  		<div class="col-sm-6 col-md-6">
 											<label class="control-label">Габариты (см)</label>
 											<div class="custom-form-group">
 												<input type="number" class="col-sm-4 col-md-4" placeholder="Длинна" ng-model="cargo.length">
@@ -394,7 +394,7 @@
 				</fieldset>
 			</form>
 			<div class="row text-right">
-	  			<button type="submit" class="btn btn-success" ng-click="goNext($event)" ng-disabled="step4form.$invalid">Оформить заказ</button>
+	  			<button type="submit" class="btn btn-success" ng-click="goNext($event)" ng-disabled="step4form.$invalid">Оформить заявку</button>
 	  		</div>
 		</div>
 	</div>
@@ -469,7 +469,7 @@
 		</div>
 		<br>
 		<div ng-show="newOrder.deliveryType !== 1">
-			 <h4>Данные о товаре в заказе</h4>
+			 <h4>Данные о заказе</h4>
 			<dl class="full-info">
 				<dt>Номер заказа магазина:</dt>
 				<dd>{{newOrder.cargo.number}}</dd>
