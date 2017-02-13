@@ -17,10 +17,10 @@ h1 {
   width: 350px !important;
 
   .current-user {
-  	.user-name {
-  		padding-top: 20px;
-  		margin: 0;
-  	}
+    .user-name {
+      padding-top: 20px;
+      margin: 0;
+    }
   }
 }
 
@@ -104,27 +104,27 @@ h1 {
   border-collapse: collapse;
 
   &.acts-table_type_grouped {
-  	tbody {
-	    &:nth-child(even) {
-	      td {
-	        background: #f0f0f0;
-	      }
-	      tr {
-		    &:nth-child(even) {
-		      td {
-		        background: #f0f0f0;
-		      }
-		    }
-		  }
-	    }
-	}
-	tr {
-	    &:nth-child(even) {
-	      td {
-	        background: inherit;
-	      }
-	    }
-	  }
+    tbody {
+      &:nth-child(even) {
+        td {
+          background: #f0f0f0;
+        }
+        tr {
+          &:nth-child(even) {
+            td {
+              background: #f0f0f0;
+            }
+          }
+        }
+      }
+    }
+    tr {
+      &:nth-child(even) {
+        td {
+          background: inherit;
+        }
+      }
+    }
   }
 
   th {
@@ -472,9 +472,9 @@ input.ng-invalid {
 
 .pointer {
   cursor: pointer;
-  &.dashed{
-    border-bottom:1px dashed;
-    &:hover{
+  &.dashed {
+    border-bottom: 1px dashed;
+    &:hover {
       text-decoration: none;
     }
   }
@@ -487,14 +487,17 @@ input.ng-invalid {
 .col {
   padding-left: 15px;
   padding-right: 15px;
-  &.control-label {
-    margin-bottom: 15px;
-    &:after {
-      content: '';
-      display: inline-block;
-      width: 100%;
-    }
 
+}
+
+.filters-form {
+  .col {
+    &.control-label {
+      padding-bottom: 0;
+      margin-bottom: 15px;
+      padding-top: 5px;
+      vertical-align: top;
+    }
   }
 }
 
@@ -547,11 +550,13 @@ input.ng-invalid {
 .order-detail-preview .tab-pane {
   padding-top: 15px;
 }
-.input-group-btn{
-  &.print-link-container{
-    font-size:inherit;
+
+.input-group-btn {
+  &.print-link-container {
+    font-size: inherit;
   }
 }
+
 .table-like {
   display: table;
   width: 100%;
@@ -567,30 +572,30 @@ input.ng-invalid {
 }
 
 .cargoPlace-holder {
-	border: solid #ccc;
-	border-width: 2px 0 2px 0;
-	padding: 0 10px;
-	margin-bottom: 10px;
-	overflow: hidden;
+  border: solid #ccc;
+  border-width: 2px 0 2px 0;
+  padding: 0 10px;
+  margin-bottom: 10px;
+  overflow: hidden;
 
-	&:hover {
-		background: #eee;
-	}
+  &:hover {
+    background: #eee;
+  }
 
-	& + .cargoPlace-holder {
-		margin-top: -11px;
-	}
+  & + .cargoPlace-holder {
+    margin-top: -11px;
+  }
 
-	.cargoPlace-holder__products-holder {
-		float: left;
-		width: 100%;
-		margin-top: -52px;
-		position: relative;
-		z-index: 1;
-	}
+  .cargoPlace-holder__products-holder {
+    float: left;
+    width: 100%;
+    margin-top: -52px;
+    position: relative;
+    z-index: 1;
+  }
 
-	.form-group {
-		position: relative;
-		z-index: 2;
-	}
+  .form-group {
+    position: relative;
+    z-index: 2;
+  }
 }

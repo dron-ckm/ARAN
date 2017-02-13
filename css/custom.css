@@ -380,13 +380,11 @@ input.ng-invalid {
   padding-left: 15px;
   padding-right: 15px;
 }
-.col.control-label {
+.filters-form .col.control-label {
+  padding-bottom: 0;
   margin-bottom: 15px;
-}
-.col.control-label:after {
-  content: '';
-  display: inline-block;
-  width: 100%;
+  padding-top: 5px;
+  vertical-align: top;
 }
 .block {
   display: block;
