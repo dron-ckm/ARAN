@@ -28,6 +28,14 @@ app.controller('newOrderCtrl', ['$scope', 'SenderData', '$filter', '$http', 'Aut
 	$scope.newOrder.measurements = {};
 	$scope.newOrder.measurements.timeEnd =  new Date();
 	$scope.newOrder.measurements.timeStart =  new Date();
+	$scope.step3name='Информация о товаре';
+	$scope.$watch('newOrder.deliveryType',function (newVal) {
+		if(newVal==1){
+			$scope.step3name='Информация о товаре';
+		}else{
+            $scope.step3name='Данные получателя';
+		}
+    });
 	$scope.$watch('newOrder.measurements.date', function(newVal){
 		if (newVal){
 			var month = newVal.getUTCMonth();

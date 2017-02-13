@@ -1,9 +1,9 @@
 <div class="js-kladr-form-address">
 	<ul class="steps" ng-show="currentStep < 4 || (currentStep <= 4 && newOrder.deliveryType != 1) ">
-		<li ng-class="(currentStep >=1 ) ? 'active' : ''" ng-click="goStep(1)"><span>Шаг 1</span></li>
-		<li ng-class="(currentStep >=2 ) ? 'active' : ''" ng-click="goStep(2)"><span>Шаг 2</span></li>
-		<li ng-class="(currentStep >=3 ) ? 'active' : ''" ng-click="goStep(3)"><span>Шаг 3</span></li>
-		<li ng-if="newOrder.deliveryType != 1" ng-class="(currentStep >=4 ) ? 'active' : ''" ng-click="goStep(4)"><span>Шаг 4</span></li>
+		<li ng-class="(currentStep >=1 ) ? 'active' : ''" ng-click="goStep(1)"><span>Данные отправителя</span></li>
+		<li ng-class="(currentStep >=2 ) ? 'active' : ''" ng-click="goStep(2)"><span>Выбор тарифа</span></li>
+		<li ng-class="(currentStep >=3 ) ? 'active' : ''" ng-click="goStep(3)"><span>{{step3name}}</span></li>
+		<li ng-if="newOrder.deliveryType != 1" ng-class="(currentStep >=4 ) ? 'active' : ''" ng-click="goStep(4)"><span>Информация о товаре</span></li>
 	</ul>
 	<div ng-show="currentStep ===1">
 		<form action="#" class="form-horizontal" name="step1form">
