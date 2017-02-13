@@ -9,7 +9,7 @@
 		<form action="#" class="form-horizontal" name="step1form">
 			<fieldset>
 				<div class="form-group">
-				    <label class="col-sm-4 col-md-4 control-label">Название магазина</label>
+				    <label class="col-sm-4 col-md-4 control-label">Название магазина/склада</label>
 				    <div class="col-sm-8 col-md-8">
 				      	<input type="text" class="form-control" name="" disabled="" ng-model="newOrder.selectedShop.shopName" ng-show="newOrder.shops.length == 1" required>
 				      	<button type="button" class="btn btn-default dropdawn_default" placeholder="Выберите магазин..." ng-model="newOrder.selectedShop" ng-show="newOrder.shops.length > 1" data-html="1" data-toggle="true" bs-options="shop.shopName for shop in newOrder.shops" bs-select>
