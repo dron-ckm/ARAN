@@ -3,7 +3,7 @@
 		<fieldset ng-repeat="sender in senders">
 			<div ng-class="{'alert alert-warning':sender.new}">
 			<div class="form-group">
-			    <label class="col-sm-4 col-md-4 control-label">Отправитель</label>
+			    <label class="col-sm-4 col-md-4 control-label">Название магазина/склада</label>
 			    <div class="col-sm-8 col-md-8">
 			      <input type="text" ng-required="true" required="required" class="form-control" name="" ng-model="sender.shopName" ng-disabled="!isChangeEvailable">
 			    </div>
