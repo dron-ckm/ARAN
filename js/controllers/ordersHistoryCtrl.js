@@ -9,7 +9,8 @@ app.controller('ordersHistoryCtrl', [
     'RestOrdersService',
     'SenderData',
     '$rootScope',
-    function ($scope, $modal, historyData, OrdersHistoryData, $filter, FileSaver, OrderStatusService, RestOrdersService,SenderData, $rootScope) {
+    'ActPrinterService',
+    function ($scope, $modal, historyData, OrdersHistoryData, $filter, FileSaver, OrderStatusService, RestOrdersService,SenderData, $rootScope,ActPrinterService) {
         $rootScope.pageTitle = 'История заказов';
         var types = {
             2: "Заказ",
@@ -161,8 +162,13 @@ app.controller('ordersHistoryCtrl', [
         };
         $scope.printActs = function () {
             // TODO
-            alert('PRINT! ');
+            var ids = $scope.getCheckedItems().map(function (p1) { return p1._id });
+            ActPrinterService.start(ids);
+            // console.log();
         };
+        function checkPrintStatus() {
+
+        }
         // инфа о заказе
         $scope.shownItem = null;
         $scope.isShownItem = function (item) {
