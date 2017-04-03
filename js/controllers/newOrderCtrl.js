@@ -13,7 +13,6 @@ app.controller('newOrderCtrl', ['$scope', 'SenderData', '$filter', '$http', 'Aut
     };
 
 	$http(warehousesReq).then(function successCallback(response) {
-		console.log('warehouses', response);
 		$scope.newOrder.aranStorages = response.data.warehouses;
     }, function errorCallback(response) {
     	if (response) {
@@ -240,7 +239,11 @@ app.controller('newOrderCtrl', ['$scope', 'SenderData', '$filter', '$http', 'Aut
         $scope.newOrder.shops = SenderData.parse(response);
         $scope.newOrder.selectedShop = $scope.newOrder.shops[0];
     });
-
+	$scope.reportVolume=function () {
+		return $scope.newOrder.cargo.cargos.reduce(function (volume,cargo) {
+			return volume+=cargo.volume*1,volume;
+		},0)
+    };
     function groupAllItems(){
     	return $scope.newOrder.cargo.cargos;
     }
