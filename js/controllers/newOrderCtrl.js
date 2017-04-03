@@ -28,10 +28,10 @@ app.controller('newOrderCtrl', ['$scope', 'SenderData', '$filter', '$http', 'Aut
 	$scope.newOrder.measurements = {};
 	$scope.newOrder.measurements.timeEnd =  new Date();
 	$scope.newOrder.measurements.timeStart =  new Date();
-	$scope.step3name='Информация о товаре';
+	$scope.step3name='Список товаров';
 	$scope.$watch('newOrder.deliveryType',function (newVal) {
 		if(newVal==1){
-			$scope.step3name='Информация о товаре';
+			$scope.step3name='Список товаров';
 		}else{
             $scope.step3name='Данные получателя';
 		}
