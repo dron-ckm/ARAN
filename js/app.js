@@ -6,8 +6,16 @@ var app = angular.module('app', [
     'ngFileSaver',
     'restangular',
     'smart-table',
-    'ui.mask'
-  ]).config(['$urlRouterProvider', '$stateProvider', function($urlRouterProvider, $stateProvider) {
+    'ui.mask',
+    'yandex-metrika'
+  ]).config(['$urlRouterProvider', '$stateProvider','$metrikaProvider', function($urlRouterProvider, $stateProvider,$metrikaProvider) {
+    $metrikaProvider.configureCounter({
+        id: 42636624,
+        clickmap: true,
+        trackLinks: true,
+        accurateTrackBounce: true,
+        webvisor: true
+    });
     $urlRouterProvider.otherwise('/');
     $stateProvider
       .state('home', {
