@@ -171,9 +171,8 @@
                                                             <th>количество</th>
                                                            <!--  <th>штрихкод</th> -->
                                                         </tr>
-                                                        <tbody ng-repeat="products in order.items">
-
-                                                        <tr>
+                                                        <tbody ng-repeat="cargoPlace in order.dynamic_attributes">
+                                                        <tr ng-repeat="products in cargoPlace.products">
                                                             <td>{{products.name}}</td>
                                                             <td>{{products.article}}</td>
                                                             <td>{{products.cost}}</td>

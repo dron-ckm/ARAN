@@ -194,7 +194,6 @@ app.controller('newOrderCtrl', ['$scope', 'SenderData', '$filter', '$http', 'Aut
 				warehouse: order.measurements.selectedStorage ? order.measurements.selectedStorage._id : null		// ??
 			}
 	    };
-
 	    // Забор - вывоз
 
 	    if (order.deliveryType == 1) {
@@ -251,11 +250,25 @@ app.controller('newOrderCtrl', ['$scope', 'SenderData', '$filter', '$http', 'Aut
 	function getAllGoods(){
 		var result = [],
 			copy;
-
-		$scope.newOrder.cargo.cargos.forEach(function(cargoPlace, i){
-			result = result.concat(cargoPlace.products);
-		});
-		return result;
+        $scope.newOrder.cargo.cargos.forEach(function (cargoPlace, i) {
+            // каждый товар должен быть отдельной записью
+            var products = cargoPlace.products.reduce(function (acc, current) {
+                // длинна массива для заполнения одинаковыми товарами
+                var total = 1 * current.quantity;
+                // быстрое клонирование объекта, чтобы не изменять входные данные
+                var filler = JSON.parse(JSON.stringify(current));
+                // удаление поля количества, оно не учитывается
+                if (typeof filler['quantity'] !== 'undefined') {
+                    delete filler['quantity'];
+                }
+                // создается массив по количеству товаров и склеивается с остальными товарами в грузоместе рекурсивно
+                acc = [].concat(acc, (new Array(total)).fill(filler));
+                return acc;
+            }, []);
+            // склеиваем все товары с каждого грузоместа в один массив
+            result = [].concat(result, products);
+        });
+        return result;
 	}
 
 
